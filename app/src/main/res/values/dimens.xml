@@ -15,4 +15,19 @@
     <dimen name="option_item_margin_top">42px</dimen>
     <dimen name="option_item_margin_left">40px</dimen>
     <dimen name="option_item_margin_right">40px</dimen>
+
+
+    <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_18">18dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_32">32dp</dimen>
+    <dimen name="dimen_42">42dp</dimen>
+    <dimen name="dimen_60">60dp</dimen>
+    <dimen name="dimen_162">162dp</dimen>
+    <dimen name="dimen_192">192dp</dimen>
+
+
+    <dimen name="dimen_14sp">14sp</dimen>
+
 </resources>

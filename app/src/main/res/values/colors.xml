@@ -63,4 +63,7 @@
     <color name="side_bar_pressed">#BFBFBF</color>
 
     <color name="black">#000000</color>
+
+    <!--登录界面-->
+    <color name="login_bg">#E1EDFF</color>
 </resources>

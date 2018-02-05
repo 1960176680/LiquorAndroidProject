@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">酒窖管理</string>
+    <string name="app_name">酒窖系统</string>
     <string name="error_code">异常码：</string>
     <string name="add_friend">添加朋友</string>
     <string name="search">搜索</string>
