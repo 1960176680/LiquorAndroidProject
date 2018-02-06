@@ -17,6 +17,8 @@
     <dimen name="option_item_margin_right">40px</dimen>
 
 
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
     <dimen name="dimen_18">18dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
@@ -27,7 +29,7 @@
     <dimen name="dimen_162">162dp</dimen>
     <dimen name="dimen_192">192dp</dimen>
 
-
+    <dimen name="dimen_12sp">12sp</dimen>
     <dimen name="dimen_14sp">14sp</dimen>
 
 </resources>

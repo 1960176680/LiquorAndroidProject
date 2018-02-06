@@ -1,100 +1,136 @@
-/*
- *
- *  * Copyright (C) 2014 Antonio Leiva Gordillo.
- *  *
- *  * Licensed under the Apache License, Version 2.0 (the "License");
- *  * you may not use this file except in compliance with the License.
- *  * You may obtain a copy of the License at
- *  *
- *  *      http://www.apache.org/licenses/LICENSE-2.0
- *  *
- *  * Unless required by applicable law or agreed to in writing, software
- *  * distributed under the License is distributed on an "AS IS" BASIS,
- *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  * See the License for the specific language governing permissions and
- *  * limitations under the License.
- *
- */
-
 package com.hz.tt.mvp.ui.activity;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.graphics.Color;
+import android.support.v4.view.ViewPager;
+import android.widget.TextView;
 
-import com.antonioleiva.mvpexample.app.R;
-import com.antonioleiva.mvpexample.mvp.model.impl.FindItemsModelImpl;
-import com.antonioleiva.mvpexample.mvp.presenter.MainPresenter;
-import com.antonioleiva.mvpexample.mvp.presenter.impl.MainPresenterImpl;
-import com.antonioleiva.mvpexample.mvp.ui.view.MainView;
+import com.hz.tt.R;
+import com.hz.tt.mvp.presenter.impl.MainAtPresenter;
+import com.hz.tt.mvp.ui.common.BaseActivity;
+import com.hz.tt.mvp.ui.common.BaseFragment;
+import com.hz.tt.mvp.ui.fragment.FragmentFactory;
+import com.hz.tt.mvp.ui.view.IMainAtView;
+import com.hz.tt.util.UIUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements MainView, AdapterView.OnItemClickListener {
+import butterknife.Bind;
 
-    private ListView listView;
-    private ProgressBar progressBar;
-    private MainPresenter presenter;
+/**
+ * Created by Administrator on 2018-02-06.
+ */
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.list);
-        listView.setOnItemClickListener(this);
-        progressBar = (ProgressBar) findViewById(R.id.progress);
-        presenter = new MainPresenterImpl(this, new FindItemsModelImpl());
+public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> implements ViewPager.OnPageChangeListener,IMainAtView{
+    @Bind(R.id.vpContent)
+    ViewPager mVpContent;
+    @Bind(R.id.tvMessageNormal)
+    TextView tvMessageNormal;
+    @Bind(R.id.tvContactsNormal)
+    TextView tvContactsNormal;
+    @Bind(R.id.tvDiscoveryNormal)
+    TextView tvDiscoveryNormal;
+    @Bind(R.id.tvMeNormal)
+    TextView tvMeNormal;
+    @Bind(R.id.tvMessagePress)
+    TextView tvMessagePress;
+    @Bind(R.id.tvContactsPress)
+    TextView tvContactsPress;
+    @Bind(R.id.tvDiscoveryPress)
+    TextView tvDiscoveryPress;
+    @Bind(R.id.tvMePress)
+    TextView tvMePress;
+    @Bind(R.id.tvMessageTextNormal)
+    TextView tvMessageTextNormal;
+    @Bind(R.id.tvContactsTextNormal)
+    TextView tvContactsTextNormal;
+    @Bind(R.id.tvDiscoveryTextNormal)
+    TextView tvDiscoveryTextNormal;
+    @Bind(R.id.tvMessageTextPress)
+    TextView tvMessageTextPress;
+    @Bind(R.id.tvContactsTextPress)
+    TextView tvContactsTextPress;
+    @Bind(R.id.tvDiscoveryTextPress)
+    TextView tvDiscoveryTextPress;
+    @Bind(R.id.tvMeTextPress)
+    TextView tvMeTextPress;
+    @Bind(R.id.tvMeTextNormal)
+    TextView tvMeTextNormal;
+    private List<BaseFragment> mFragmentList;
+
+
+
+    @Override
+    public void initView() {
+        setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
+        //默认选中第一个
+        setTransparency();
+        tvMessagePress.getBackground().setAlpha(255);
+        tvMessageTextPress.setTextColor(Color.argb(255, 69, 192, 26));
+
+        //设置ViewPager的最大缓存页面
+        mVpContent.setOffscreenPageLimit(3);
+
     }
 
-    @Override protected void onResume() {
-        super.onResume();
-        presenter.onResume();
+    @Override
+    public void initData() {
+        mFragmentList = new ArrayList<>(4);
+        mFragmentList.add(FragmentFactory.getInstance().getRecentMessageFragment());
+        mFragmentList.add(FragmentFactory.getInstance().getContactsFragment());
+        mFragmentList.add(FragmentFactory.getInstance().getDiscoveryFragment());
+        mFragmentList.add(FragmentFactory.getInstance().getMeFragment());
+        mVpContent.setAdapter(new CommonFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList));
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    @Override
+    protected MainAtPresenter createPresenter() {
+        return new MainAtPresenter(this);
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    @Override
+    protected int provideContentViewId() {
+        return R.layout.activity_main;
+    }
+    /**
+     * 把press图片、文字全部隐藏(设置透明度)
+     */
+    private void setTransparency() {
+        tvMessageNormal.getBackground().setAlpha(255);
+        tvContactsNormal.getBackground().setAlpha(255);
+        tvDiscoveryNormal.getBackground().setAlpha(255);
+        tvMeNormal.getBackground().setAlpha(255);
+        tvMessagePress.getBackground().setAlpha(1);
+        tvContactsPress.getBackground().setAlpha(1);
+        tvDiscoveryPress.getBackground().setAlpha(1);
+        tvMePress.getBackground().setAlpha(1);
+        tvMessageTextNormal.setTextColor(Color.argb(255, 153, 153, 153));
+        tvContactsTextNormal.setTextColor(Color.argb(255, 153, 153, 153));
+        tvDiscoveryTextNormal.setTextColor(Color.argb(255, 153, 153, 153));
+        tvMeTextNormal.setTextColor(Color.argb(255, 153, 153, 153));
+        tvMessageTextPress.setTextColor(Color.argb(0, 69, 192, 26));
+        tvContactsTextPress.setTextColor(Color.argb(0, 69, 192, 26));
+        tvDiscoveryTextPress.setTextColor(Color.argb(0, 69, 192, 26));
+        tvMeTextPress.setTextColor(Color.argb(0, 69, 192, 26));
     }
 
-    @Override protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
+    @Override
+    public TextView getTvMessageCount() {
+        return null;
     }
 
-    @Override public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-        listView.setVisibility(View.INVISIBLE);
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
     }
 
-    @Override public void hideProgress() {
-        progressBar.setVisibility(View.INVISIBLE);
-        listView.setVisibility(View.VISIBLE);
+    @Override
+    public void onPageSelected(int position) {
+
     }
 
-    @Override public void setItems(List<String> items) {
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items));
-    }
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
-    @Override public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        presenter.onItemClicked(position);
     }
 }

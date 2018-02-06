@@ -12,28 +12,27 @@ import android.widget.TextView;
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.LoginAtPresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
-import com.hz.tt.mvp.ui.view.ILoginAtView;
-import com.hz.tt.util.UIUtils;
+import com.hz.tt.mvp.ui.view.LoginView;
 
 import butterknife.Bind;
 
 /**
  * @描述 登录界面
  */
-public class LoginActivity extends BaseActivity<ILoginAtView, LoginAtPresenter> implements ILoginAtView {
+public class LoginActivity extends BaseActivity<LoginView, LoginAtPresenter> implements LoginView {
 
     @Bind(R.id.ibAddMenu)
     ImageButton mIbAddMenu;
 
     @Bind(R.id.etPhone)
     EditText mEtPhone;
-    @Bind(R.id.vLinePhone)
-    View mVLinePhone;
+//    @Bind(R.id.vLinePhone)
+//    View mVLinePhone;
 
     @Bind(R.id.etPwd)
     EditText mEtPwd;
-    @Bind(R.id.vLinePwd)
-    View mVLinePwd;
+//    @Bind(R.id.vLinePwd)
+//    View mVLinePwd;
 
     @Bind(R.id.tvProblems)
     TextView mTvProblems;
@@ -64,24 +63,30 @@ public class LoginActivity extends BaseActivity<ILoginAtView, LoginAtPresenter> 
 
     @Override
     public void initListener() {
-        mEtPwd.addTextChangedListener(watcher);
-        mEtPhone.addTextChangedListener(watcher);
-        mEtPwd.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                mVLinePwd.setBackgroundColor(UIUtils.getColor(R.color.green0));
-            } else {
-                mVLinePwd.setBackgroundColor(UIUtils.getColor(R.color.line));
-            }
-        });
-        mEtPhone.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                mVLinePhone.setBackgroundColor(UIUtils.getColor(R.color.green0));
-            } else {
-                mVLinePhone.setBackgroundColor(UIUtils.getColor(R.color.line));
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.login();
             }
         });
 
-        mBtnLogin.setOnClickListener(v -> mPresenter.login());
+
+//        mEtPwd.addTextChangedListener(watcher);
+//        mEtPhone.addTextChangedListener(watcher);
+        //        mEtPwd.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (hasFocus) {
+////                mVLinePwd.setBackgroundColor(UIUtils.getColor(R.color.green0));
+//            } else {
+////                mVLinePwd.setBackgroundColor(UIUtils.getColor(R.color.line));
+//            }
+//        });
+//        mEtPhone.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (hasFocus) {
+////                mVLinePhone.setBackgroundColor(UIUtils.getColor(R.color.green0));
+//            } else {
+////                mVLinePhone.setBackgroundColor(UIUtils.getColor(R.color.line));
+//            }
+//        });
     }
 
     private boolean canLogin() {
