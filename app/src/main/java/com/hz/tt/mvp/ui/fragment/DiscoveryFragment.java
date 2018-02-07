@@ -1,4 +1,6 @@
 package com.hz.tt.mvp.ui.fragment;
+import android.view.View;
+
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.DiscoveryFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
@@ -17,6 +19,11 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
 //    OptionItemView mOivShop;
 //    @Bind(R.id.oivGame)
 //    OptionItemView mOivGame;
+
+
+    @Override
+    public void initView(View rootView) {
+     }
 
     @Override
     public void initListener() {

@@ -109,21 +109,25 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         setTransparency();
         switch (view.getId()) {
             case R.id.llMessage:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
                 mVpContent.setCurrentItem(0, false);
                 tvMessagePress.getBackground().setAlpha(255);
                 tvMessageTextPress.setTextColor(Color.argb(255, 69, 192, 26));
                 break;
             case R.id.llContacts:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
                 mVpContent.setCurrentItem(1, false);
                 tvContactsPress.getBackground().setAlpha(255);
                 tvContactsTextPress.setTextColor(Color.argb(255, 69, 192, 26));
                 break;
             case R.id.llDiscovery:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_query));
                 mVpContent.setCurrentItem(2, false);
                 tvDiscoveryPress.getBackground().setAlpha(255);
                 tvDiscoveryTextPress.setTextColor(Color.argb(255, 69, 192, 26));
                 break;
             case R.id.llMe:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_more));
                 mVpContent.setCurrentItem(3, false);
                 tvMePress.getBackground().setAlpha(255);
                 tvMeTextPress.setTextColor(Color.argb(255, 69, 192, 26));
@@ -174,6 +178,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         int diaphaneity_two = (int) (255 * (1 - positionOffset));
         switch (position) {
             case 0:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
                 tvMessageNormal.getBackground().setAlpha(diaphaneity_one);
                 tvMessagePress.getBackground().setAlpha(diaphaneity_two);
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_two);
@@ -184,6 +189,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvContactsTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 1:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
                 tvContactsPress.getBackground().setAlpha(diaphaneity_two);
                 tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_two);
@@ -194,6 +200,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvDiscoveryTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 2:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_query));
                 tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_one);
                 tvDiscoveryPress.getBackground().setAlpha(diaphaneity_two);
                 tvMeNormal.getBackground().setAlpha(diaphaneity_two);
@@ -202,6 +209,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvDiscoveryTextPress.setTextColor(Color.argb(diaphaneity_two, 69, 192, 26));
                 tvMeTextNormal.setTextColor(Color.argb(diaphaneity_two, 153, 153, 153));
                 tvMeTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
+                break;
+            case 3:
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_more));
                 break;
         }
     }

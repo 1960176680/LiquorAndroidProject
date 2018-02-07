@@ -13,7 +13,6 @@ import com.hz.tt.util.LogUtils;
 import com.hz.tt.widget.CustomDialog;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 我界面
  */
 public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implements IMeFgView {
@@ -55,6 +54,7 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
 
     @Override
     public void initView(View rootView) {
+
 //        mIvQRCordCard.setOnClickListener(v -> showQRCard());
 //        mOivAlbum.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.MY_JIAN_SHU));
 //        mOivCollection.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.MY_CSDN));

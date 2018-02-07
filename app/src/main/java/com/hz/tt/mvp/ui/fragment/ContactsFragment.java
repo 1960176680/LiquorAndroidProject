@@ -25,9 +25,11 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     private View mHeaderView;
     private TextView mFooterView;
     private TextView mTvNewFriendUnread;
-
     @Override
     public void initView(View rootView) {
+
+
+
 //        mHeaderView = View.inflate(getActivity(), R.layout.header_rv_contacts, null);
 //        mTvNewFriendUnread = (TextView) mHeaderView.findViewById(R.id.tvNewFriendUnread);
 //        mFooterView = new TextView(getContext());
