@@ -9,7 +9,7 @@
     <include layout="@layout/include_toolbar"
         android:visibility="gone"/>
     <ImageView
-        android:layout_marginTop="@dimen/dimen_42"
+        android:layout_marginTop="@dimen/dimen_60"
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/dimen_192"
         android:layout_height="@dimen/dimen_162"
@@ -18,7 +18,7 @@
         android:id="@+id/imageView" />
 
     <com.zhy.autolayout.AutoLinearLayout
-        android:layout_marginTop="@dimen/dimen_16"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_32"
         android:gravity="center_vertical"
@@ -52,8 +52,7 @@
     <View
         android:id="@+id/vLinePhone"
         style="@style/Line"
-        android:paddingLeft="@dimen/dimen_30"
-        android:paddingRight="@dimen/dimen_30"
+
         />
 
     <com.zhy.autolayout.AutoLinearLayout
@@ -92,7 +91,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_42"
-        android:layout_marginTop="@dimen/dimen_18"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="@dimen/dimen_20"
         android:layout_marginRight="@dimen/dimen_20"
         android:background="@drawable/selector_login_btn"

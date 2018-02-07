@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     android:padding="20dp">
 
-    <LinearLayout
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -26,12 +26,12 @@
                 android:layout_height="wrap_content"
                 android:text="周文广" />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             android:id="@+id/vLinePhone"
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -50,28 +50,33 @@
 
                 />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/pull"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="品类："
                 />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="周文广" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -90,11 +95,11 @@
 
                 />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -113,11 +118,11 @@
 
                 />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -136,11 +141,11 @@
 
                 />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -154,11 +159,11 @@
                 android:layout_height="wrap_content"
                 android:text="周文广"
                 />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -172,11 +177,11 @@
                 android:layout_height="wrap_content"
                 android:text="周文广"
                 />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -192,11 +197,11 @@
                 android:text="周文广"
 
                 />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View
             style="@style/Line"
             />
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical">
@@ -213,8 +218,8 @@
 
                 />
 
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
         <View style="@style/Line"
             />
-    </LinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
 </ScrollView>
