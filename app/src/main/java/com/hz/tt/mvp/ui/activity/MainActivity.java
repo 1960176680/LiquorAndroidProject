@@ -2,10 +2,13 @@ package com.hz.tt.mvp.ui.activity;
 
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.MainAtPresenter;
+import com.hz.tt.mvp.ui.adapter.CommonFragmentPagerAdapter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.fragment.FragmentFactory;
@@ -56,9 +59,16 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     TextView tvMeTextPress;
     @Bind(R.id.tvMeTextNormal)
     TextView tvMeTextNormal;
+
+    @Bind(R.id.llMessage)
+    LinearLayout mLlMessage;
+    @Bind(R.id.llContacts)
+    LinearLayout mLlContacts;
+    @Bind(R.id.llDiscovery)
+    LinearLayout mLlDiscovery;
+    @Bind(R.id.llMe)
+    LinearLayout mLlMe;
     private List<BaseFragment> mFragmentList;
-
-
 
     @Override
     public void initView() {
@@ -67,7 +77,6 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         setTransparency();
         tvMessagePress.getBackground().setAlpha(255);
         tvMessageTextPress.setTextColor(Color.argb(255, 69, 192, 26));
-
         //设置ViewPager的最大缓存页面
         mVpContent.setOffscreenPageLimit(3);
 
@@ -84,13 +93,42 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     }
 
     @Override
-    protected MainAtPresenter createPresenter() {
-        return new MainAtPresenter(this);
+    public void initListener() {
+        mLlMessage.setOnClickListener(v -> bottomBtnClick(v));
+        mLlContacts.setOnClickListener(v -> bottomBtnClick(v));
+        mLlDiscovery.setOnClickListener(v -> bottomBtnClick(v));
+        mLlMe.setOnClickListener(v -> bottomBtnClick(v));
+        mVpContent.addOnPageChangeListener(this);
     }
-
     @Override
-    protected int provideContentViewId() {
-        return R.layout.activity_main;
+    protected void onDestroy() {
+        super.onDestroy();
+//        unRegisterBR();
+    }
+    public void bottomBtnClick(View view) {
+        setTransparency();
+        switch (view.getId()) {
+            case R.id.llMessage:
+                mVpContent.setCurrentItem(0, false);
+                tvMessagePress.getBackground().setAlpha(255);
+                tvMessageTextPress.setTextColor(Color.argb(255, 69, 192, 26));
+                break;
+            case R.id.llContacts:
+                mVpContent.setCurrentItem(1, false);
+                tvContactsPress.getBackground().setAlpha(255);
+                tvContactsTextPress.setTextColor(Color.argb(255, 69, 192, 26));
+                break;
+            case R.id.llDiscovery:
+                mVpContent.setCurrentItem(2, false);
+                tvDiscoveryPress.getBackground().setAlpha(255);
+                tvDiscoveryTextPress.setTextColor(Color.argb(255, 69, 192, 26));
+                break;
+            case R.id.llMe:
+                mVpContent.setCurrentItem(3, false);
+                tvMePress.getBackground().setAlpha(255);
+                tvMeTextPress.setTextColor(Color.argb(255, 69, 192, 26));
+                break;
+        }
     }
     /**
      * 把press图片、文字全部隐藏(设置透明度)
@@ -115,22 +153,83 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     }
 
     @Override
-    public TextView getTvMessageCount() {
-        return null;
+    protected MainAtPresenter createPresenter() {
+        return new MainAtPresenter(this);
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    protected int provideContentViewId() {
+        return R.layout.activity_main;
+    }
+    @Override
+    protected boolean isToolbarCanBack() {
+        return false;
+    }
 
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //根据ViewPager滑动位置更改透明度
+        int diaphaneity_one = (int) (255 * positionOffset);
+        int diaphaneity_two = (int) (255 * (1 - positionOffset));
+        switch (position) {
+            case 0:
+                tvMessageNormal.getBackground().setAlpha(diaphaneity_one);
+                tvMessagePress.getBackground().setAlpha(diaphaneity_two);
+                tvContactsNormal.getBackground().setAlpha(diaphaneity_two);
+                tvContactsPress.getBackground().setAlpha(diaphaneity_one);
+                tvMessageTextNormal.setTextColor(Color.argb(diaphaneity_one, 153, 153, 153));
+                tvMessageTextPress.setTextColor(Color.argb(diaphaneity_two, 69, 192, 26));
+                tvContactsTextNormal.setTextColor(Color.argb(diaphaneity_two, 153, 153, 153));
+                tvContactsTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
+                break;
+            case 1:
+                tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
+                tvContactsPress.getBackground().setAlpha(diaphaneity_two);
+                tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_two);
+                tvDiscoveryPress.getBackground().setAlpha(diaphaneity_one);
+                tvContactsTextNormal.setTextColor(Color.argb(diaphaneity_one, 153, 153, 153));
+                tvContactsTextPress.setTextColor(Color.argb(diaphaneity_two, 69, 192, 26));
+                tvDiscoveryTextNormal.setTextColor(Color.argb(diaphaneity_two, 153, 153, 153));
+                tvDiscoveryTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
+                break;
+            case 2:
+                tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_one);
+                tvDiscoveryPress.getBackground().setAlpha(diaphaneity_two);
+                tvMeNormal.getBackground().setAlpha(diaphaneity_two);
+                tvMePress.getBackground().setAlpha(diaphaneity_one);
+                tvDiscoveryTextNormal.setTextColor(Color.argb(diaphaneity_one, 153, 153, 153));
+                tvDiscoveryTextPress.setTextColor(Color.argb(diaphaneity_two, 69, 192, 26));
+                tvMeTextNormal.setTextColor(Color.argb(diaphaneity_two, 153, 153, 153));
+                tvMeTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
+                break;
+        }
     }
 
     @Override
     public void onPageSelected(int position) {
-
+        if (position == 1) {
+            //如果是“通讯录”页被选中，则显示快速导航条
+            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(true);
+        } else {
+            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(false);
+        }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        if (state != ViewPager.SCROLL_STATE_IDLE) {
+            //滚动过程中隐藏快速导航条
+            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(false);
+        } else {
+            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(true);
+        }
     }
+
+
+    @Override
+    public TextView getTvMessageCount() {
+        return null;
+    }
+
 }

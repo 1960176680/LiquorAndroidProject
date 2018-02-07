@@ -1,33 +1,23 @@
 package com.hz.tt.mvp.ui.fragment;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-
-import com.lqr.recyclerview.LQRRecyclerView;
-import com.lqr.wechat.R;
-import com.lqr.wechat.app.AppConst;
-import com.lqr.wechat.manager.BroadcastManager;
-import com.lqr.wechat.ui.activity.MainActivity;
-import com.lqr.wechat.ui.base.BaseFragment;
-import com.lqr.wechat.ui.presenter.RecentMessageFgPresenter;
-import com.lqr.wechat.ui.view.IRecentMessageFgView;
-
-import butterknife.Bind;
+import com.hz.tt.R;
+import com.hz.tt.mvp.presenter.impl.RecentMessageFgPresenter;
+import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.common.BaseFragment;
+import com.hz.tt.mvp.ui.view.IRecentMessageFgView;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 最近会话列表界面
  */
 public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, RecentMessageFgPresenter> implements IRecentMessageFgView {
 
     private boolean isFirst = true;
-    @Bind(R.id.rvRecentMessage)
-    LQRRecyclerView mRvRecentMessage;
+//    @Bind(R.id.rvRecentMessage)
+//    LQRRecyclerView mRvRecentMessage;
 
     @Override
     public void init() {
-        registerBR();
+//        registerBR();
     }
 
 
@@ -35,7 +25,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     public void onResume() {
         super.onResume();
         if (!isFirst) {
-            mPresenter.getConversations();
+//            mPresenter.getConversations();
         }
     }
 
@@ -49,22 +39,22 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unRegisterBR();
+//        unRegisterBR();
     }
 
-    private void registerBR() {
-        BroadcastManager.getInstance(getActivity()).register(AppConst.UPDATE_CONVERSATIONS, new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                mPresenter.getConversations();
-                isFirst = false;
-            }
-        });
-    }
+//    private void registerBR() {
+//        BroadcastManager.getInstance(getActivity()).register(AppConst.UPDATE_CONVERSATIONS, new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                mPresenter.getConversations();
+//                isFirst = false;
+//            }
+//        });
+//    }
 
-    private void unRegisterBR() {
-        BroadcastManager.getInstance(getActivity()).unregister(AppConst.UPDATE_CONVERSATIONS);
-    }
+//    private void unRegisterBR() {
+//        BroadcastManager.getInstance(getActivity()).unregister(AppConst.UPDATE_CONVERSATIONS);
+//    }
 
     @Override
     protected RecentMessageFgPresenter createPresenter() {
@@ -73,11 +63,11 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.fragment_recent_message;
+        return R.layout.a;
     }
 
-    @Override
-    public LQRRecyclerView getRvRecentMessage() {
-        return mRvRecentMessage;
-    }
+//    @Override
+//    public LQRRecyclerView getRvRecentMessage() {
+//        return null;
+//    }
 }

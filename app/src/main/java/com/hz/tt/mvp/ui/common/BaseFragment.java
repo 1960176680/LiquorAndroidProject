@@ -18,9 +18,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         init();
-
         //判断是否使用MVP模式
         mPresenter = createPresenter();
         if (mPresenter != null) {

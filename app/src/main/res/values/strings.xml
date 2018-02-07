@@ -27,4 +27,26 @@
     <string name="tv_title_out">商品出库</string>
     <string name="tv_title_query">商品查询</string>
     <string name="tv_title_more">更多</string>
+
+    <!--发现-->
+    <string name="friend_cicle">朋友圈</string>
+    <string name="scan">扫一扫</string>
+    <string name="shake">摇一摇</string>
+    <string name="people_nearby">附近的人</string>
+    <string name="shopping">购物</string>
+    <string name="game">游戏</string>
+
+    <!--我-->
+    <string name="my_chat_account">微信号:%1$s</string>
+    <string name="album">相册</string>
+    <string name="collection">收藏</string>
+    <string name="wallet">钱包</string>
+    <string name="card_package">卡包</string>
+    <string name="jian_shu">简书</string>
+    <string name="csdn">CSDN</string>
+    <string name="oschina">码云</string>
+    <string name="github">GitHub</string>
+    <string name="emotion">表情</string>
+    <string name="setting">设置</string>
+    <string name="qr_code_card_tip">扫一扫上面的二维码图案，加我微信</string>
 </resources>

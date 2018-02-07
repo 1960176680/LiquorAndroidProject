@@ -1,15 +1,9 @@
 package com.hz.tt.mvp.ui.fragment;
-
-import com.lqr.optionitemview.OptionItemView;
-import com.lqr.wechat.R;
-import com.lqr.wechat.app.AppConst;
-import com.lqr.wechat.ui.activity.MainActivity;
-import com.lqr.wechat.ui.activity.ScanActivity;
-import com.lqr.wechat.ui.base.BaseFragment;
-import com.lqr.wechat.ui.presenter.DiscoveryFgPresenter;
-import com.lqr.wechat.ui.view.IDiscoveryFgView;
-
-import butterknife.Bind;
+import com.hz.tt.R;
+import com.hz.tt.mvp.presenter.impl.DiscoveryFgPresenter;
+import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.common.BaseFragment;
+import com.hz.tt.mvp.ui.view.IDiscoveryFgView;
 
 /**
  * @创建者 CSDN_LQR
@@ -17,18 +11,18 @@ import butterknife.Bind;
  */
 public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryFgPresenter> implements IDiscoveryFgView {
 
-    @Bind(R.id.oivScan)
-    OptionItemView mOivScan;
-    @Bind(R.id.oivShop)
-    OptionItemView mOivShop;
-    @Bind(R.id.oivGame)
-    OptionItemView mOivGame;
+//    @Bind(R.id.oivScan)
+//    OptionItemView mOivScan;
+//    @Bind(R.id.oivShop)
+//    OptionItemView mOivShop;
+//    @Bind(R.id.oivGame)
+//    OptionItemView mOivGame;
 
     @Override
     public void initListener() {
-        mOivScan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(ScanActivity.class));
-        mOivShop.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.JD));
-        mOivGame.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.GAME));
+//        mOivScan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(MainActivity.class/*ScanActivity.class*/));
+//        mOivShop.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.JD));
+//        mOivGame.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.GAME));
     }
 
     @Override
@@ -38,6 +32,6 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.fragment_discovery;
+        return R.layout.a;
     }
 }

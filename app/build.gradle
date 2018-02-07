@@ -5,7 +5,7 @@ android {
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.hz.tt"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -51,4 +51,8 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 //    rxandroid是有Rxjava延伸出来的
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//    别人组件
+    compile 'com.lqr.recyclerview:library:1.0.2'
+    compile 'com.lqr.adapter:library:1.0.2'
+    compile 'com.lqr.optionitemview:library:1.0.7'
 }

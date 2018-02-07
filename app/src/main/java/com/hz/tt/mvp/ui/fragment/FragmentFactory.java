@@ -1,7 +1,6 @@
 package com.hz.tt.mvp.ui.fragment;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 主界面4个Fragment工厂
  */
 public class FragmentFactory {
