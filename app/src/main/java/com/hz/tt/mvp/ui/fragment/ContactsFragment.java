@@ -88,7 +88,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.a;
+        return R.layout.fragment_out;
     }
 
 //    @Override

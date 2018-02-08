@@ -4,13 +4,15 @@ import android.text.TextUtils;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
+import com.hz.tt.mvp.ui.activity.ForgetKeyActivity;
 import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.activity.RegisterActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
-import com.hz.tt.mvp.ui.view.LoginView;
+import com.hz.tt.mvp.ui.view.LoginAtView;
 import com.hz.tt.util.LogUtils;
 import com.hz.tt.util.UIUtils;
 
-public class LoginAtPresenter extends BasePresenter<LoginView> {
+public class LoginAtPresenter extends BasePresenter<LoginAtView> {
 
     public LoginAtPresenter(BaseActivity context) {
         super(context);
@@ -55,4 +57,12 @@ public class LoginAtPresenter extends BasePresenter<LoginView> {
         UIUtils.showToast(throwable.getLocalizedMessage());
         mContext.hideWaitingDialog();
     }
+
+    public void register(){
+        mContext.jumpToActivity(RegisterActivity.class);
+    }
+    public void forgetKey(){
+        mContext.jumpToActivity(ForgetKeyActivity.class);
+    }
+
 }

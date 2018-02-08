@@ -11,24 +11,31 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="design_width"
-            android:value="720">
-        </meta-data>
+            android:value="720"></meta-data>
         <meta-data
             android:name="design_height"
-            android:value="1280">
-        </meta-data>
+            android:value="1280"></meta-data>
 
-        <activity android:name=".mvp.ui.activity.LoginActivity"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".mvp.ui.activity.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.activity.MainActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".mvp.ui.activity.RegisterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.ForgetKeyActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
     </application>
 
 </manifest>

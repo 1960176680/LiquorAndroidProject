@@ -3,76 +3,54 @@ package com.hz.tt.mvp.ui.activity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.LoginAtPresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
-import com.hz.tt.mvp.ui.view.LoginView;
+import com.hz.tt.mvp.ui.view.LoginAtView;
 
 import butterknife.Bind;
 
 /**
  * @描述 登录界面
  */
-public class LoginActivity extends BaseActivity<LoginView, LoginAtPresenter> implements LoginView {
-
-    @Bind(R.id.ibAddMenu)
-    ImageButton mIbAddMenu;
-
+public class LoginActivity extends BaseActivity<LoginAtView, LoginAtPresenter> implements LoginAtView {
+//    用户名
     @Bind(R.id.etPhone)
     EditText mEtPhone;
-//    @Bind(R.id.vLinePhone)
-//    View mVLinePhone;
-
+//    密码
     @Bind(R.id.etPwd)
     EditText mEtPwd;
-//    @Bind(R.id.vLinePwd)
-//    View mVLinePwd;
-
-    @Bind(R.id.tvProblems)
-    TextView mTvProblems;
+    //    登录
     @Bind(R.id.btnLogin)
     Button mBtnLogin;
-    @Bind(R.id.tvOtherLogin)
-    TextView mTvOtherLogin;
+//    注册
+    @Bind(R.id.tv_register)
+    TextView tv_register;
+//    忘记密码
+    @Bind(R.id.tv_forget)
+    TextView tv_forget;
 
-    TextWatcher watcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mBtnLogin.setEnabled(canLogin());
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
 
     @Override
     public void initView() {
-        mIbAddMenu.setVisibility(View.GONE);
+//        mIbAddMenu.setVisibility(View.GONE);
     }
 
     @Override
     public void initListener() {
-        mBtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.login();
-            }
-        });
+        mBtnLogin.setOnClickListener(v -> mPresenter.login());
+        tv_register.setOnClickListener(v -> mPresenter.register());
+        tv_forget.setOnClickListener(v -> mPresenter.forgetKey());
+
+        mEtPwd.addTextChangedListener(watcher);
+        mEtPhone.addTextChangedListener(watcher);
 
 
-//        mEtPwd.addTextChangedListener(watcher);
-//        mEtPhone.addTextChangedListener(watcher);
         //        mEtPwd.setOnFocusChangeListener((v, hasFocus) -> {
 //            if (hasFocus) {
 ////                mVLinePwd.setBackgroundColor(UIUtils.getColor(R.color.green0));
@@ -118,4 +96,19 @@ public class LoginActivity extends BaseActivity<LoginView, LoginAtPresenter> imp
     public EditText getEtPwd() {
         return mEtPwd;
     }
+
+    TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mBtnLogin.setEnabled(canLogin());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 }

@@ -49,4 +49,20 @@
     <string name="emotion">表情</string>
     <string name="setting">设置</string>
     <string name="qr_code_card_tip">扫一扫上面的二维码图案，加我微信</string>
+
+    <string-array name="CXH_list">
+        <item>酱香型</item>
+        <item>浓香型</item>
+    </string-array>
+    <!--注册-->
+    <string name="nickname">昵称</string>
+    <string name="password">密码</string>
+    <string name="area">国家/地区</string>
+    <string name="verification_code">验证码</string>
+
+    <string name="phone_not_available">手机号不可用</string>
+    <string name="send_code_error">发送验证码失败</string>
+    <string name="vertify_code_error">验证码有误</string>
+    <string name="send_code_btn_normal_tip">发送验证码</string>
+    <string name="register_error">注册出错</string>
 </resources>

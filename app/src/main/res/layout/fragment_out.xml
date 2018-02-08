@@ -20,7 +20,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="入  库  员："
+                android:text="接  收  人："
                 android:textSize="16sp"
                 android:textStyle="bold"
                 />
@@ -47,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="入库时间："
+                android:text="接收时间："
                 android:textSize="16sp"
                 android:textStyle="bold"
                 />
@@ -61,6 +61,63 @@
                 />
 
         </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            style="@style/Line"
+            />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_scan_blue"
+                android:padding="10dp"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入或扫描条形码"
+                android:layout_marginLeft="10dp"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            style="@style/Line"
+            />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备        注："
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/et_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="酱香型白酒"
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:textSize="16sp"/>
+            <ImageView
+                android:id="@+id/iv_type"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/pull"
+                android:padding="15dp"
+                />
+        </com.zhy.autolayout.AutoLinearLayout>
+
         <TextView
             style="@style/Line"
             />
@@ -259,115 +316,7 @@
                 android:textSize="16sp"/>
 
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView style="@style/Line" />
-        <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_scan_blue"
-                android:padding="10dp"
-
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入或扫描条形码"
-                android:layout_marginLeft="10dp"
-                />
-
-        </com.zhy.autolayout.AutoLinearLayout>
-        <TextView style="@style/Line" />
-
-        <com.zhy.autolayout.AutoLinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal"
-            android:layout_height="65dp"
-            android:layout_marginTop="15dp"
-            >
-
-            <!--<FrameLayout-->
-                <!--android:layout_marginStart="5dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp">-->
-
-                <!--<ImageButton-->
-                    <!--android:src="@mipmap/ic_photo"-->
-                    <!--android:background="?android:attr/selectableItemBackground"-->
-                    <!--android:id="@+id/btn_pic_one"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--/>-->
-
-                <!--<ImageButton-->
-                    <!--android:id="@+id/btn_pic_close_one"-->
-                    <!--android:layout_gravity="end"-->
-                    <!--android:visibility="gone"-->
-                    <!--android:src="@mipmap/ic_close_pic"-->
-                    <!--android:background="?android:attr/selectableItemBackground"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="24dp" />-->
-            <!--</FrameLayout>-->
-
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"/>-->
-
-            <!--<FrameLayout-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp" >-->
-                <!--<ImageButton-->
-                    <!--android:background="?android:attr/selectableItemBackground"-->
-                    <!--android:src="@mipmap/ic_photo"-->
-                    <!--android:id="@+id/btn_pic_two"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="50dp" />-->
-
-                <!--<ImageButton-->
-                    <!--android:id="@+id/btn_pic_close_two"-->
-                    <!--android:layout_gravity="end"-->
-                    <!--android:visibility="gone"-->
-                    <!--android:src="@mipmap/ic_close_pic"-->
-                    <!--android:background="?android:attr/selectableItemBackground"-->
-                    <!--android:layout_width="12dp"-->
-                    <!--android:layout_height="12dp" />-->
-
-            <!--</FrameLayout>-->
-
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"/>-->
-
-            <FrameLayout
-                android:layout_marginEnd="5dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="5dp">
-                <ImageButton
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@mipmap/ic_photo"
-                    android:id="@+id/btn_pic_three"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
-
-                <ImageButton
-                    android:id="@+id/btn_pic_close_three"
-                    android:layout_gravity="end"
-                    android:visibility="gone"
-                    android:src="@mipmap/ic_close_pic"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp" />
-            </FrameLayout>
-        </com.zhy.autolayout.AutoLinearLayout>
         <TextView style="@style/Line" />
         <com.zhy.autolayout.AutoRelativeLayout
             android:layout_width="match_parent"
