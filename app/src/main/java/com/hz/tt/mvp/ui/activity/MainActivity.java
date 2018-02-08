@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hz.tt.R;
+import com.hz.tt.app.MyApp;
 import com.hz.tt.mvp.presenter.impl.MainAtPresenter;
 import com.hz.tt.mvp.ui.adapter.CommonFragmentPagerAdapter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
@@ -242,4 +243,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         return null;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MyApp.exit();
+    }
 }

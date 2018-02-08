@@ -8,7 +8,6 @@ import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IDiscoveryFgView;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 发现界面
  */
 public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryFgPresenter> implements IDiscoveryFgView {
@@ -39,6 +38,6 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.a;
+        return R.layout.fragment_query;
     }
 }
