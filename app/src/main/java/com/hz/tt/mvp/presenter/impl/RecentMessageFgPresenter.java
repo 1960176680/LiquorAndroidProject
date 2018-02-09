@@ -1,5 +1,10 @@
 package com.hz.tt.mvp.presenter.impl;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 
 import com.hz.tt.R;
@@ -7,10 +12,18 @@ import com.hz.tt.mvp.presenter.base.BasePresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IRecentMessageFgView;
+import com.hz.tt.util.DateUtil;
 import com.hz.tt.util.UIUtils;
+import com.hz.tt.util.voice.TextToSpeechUtil;
 import com.hz.tt.widget.CustomDialog;
 
+import java.io.File;
+import java.util.Date;
+
 public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView> {
+    TextToSpeechUtil speechUtil;
+    private String bitmapPath;
+    private Context context;
 
 //    private List<Conversation> mData = new ArrayList<>();
 //    private LQRAdapterForRecyclerView<Conversation> mAdapter;
@@ -25,6 +38,8 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 
     public RecentMessageFgPresenter(BaseActivity context) {
         super(context);
+        this.context=context;
+//        speechUtil = new TextToSpeechUtil(context);
     }
 
     public void getConversations() {
@@ -240,5 +255,32 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 //            });
 //            getView().getRvRecentMessage().setAdapter(mAdapter);
 //        }
+    }
+
+
+    /**
+     * 执行拍照
+     */
+    public void takePhoto(String s) {
+        String status = Environment.getExternalStorageState();
+        if (status.equals(Environment.MEDIA_MOUNTED)) {
+            File dir = new File(Environment.getExternalStorageDirectory() + "/StayWareHouseImage/");
+            if (!dir.exists() && !dir.mkdirs())
+                return;
+            Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File file = new File(dir, DateUtil.format(new Date(), "yyyyMMddhhmmss") + "stayHorse_0" + s + ".jpg");
+            bitmapPath = file.getPath();
+
+            openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+            openCameraIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
+            ((MainActivity) context).startActivityForResult(openCameraIntent, 0x000000);
+        } else {
+            speech("没有储存卡");
+        }
+    }
+
+
+    public void speech(String toast) {
+//        speechUtil.speakXunFei(toast);
     }
 }

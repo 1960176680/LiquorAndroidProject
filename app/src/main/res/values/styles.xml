@@ -41,4 +41,9 @@
         <item name="android:layout_height">102px</item>
         <item name="android:background">@color/white</item>
     </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/line</item>
+        <item name="colorControlActivated">@color/green0</item>
+    </style>
 </resources>

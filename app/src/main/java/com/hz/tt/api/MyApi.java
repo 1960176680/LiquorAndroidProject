@@ -10,13 +10,12 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 server端api
  */
 
 public interface MyApi {
 
-    public static final String BASE_URL = "http://api.sealtalk.im/";
+    public static final String BASE_URL = "http://10.38.1.40:8080/SpringSpringmvcMybatis/api/";
 
     //检查手机是否被注册
     @POST("user/check_phone_available")

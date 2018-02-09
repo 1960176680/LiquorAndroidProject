@@ -52,6 +52,12 @@ public class RegisterActivity extends BaseActivity<IRegisterAtView, RegisterAtPr
         public void afterTextChanged(Editable s) {
         }
     };
+
+    @Override
+    public void initView() {
+        setToolbarTitle(UIUtils.getString(R.string.register_btn));
+    }
+
     @Override
     public void initListener() {
         mEtPwd.addTextChangedListener(watcher);

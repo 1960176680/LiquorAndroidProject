@@ -1,19 +1,24 @@
 package com.hz.tt.mvp.ui.fragment;
+
 import android.view.View;
+import android.widget.ImageView;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.DiscoveryFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IDiscoveryFgView;
+
+import butterknife.Bind;
 
 /**
  * @描述 发现界面
  */
 public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryFgPresenter> implements IDiscoveryFgView {
 
-//    @Bind(R.id.oivScan)
-//    OptionItemView mOivScan;
+    @Bind(R.id.iv_scan)
+    ImageView iv_scan;
 //    @Bind(R.id.oivShop)
 //    OptionItemView mOivShop;
 //    @Bind(R.id.oivGame)
@@ -26,7 +31,7 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
 
     @Override
     public void initListener() {
-//        mOivScan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(MainActivity.class/*ScanActivity.class*/));
+        iv_scan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(ScanActivity.class));
 //        mOivShop.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.JD));
 //        mOivGame.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.GAME));
     }

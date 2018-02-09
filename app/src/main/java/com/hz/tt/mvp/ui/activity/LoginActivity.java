@@ -43,7 +43,12 @@ public class LoginActivity extends BaseActivity<LoginAtView, LoginAtPresenter> i
 
     @Override
     public void initListener() {
-        mBtnLogin.setOnClickListener(v -> mPresenter.login());
+        mBtnLogin.setOnClickListener(v -> {
+            RegisterRequest request=new RegisterRequest();
+            String q=request.getUrl();
+            speechUtil.speakXunFei("正在登录请稍后");
+            mPresenter.login();
+        });
         tv_register.setOnClickListener(v -> mPresenter.register());
         tv_forget.setOnClickListener(v -> mPresenter.forgetKey());
 

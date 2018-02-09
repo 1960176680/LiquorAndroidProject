@@ -18,6 +18,7 @@ import com.hz.tt.R;
 import com.hz.tt.app.MyApp;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
 import com.hz.tt.util.UIUtils;
+import com.hz.tt.util.voice.TextToSpeechUtil;
 import com.hz.tt.widget.CustomDialog;
 import com.jaeger.library.StatusBarUtil;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -31,7 +32,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected T mPresenter;
     private CustomDialog mDialogWaiting;
     private MaterialDialog mMaterialDialog;
-
+    protected TextToSpeechUtil speechUtil;
     //以下是所有Activity中可能会出现的控件
     @Bind(R.id.appBar)
     protected AppBarLayout mAppBar;
@@ -74,6 +75,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         initView();
         initData();
         initListener();
+        speechUtil = new TextToSpeechUtil(MyApp.getContext());
     }
 
     /**
@@ -124,6 +126,11 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+
+        if (speechUtil != null){
+            speechUtil.onDestroy();
+        }
+
     }
 
     //在setContentView()调用之前调用，可以设置WindowFeature(如：this.requestWindowFeature(Window.FEATURE_NO_TITLE);)

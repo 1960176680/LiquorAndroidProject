@@ -25,14 +25,14 @@
                 android:textStyle="bold"
                 />
 
-            <TextView
+            <EditText
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="周文广"
+                android:layout_height="match_parent"
+                android:text="郎丽"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
-                />
+                android:theme="@style/MyEditText"/>
 
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView
@@ -70,6 +70,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/iv_scan"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_scan_blue"
@@ -82,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入或扫描条形码"
                 android:layout_marginLeft="10dp"
-                />
+                android:theme="@style/MyEditText"/>
 
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView
@@ -102,20 +103,12 @@
                 />
 
             <EditText
-                android:id="@+id/et_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="酱香型白酒"
-                android:paddingLeft="10dp"
-                android:layout_weight="1"
-                android:textSize="16sp"/>
-            <ImageView
-                android:id="@+id/iv_type"
-                android:layout_width="45dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/pull"
-                android:padding="15dp"
-                />
+                android:text="经典白酒"
+                android:paddingLeft="10dp"
+                android:textSize="16sp"
+                android:theme="@style/MyEditText"/>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <TextView
@@ -134,21 +127,14 @@
                 android:textStyle="bold"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/et_type"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="酱香型白酒"
                 android:paddingLeft="10dp"
-                android:layout_weight="1"
+
                 android:textSize="16sp"/>
-            <ImageView
-                android:id="@+id/iv_type"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/pull"
-                android:padding="15dp"
-                />
         </com.zhy.autolayout.AutoLinearLayout>
 
         <TextView
@@ -167,22 +153,14 @@
                 android:textStyle="bold"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/et_country"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="中国"
                 android:paddingLeft="10dp"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                />
 
-            <ImageView
-                android:id="@+id/iv_country"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/pull"
-                android:padding="15dp"
+                android:textSize="16sp"
                 />
 
         </com.zhy.autolayout.AutoLinearLayout>
@@ -202,21 +180,13 @@
                 android:textStyle="bold"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/et_birthplace"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="贵州"
                 android:paddingLeft="10dp"
-                android:layout_weight="1"
                 android:textSize="16sp"/>
-            <ImageView
-                android:id="@+id/iv_birthplace"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/pull"
-                android:padding="15dp"
-                />
 
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView
@@ -233,21 +203,13 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 />
-            <EditText
+            <TextView
                 android:id="@+id/et_capacity"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:text="1L"
                 android:paddingLeft="10dp"
-                android:layout_weight="1"
                 android:textSize="16sp"/>
-            <ImageView
-                android:id="@+id/iv_capacity"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/pull"
-                android:padding="15dp"
-                />
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView
             style="@style/Line"
@@ -263,7 +225,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 />
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1949年"
@@ -285,7 +247,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 />
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1瓶"
@@ -308,7 +270,7 @@
                 android:textStyle="bold"
                 />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="杭州"

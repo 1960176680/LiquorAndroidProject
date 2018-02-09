@@ -34,7 +34,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:srcCompat="@mipmap/ic_scan_blue"
-
+            android:id="@+id/iv_scan"
             />
     </com.zhy.autolayout.AutoLinearLayout>
     <com.zhy.autolayout.AutoLinearLayout

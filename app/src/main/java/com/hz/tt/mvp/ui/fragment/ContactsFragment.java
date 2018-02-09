@@ -1,13 +1,17 @@
 package com.hz.tt.mvp.ui.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.ContactsFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IContactsFgView;
+
+import butterknife.Bind;
 
 /**
  * @创建者 CSDN_LQR
@@ -21,7 +25,8 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 //    QuickIndexBar mQib;
 //    @Bind(R.id.tvLetter)
 //    TextView mTvLetter;
-
+    @Bind(R.id.iv_scan)
+    ImageView iv_scan;
     private View mHeaderView;
     private TextView mFooterView;
     private TextView mTvNewFriendUnread;
@@ -47,7 +52,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 
     @Override
     public void initListener() {
-
+        iv_scan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(ScanActivity.class));
     }
 
     @Override

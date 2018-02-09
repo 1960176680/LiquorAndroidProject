@@ -2,11 +2,13 @@ package com.hz.tt.mvp.ui.fragment;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.RecentMessageFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IRecentMessageFgView;
 import com.hz.tt.widget.SelectDialog;
@@ -21,6 +23,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     private boolean isFirst = true;
 //    @Bind(R.id.rvRecentMessage)
 //    LQRRecyclerView mRvRecentMessage;
+//    下拉
     @Bind(R.id.iv_type)
     ImageView iv_type;
     @Bind(R.id.iv_country)
@@ -29,7 +32,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     ImageView iv_birthplace;
     @Bind(R.id.iv_capacity)
     ImageView iv_capacity;
-
+//输入文本框
     @Bind(R.id.et_type)
     EditText et_type;
     @Bind(R.id.et_country)
@@ -38,6 +41,13 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     EditText et_birthplace;
     @Bind(R.id.et_capacity)
     EditText et_capacity;
+//    扫描
+    @Bind(R.id.iv_scan)
+    ImageView iv_scan;
+// 拍照
+    @Bind(R.id.btn_picture)
+    ImageButton btn_picture;
+
     @Override
     public void init() {
 //        registerBR();
@@ -46,6 +56,12 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Override
     public void initView(View rootView) {
         iv_type.setOnClickListener(v -> selectDialog("type"));
+        iv_country.setOnClickListener(v -> selectDialog("country"));
+        iv_birthplace.setOnClickListener(v -> selectDialog("birthplace"));
+        iv_capacity.setOnClickListener(v -> selectDialog("capacity"));
+        iv_scan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(ScanActivity.class));
+        btn_picture.setOnClickListener(v -> mPresenter.takePhoto("1"));
+        mPresenter.speech("登录成功");
     }
 
     @Override
@@ -102,22 +118,22 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         switch (type){
             case "type":
                 SelectDialog.setOnResultListener(result -> et_type.setText(result));
-                SelectDialog.initDialog(getActivity(),"选择品类","",R.array.CXH_list,0)
+                SelectDialog.initDialog(getActivity(),"品类选择","",R.array.CXH_list,0)
                 .show();
                 break;
             case "country":
                 SelectDialog.setOnResultListener(result -> et_country.setText(result));
-                SelectDialog.initDialog(getActivity(),"选择国家","",R.array.CXH_list,0)
+                SelectDialog.initDialog(getActivity(),"国家选择","",R.array.CXH_list0,0)
                         .show();
                 break;
             case "birthplace":
                 SelectDialog.setOnResultListener(result -> et_birthplace.setText(result));
-                SelectDialog.initDialog(getActivity(),"选择产地","",R.array.CXH_list,0)
+                SelectDialog.initDialog(getActivity(),"产地选择","",R.array.CXH_list1,0)
                         .show();
                 break;
             case "capacity":
                 SelectDialog.setOnResultListener(result -> et_capacity.setText(result));
-                SelectDialog.initDialog(getActivity(),"选择容量","",R.array.CXH_list,0)
+                SelectDialog.initDialog(getActivity(),"容量选择","",R.array.CXH_list2,0)
                         .show();
                 break;
         }

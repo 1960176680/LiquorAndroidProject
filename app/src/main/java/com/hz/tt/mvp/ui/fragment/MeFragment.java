@@ -122,7 +122,7 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.a;
+        return R.layout.fragment_more;
     }
 
     @Override

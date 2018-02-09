@@ -5,10 +5,13 @@
     <string name="search">搜索</string>
     <string name="send">发送</string>
     <string name="please_wait">请稍等</string>
+
+    <!--注册-->
     <!--登录-->
     <string name="login_btn">登录</string>
     <string name="register_btn">注册</string>
     <string name="forget_btn">忘记密码？</string>
+    <string name="forget_title">忘记密码？</string>
     <string name="login_error">登录失败</string>
     <string name="phone_format_error">手机格式有误</string>
     <string name="phone_not_empty">手机号不能为空</string>
@@ -54,6 +57,21 @@
         <item>酱香型</item>
         <item>浓香型</item>
     </string-array>
+    <string-array name="CXH_list0">
+        <item>中国</item>
+        <item>美国</item>
+        <item>日本</item>
+    </string-array>
+    <string-array name="CXH_list1">
+        <item>贵州</item>
+        <item>杭州</item>
+        <item>郑州</item>
+    </string-array>
+    <string-array name="CXH_list2">
+        <item>1L</item>
+        <item>2L</item>
+        <item>3L</item>
+    </string-array>
     <!--注册-->
     <string name="nickname">昵称</string>
     <string name="password">密码</string>
@@ -65,4 +83,19 @@
     <string name="vertify_code_error">验证码有误</string>
     <string name="send_code_btn_normal_tip">发送验证码</string>
     <string name="register_error">注册出错</string>
+
+    <!--扫一扫-->
+    <string name="scan_code">扫码</string>
+    <string name="cover">封面</string>
+    <string name="street_scape">街景</string>
+    <string name="translate">翻译</string>
+    <string name="qr_cord_or_bar_code">二级码/条码</string>
+    <string name="cover_or_movie_poster">封面/电影海报</string>
+    <string name="select_qr_code_from_ablum">从相册选取二维码</string>
+    <string name="scan_fail">扫描失败</string>
+    <string name="open_camera_error">打开相机出错</string>
+    <string name="this_account_was_your_friend">该用户已经是您的好友</string>
+    <string name="you_already_in_this_group">您已经在群聊中</string>
+    <string name="select_group_info_fail_please_restart_app">已加入群聊，但查询群信息失败，请重启APP</string>
+    <string name="join_group_fail">入群失败</string>
 </resources>
