@@ -2,7 +2,7 @@ package com.hz.tt.mvp.ui.activity;
 
 import android.util.Base64;
 
-import com.hz.tt.api.MyApi;
+import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.util.Md5Util;
 
 import java.io.UnsupportedEncodingException;
@@ -52,7 +52,7 @@ public class RegisterRequest {
             e.printStackTrace();
         }
 
-        url = MyApi.BASE_URL+"?msg_type=" + meth + "&data_digest=" + md5 + "&logistics_interface=" + ckey+"&appkey=123456";
+        url = NetConstant.BASE_URL+"?msg_type=" + meth + "&data_digest=" + md5 + "&logistics_interface=" + ckey+"&appkey=123456";
         return url;
     }
 

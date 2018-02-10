@@ -36,8 +36,6 @@ public class RegisterActivity extends BaseActivity<IRegisterAtView, RegisterAtPr
 //注册
     @Bind(R.id.btnRegister)
     Button mBtnRegister;
-
-
     TextWatcher watcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,7 +85,7 @@ public class RegisterActivity extends BaseActivity<IRegisterAtView, RegisterAtPr
         });
 
         mBtnRegister.setOnClickListener(v -> {
-//            mPresenter.register();
+            mPresenter.register();
         });
     }
 

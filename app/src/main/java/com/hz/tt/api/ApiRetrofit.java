@@ -6,7 +6,6 @@ import com.hz.tt.api.base.BaseApiRetrofit;
 import com.hz.tt.mvp.model.entity.request.CheckPhoneRequest;
 import com.hz.tt.mvp.model.entity.request.LoginRequest;
 import com.hz.tt.mvp.model.entity.response.CheckPhoneResponse;
-import com.hz.tt.mvp.model.entity.response.LoginResponse;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -15,7 +14,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 使用Retrofit对网络请求进行配置
  */
 public class ApiRetrofit extends BaseApiRetrofit {
@@ -58,8 +56,8 @@ public class ApiRetrofit extends BaseApiRetrofit {
     }
 
     //登录
-    public Observable<LoginResponse> login(String region, String phone, String password) {
-        return mApi.login(getRequestBody(new LoginRequest(region, phone, password)));
+    public Observable<String> login(String phone, String password) {
+        return mApi.login();
     }
 
     //注册

@@ -1,13 +1,14 @@
 package com.hz.tt.api;
 
 import com.hz.tt.mvp.model.entity.response.CheckPhoneResponse;
-import com.hz.tt.mvp.model.entity.response.LoginResponse;
 import com.hz.tt.mvp.model.entity.response.RegisterResponse;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 
 /**
  * @描述 server端api
@@ -15,7 +16,24 @@ import retrofit2.http.POST;
 
 public interface MyApi {
 
-    public static final String BASE_URL = "http://10.38.1.40:8080/SpringSpringmvcMybatis/api/";
+    public static final String BASE_URL = "http://10.38.1.40:8080/SpringSpringmvcMybatis/";
+
+
+    /**
+     msg_type：WINECELLAR_MANAGER_LOGIN
+    logistics_interface：{\"userName\":\"123456\",\"password\":\"123456\"}
+     logistics_interface：请求报文json
+        msg_type：请求接口
+        data_digest：加密字符串（base64（md5（logistics_interface+appsecret）））
+        appkey：密钥
+                */
+    //登录
+
+    @GET("api?msg_type=WINECELLAR_MANAGER_LOGIN&data_digest=NzE5ZDQwNmU1NTk4NzM3Zjk2YjliMjJmNzAxMjkwMmQ=&logistics_interface=%7B%22userName%22%3A%22123456%22%2C%22password%22%3A%22123456%22%7D&appkey=123456")
+    Observable<String> login();
+
+
+
 
     //检查手机是否被注册
     @POST("user/check_phone_available")
@@ -33,9 +51,9 @@ public interface MyApi {
     @POST("user/register")
     Observable<RegisterResponse> register(@Body RequestBody body);
 
-    //登录
-    @POST("user/login")
-    Observable<LoginResponse> login(@Body RequestBody body);
+//    //登录
+//    @POST("user/login")
+//    Observable<LoginResponse> login(@Body RequestBody body);
 //
 //    //获取 token 前置条件需要登录   502 坏的网关 测试环境用户已达上限
 //    @GET("user/get_token")

@@ -1,59 +1,41 @@
 package com.hz.tt.mvp.model.entity.response;
-
-
 /**
- * Created by AMing on 15/12/24.
- * Company RongCloud
+ * {"errorCode":"1000","errorMsg":"密码修改成功。","success":false}
  */
 public class LoginResponse {
-
     /**
-     * code : 200
-     * result : {"id":"t1hWCOGvX","token":"B0DA/kKanJviD5xxUzhwsEFIJad0/86YwGxBwz1417WFQi/Vr2OJay26s5IFDffGZaUYRMAkvN0ikvOcTl7RN9JilKZlosfQ"}
+     * errorCode : 1000
+     * errorMsg : 密码修改成功。
+     * success : false
      */
 
-    private int code;
-    /**
-     * id : t1hWCOGvX
-     * token : B0DA/kKanJviD5xxUzhwsEFIJad0/86YwGxBwz1417WFQi/Vr2OJay26s5IFDffGZaUYRMAkvN0ikvOcTl7RN9JilKZlosfQ
-     */
+    private String errorCode;
+    private String errorMsg;
+    private boolean success;
 
-    private ResultEntity result;
-
-    public void setCode(int code) {
-        this.code = code;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setResult(ResultEntity result) {
-        this.result = result;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public int getCode() {
-        return code;
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
-    public ResultEntity getResult() {
-        return result;
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
-    public static class ResultEntity {
-        private String id;
-        private String token;
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getToken() {
-            return token;
-        }
+    public boolean isSuccess() {
+        return success;
     }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+
 }

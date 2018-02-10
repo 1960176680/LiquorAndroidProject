@@ -32,7 +32,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected T mPresenter;
     private CustomDialog mDialogWaiting;
     private MaterialDialog mMaterialDialog;
-    protected TextToSpeechUtil speechUtil;
+    public TextToSpeechUtil speechUtil;
     //以下是所有Activity中可能会出现的控件
     @Bind(R.id.appBar)
     protected AppBarLayout mAppBar;
