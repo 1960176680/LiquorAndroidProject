@@ -208,10 +208,15 @@ public class ScanActivity extends BaseActivity<IScanAtView, ScanAtPresenter> imp
         LogUtils.sf("扫描结果:" + result);
         vibrate();
 //        周文广
-        NetConstant.SCAN_RESULT="";
-        NetConstant.SCAN_RESULT=result.trim();
+        String type=getIntent().getStringExtra("flag");
+        if (type.equals("out")){
+            NetConstant.SCAN_RESULT_OUT="";
+            NetConstant.SCAN_RESULT_OUT=result.trim();
+        }else{
+            NetConstant.SCAN_RESULT="";
+            NetConstant.SCAN_RESULT=result.trim();
+        }
         finish();
-
 
         mZxingview.startSpot();
         //添加好友

@@ -55,8 +55,8 @@
 
         <ImageView
             android:id="@+id/delete_img"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
             android:visibility="invisible"

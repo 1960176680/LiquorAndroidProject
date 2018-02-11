@@ -1,10 +1,16 @@
 package com.hz.tt.mvp.model.entity;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by Administrator on 2018-02-11.
  */
-
+@Entity
 public class InBean {
+    @Id
+    private Long id;
     private String person;
     private String time;
     private String type;
@@ -17,6 +23,29 @@ public class InBean {
     private String code;
     private String imgstr;
     private String status;
+
+    @Generated(hash = 1735997458)
+    public InBean(Long id, String person, String time, String type, String country,
+            String birthday, String capacity, String year, String number,
+            String location, String code, String imgstr, String status) {
+        this.id = id;
+        this.person = person;
+        this.time = time;
+        this.type = type;
+        this.country = country;
+        this.birthday = birthday;
+        this.capacity = capacity;
+        this.year = year;
+        this.number = number;
+        this.location = location;
+        this.code = code;
+        this.imgstr = imgstr;
+        this.status = status;
+    }
+
+    @Generated(hash = 1564616797)
+    public InBean() {
+    }
 
     public String getPerson() {
         return person;
@@ -112,6 +141,14 @@ public class InBean {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

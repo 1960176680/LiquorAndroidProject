@@ -26,10 +26,10 @@
                 />
 
             <EditText
-                android:id="@+id/textView3"
+                android:id="@+id/et_rec_person"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="郎丽"
+
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
@@ -53,9 +53,10 @@
                 />
 
             <TextView
+                android:id="@+id/tv_rec_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2018-02-02 14:00:00"
+
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 />
@@ -79,6 +80,7 @@
                 />
 
             <EditText
+                android:id="@+id/et_scan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请输入或扫描条形码"
@@ -103,9 +105,10 @@
                 />
 
             <EditText
+                android:id="@+id/et_remark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="经典白酒"
+
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
@@ -128,10 +131,10 @@
                 />
 
             <TextView
-                android:id="@+id/et_type"
+                android:id="@+id/tv_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="酱香型白酒"
+
                 android:paddingLeft="10dp"
 
                 android:textSize="16sp"/>
@@ -154,10 +157,10 @@
                 />
 
             <TextView
-                android:id="@+id/et_country"
+                android:id="@+id/tv_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="中国"
+
                 android:paddingLeft="10dp"
 
                 android:textSize="16sp"
@@ -181,10 +184,9 @@
                 />
 
             <TextView
-                android:id="@+id/et_birthplace"
+                android:id="@+id/tv_birthplace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="贵州"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"/>
 
@@ -204,10 +206,9 @@
                 android:textStyle="bold"
                 />
             <TextView
-                android:id="@+id/et_capacity"
+                android:id="@+id/tv_capacity"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="1L"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"/>
         </com.zhy.autolayout.AutoLinearLayout>
@@ -226,9 +227,10 @@
                 android:textStyle="bold"
                 />
             <TextView
+                android:id="@+id/tv_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1949年"
+
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 />
@@ -248,9 +250,10 @@
                 android:textStyle="bold"
                 />
             <TextView
+                android:id="@+id/tv_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1瓶"
+
                 android:paddingLeft="10dp"
                 android:textSize="16sp"/>
         </com.zhy.autolayout.AutoLinearLayout>
@@ -271,9 +274,10 @@
                 />
 
             <TextView
+                android:id="@+id/tv_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="杭州"
+
                 android:paddingLeft="10dp"
                 android:textSize="16sp"/>
 

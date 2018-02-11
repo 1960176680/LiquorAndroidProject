@@ -126,7 +126,11 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         iv_country.setOnClickListener(v -> selectDialog("country"));
         iv_birthplace.setOnClickListener(v -> selectDialog("birthplace"));
         iv_capacity.setOnClickListener(v -> selectDialog("capacity"));
-        iv_scan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(ScanActivity.class));
+        iv_scan.setOnClickListener(v -> {
+            Intent intent=new Intent(this.getActivity(),ScanActivity.class);
+            intent.putExtra("flag","in");
+            ((MainActivity) getActivity()).jumpToActivity(intent);
+        });
         btn_picture.setOnClickListener(v -> takePhoto("1"));
         mPresenter.speech("登录成功");
 
@@ -152,9 +156,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Override
     public void onResume() {
         super.onResume();
-        if (NetConstant.SCAN_RESULT.equals("")){
-            et_scan.setText(et_scan.getText());
-        }else{
+        if (!NetConstant.SCAN_RESULT.equals("")){
             et_scan.setText(NetConstant.SCAN_RESULT);
         }
 
@@ -226,7 +228,6 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
             File dir = new File(Environment.getExternalStorageDirectory() + "/StayWareHouseImage/");
             if (!dir.exists() && !dir.mkdirs())
                 return;
-
 
             Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (openCameraIntent.resolveActivity(getActivity().getPackageManager())== null) {

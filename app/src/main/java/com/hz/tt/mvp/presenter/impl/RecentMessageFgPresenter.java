@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.hz.tt.R;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
+import com.hz.tt.app.MyApp;
+import com.hz.tt.greendao.gen.InBeanDao;
 import com.hz.tt.mvp.model.entity.InBean;
 import com.hz.tt.mvp.model.entity.request.UpInRecordRequest;
 import com.hz.tt.mvp.model.entity.response.ImageUpResponse;
@@ -131,10 +133,14 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                     TextView num = helper.getView(R.id.num);
                     ImageView delete_img = helper.getView(R.id.delete_img);
 
-                    danHao.setText("1234567890123");
-                    states.setText("已传");
-                    num.setText("1");
-
+                    danHao.setText(item.getCode());
+                    String status=item.getStatus();
+                    if (status.equals("未上传")){
+                        delete_img.setVisibility(View.VISIBLE);
+                    }
+                    states.setText(status);
+                    int size=datas.size();
+                    num.setText(size-position+"");
                 }
             };
             getView().getRvRecentMessage().setAdapter(mAdapter);
@@ -157,8 +163,7 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             String Num=view.getNum().getText().toString().trim();
             String Location=view.getLocation().getText().toString().trim();
             String Code=view.getCode().getText().toString().trim();
-            if (!Person.equals("")
-                    &&!Time.equals("")
+            if (!Time.equals("")
                     &&!Type.equals("")
                     &&!Country.equals("")
                     &&!Birthday.equals("")
@@ -179,9 +184,12 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                 bean.setLocation(Location);
                 bean.setCode(Code);
                 bean.setImgstr(bitmapPath);
-                bean.setStatus("未传");
-                datas.add(bean);
+                bean.setStatus("未上传");
+                datas.add(0,bean);
                 mAdapter.notifyDataSetChanged();
+
+                InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+                inBeanDao.insert(bean);
             }else{
                 UIUtils.showToast("请检查数据完整性！");
             }
@@ -249,6 +257,10 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             }
             String code = response.getCode();
             if (code.equals("1000")) {
+                InBean inBean=datas.get(0);
+                inBean.setStatus("已上传");
+                InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+                inBeanDao.update(inBean);
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
                 removeDatas.add(datas.get(0));
                 datas.remove(0);

@@ -8,6 +8,6 @@ public class NetConstant {
     public static final String BASE_URL = "http://10.38.1.40:8080/Wine/api";
     public static String USER_NAME ="";
     public static String SCAN_RESULT ="";
-
+    public static String SCAN_RESULT_OUT ="";
 
 }

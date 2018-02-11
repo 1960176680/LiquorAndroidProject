@@ -16,10 +16,14 @@ import com.hz.tt.mvp.ui.fragment.FragmentFactory;
 import com.hz.tt.mvp.ui.view.IMainAtView;
 import com.hz.tt.util.UIUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+
+import static com.hz.tt.R.id.tv_time;
 
 /**
  * Created by Administrator on 2018-02-06.
@@ -177,8 +181,10 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         //根据ViewPager滑动位置更改透明度
         int diaphaneity_one = (int) (255 * positionOffset);
         int diaphaneity_two = (int) (255 * (1 - positionOffset));
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         switch (position) {
             case 0:
+                ((TextView) mFragmentList.get(0).getView().findViewById(R.id.tv_time)).setText(dateFormat.format(new Date()));
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
                 tvMessageNormal.getBackground().setAlpha(diaphaneity_one);
                 tvMessagePress.getBackground().setAlpha(diaphaneity_two);
@@ -190,6 +196,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvContactsTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 1:
+                ((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time)).setText(dateFormat.format(new Date()));
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
                 tvContactsPress.getBackground().setAlpha(diaphaneity_two);
