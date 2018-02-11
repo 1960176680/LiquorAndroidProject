@@ -14,6 +14,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.hz.tt.R;
+import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.app.AppConst;
 import com.hz.tt.db.DBManager;
 import com.hz.tt.mvp.presenter.impl.ScanAtPresenter;
@@ -206,6 +207,12 @@ public class ScanActivity extends BaseActivity<IScanAtView, ScanAtPresenter> imp
     private void handleResult(String result) {
         LogUtils.sf("扫描结果:" + result);
         vibrate();
+//        周文广
+        NetConstant.SCAN_RESULT="";
+        NetConstant.SCAN_RESULT=result.trim();
+        finish();
+
+
         mZxingview.startSpot();
         //添加好友
         if (result.startsWith(AppConst.QrCodeCommon.ADD)) {

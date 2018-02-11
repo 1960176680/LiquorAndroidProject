@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="111111111111"
+        android:textColor="#808080"
+        android:id="@+id/danHao"
+        android:layout_weight="1"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="已传"
+        android:textColor="#808080"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/states"
+        android:layout_weight="1"
+
+        android:layout_gravity="center_vertical"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="10"
+            android:layout_gravity="center_vertical"
+
+            android:textColor="#808080"
+            android:id="@+id/num"
+            />
+
+        <ImageView
+            android:id="@+id/delete_img"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:visibility="invisible"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/de_le"
+            />
+    </LinearLayout>
+</LinearLayout>

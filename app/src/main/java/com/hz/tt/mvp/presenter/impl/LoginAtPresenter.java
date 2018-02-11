@@ -3,7 +3,9 @@ package com.hz.tt.mvp.presenter.impl;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.hz.tt.R;
+import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
 import com.hz.tt.mvp.model.entity.exception.ServerException;
 import com.hz.tt.mvp.model.entity.request.LoginRequest;
@@ -16,7 +18,6 @@ import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.LoginAtView;
 import com.hz.tt.util.LogUtils;
 import com.hz.tt.util.UIUtils;
-import com.squareup.okhttp.OkHttpClient;
 
 public class LoginAtPresenter extends BasePresenter<LoginAtView> {
     public LoginAtPresenter(BaseActivity context) {
@@ -24,6 +25,7 @@ public class LoginAtPresenter extends BasePresenter<LoginAtView> {
 
     public void login() {
         String phone = getView().getEtPhone().getText().toString().trim();
+        NetConstant.USER_NAME=phone;
         String pwd = getView().getEtPwd().getText().toString().trim();
 
         if (TextUtils.isEmpty(phone)) {
@@ -46,7 +48,15 @@ public class LoginAtPresenter extends BasePresenter<LoginAtView> {
                 return;
             }
             Gson gson = new Gson();
-            LoginResponse response = gson.fromJson(newstr1, LoginResponse.class);
+            LoginResponse response = null;
+            try {
+                response = gson.fromJson(newstr1, LoginResponse.class);
+            } catch (JsonSyntaxException e) {
+                mContext.speechUtil.speakXunFei("服务器异常");
+                loginError(new ServerException(UIUtils.getString(R.string.login_error)));
+                e.printStackTrace();
+                return;
+            }
             String code = response.getErrorCode();
             if (code.equals("1000")) {
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
@@ -56,26 +66,7 @@ public class LoginAtPresenter extends BasePresenter<LoginAtView> {
                 loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
             }
         }));
-        okHttpUtils.myEnqueue(new LoginRequest(phone,pwd).getUrl());
-
-
-//        ApiRetrofit.getInstance().login(phone, pwd)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<String>() {
-//                    @Override
-//                    public void accept(String loginResponse) throws Exception {
-////                    int code = loginResponse.getCode();
-////                    mContext.hideWaitingDialog();
-////                    if (code == 200) {
-////                        UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
-////                        mContext.jumpToActivityAndClearTask(MainActivity.class);
-////                        mContext.finish();
-////                    } else {
-////                        loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
-////                    }
-//                    }
-//                }, this::loginError);
+        okHttpUtils.myEnqueue(new LoginRequest(phone,pwd).getUrl(),null);
     }
     private void loginError(Throwable throwable) {
         LogUtils.e(throwable.getLocalizedMessage());

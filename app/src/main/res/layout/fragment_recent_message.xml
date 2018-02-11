@@ -26,10 +26,9 @@
                 />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="郎丽"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 />
@@ -53,9 +52,9 @@
                 />
 
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2018-02-02 14:00:00"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 />
@@ -81,7 +80,7 @@
                 android:id="@+id/et_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="酱香型白酒"
+
                 android:paddingLeft="10dp"
                 android:layout_weight="1"
                 android:textSize="16sp"
@@ -115,7 +114,7 @@
                 android:id="@+id/et_country"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="中国"
+
                 android:paddingLeft="10dp"
                 android:layout_weight="1"
                 android:textSize="16sp"
@@ -151,7 +150,7 @@
                 android:id="@+id/et_birthplace"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="贵州"
+
                 android:paddingLeft="10dp"
                 android:layout_weight="1"
                 android:textSize="16sp"
@@ -183,7 +182,7 @@
                 android:id="@+id/et_capacity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="1L"
+
                 android:paddingLeft="10dp"
                 android:layout_weight="1"
                 android:textSize="16sp"
@@ -211,9 +210,9 @@
                 android:textStyle="bold"
                 />
             <EditText
+                android:id="@+id/et_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1949年"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
@@ -233,9 +232,9 @@
                 android:textStyle="bold"
                 />
             <EditText
+                android:id="@+id/et_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1瓶"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
@@ -257,9 +256,9 @@
                 />
 
             <EditText
+                android:id="@+id/et_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="杭州"
                 android:paddingLeft="10dp"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
@@ -281,6 +280,7 @@
                 />
 
             <EditText
+                android:id="@+id/et_scan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请输入或扫描条形码"
@@ -294,8 +294,9 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             >
 
             <!--<FrameLayout-->
@@ -355,18 +356,19 @@
 
             <FrameLayout
                 android:layout_marginEnd="5dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="5dp">
                 <ImageButton
                     android:background="?android:attr/selectableItemBackground"
                     android:src="@mipmap/ic_photo"
                     android:id="@+id/btn_picture"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"/>
 
                 <ImageButton
-                    android:id="@+id/btn_pic_close_three"
+                    android:id="@+id/img_close"
                     android:layout_gravity="end"
                     android:visibility="gone"
                     android:src="@mipmap/ic_close_pic"
@@ -390,11 +392,12 @@
                 android:text="添加"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_selector"
-                android:id="@+id/btn_stay_upload"
+                android:id="@+id/btn_add"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp" />
             <Button
+                android:id="@+id/btn_upload"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="15dp"
@@ -442,7 +445,7 @@
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView style="@style/Line"
             />
-        <com.lqr.recyclerview.LQRRecyclerView
+        <com.hz.tt.widget.MyListViewInScrollView
             android:id="@+id/rvRecentMessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

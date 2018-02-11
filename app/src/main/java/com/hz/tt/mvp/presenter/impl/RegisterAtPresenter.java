@@ -70,7 +70,7 @@ public class RegisterAtPresenter extends BasePresenter<IRegisterAtView> {
         RegisterBean bean=new RegisterBean();
         bean.setPhone(getView().getEtPhone().getText().toString());
         bean.setPassword(getView().getEtPwd().getText().toString());
-        okHttpUtils.myEnqueue(new RegisterRequest(bean).getUrl());
+        okHttpUtils.myEnqueue(new RegisterRequest(bean).getUrl(),null);
     }
 
     private void registerError(Throwable throwable) {

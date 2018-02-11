@@ -1,12 +1,13 @@
 package com.hz.tt.api.okHttpUtils;
 
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 /**
@@ -23,9 +24,9 @@ public class OkHttpUtils
         if (mOkHttpClient == null)
         {
             mOkHttpClient = new OkHttpClient();
-            mOkHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
-            mOkHttpClient.setWriteTimeout(10, TimeUnit.SECONDS);
-            mOkHttpClient.setReadTimeout(30, TimeUnit.SECONDS);
+//            mOkHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
+//            mOkHttpClient.setWriteTimeout(10, TimeUnit.SECONDS);
+//            mOkHttpClient.setReadTimeout(30, TimeUnit.SECONDS);
         }
 //        else{
 //            mOkHttpClient = okHttpClient;
@@ -56,26 +57,47 @@ public class OkHttpUtils
     }
 
 //OkHttp使用第三步
-    public void myEnqueue(String url)
+    public void myEnqueue(String url, RequestBody requestBody)
     {
+        Request request;
+        if (requestBody==null){
+            request = new Request.Builder()
+                    .url(url)
+                    .build();
+        }else{
+            request = new Request.Builder()
+                    .post(requestBody)
+                    .url(url)
+                    .build();
+        }
 
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
         mOkHttpClient.newCall(request)
                 .enqueue(new Callback() {
                     @Override
-                    public void onFailure(Request request, IOException e) {
+                    public void onFailure(Call call, IOException e) {
                         mResultListener.sendData("数据请求失败");
                     }
 
                     @Override
-                    public void onResponse(Response response) throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseUrl = response.body().string();
                         mResultListener.sendData(responseUrl);
                         if (response.body() != null)
-                         response.body().close();
+                            response.body().close();
                     }
+
+//                    @Override
+//                    public void onFailure(Request request, IOException e) {
+//                        mResultListener.sendData("数据请求失败");
+//                    }
+
+//                    @Override
+//                    public void onResponse(Response response) throws IOException {
+//                        String responseUrl = response.body().string();
+//                        mResultListener.sendData(responseUrl);
+//                        if (response.body() != null)
+//                         response.body().close();
+//                    }
         });
     }
     //OkHttp使用第二步
