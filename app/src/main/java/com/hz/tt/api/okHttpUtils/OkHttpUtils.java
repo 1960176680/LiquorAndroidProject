@@ -15,9 +15,9 @@ import okhttp3.Response;
  */
 public class OkHttpUtils
 {
-    private static  OkHttpUtils mInstance;
+    private static OkHttpUtils mInstance;
     private OkHttpClient mOkHttpClient;
-    private static ResultListener mResultListener;
+    private  ResultListener mResultListener;
 
     public OkHttpUtils()
     {

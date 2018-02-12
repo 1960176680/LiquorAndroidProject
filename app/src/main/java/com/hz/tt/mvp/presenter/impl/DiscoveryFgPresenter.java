@@ -56,7 +56,7 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
                 mContext.hideWaitingDialog();
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
             } else {
-                mContext.speechUtil.speakXunFei(code);
+                mContext.speechUtil.speakXunFei(response.getErrorMsg());
                 mContext.hideWaitingDialog();
                 return;
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));

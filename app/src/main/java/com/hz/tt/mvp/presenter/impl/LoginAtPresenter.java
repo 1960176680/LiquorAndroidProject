@@ -60,7 +60,7 @@ public class LoginAtPresenter extends BasePresenter<LoginAtView> {
             String code = response.getErrorCode();
             if (code.equals("1000")) {
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
-                mContext.jumpToActivity(MainActivity.class);
+                mContext.jumpToActivityAndClearTop(MainActivity.class);
                 mContext.finish();
             } else {
                 loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));

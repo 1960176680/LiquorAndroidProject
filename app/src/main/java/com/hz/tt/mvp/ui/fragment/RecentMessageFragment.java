@@ -2,6 +2,7 @@ package com.hz.tt.mvp.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.hz.tt.R;
 import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.mvp.presenter.impl.RecentMessageFgPresenter;
+import com.hz.tt.mvp.ui.activity.CameraActivity;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
@@ -38,15 +40,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-import static android.app.Activity.RESULT_OK;
-
 /**
  * @描述 最近会话列表界面
  */
 public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, RecentMessageFgPresenter> implements IRecentMessageFgView {
-
+    private  Bitmap showBitmap;
     private boolean isFirst = true;
-
+    private String truepath;
     Disposable disposable;
 //    列表ListView
     @Bind(R.id.rvRecentMessage)
@@ -131,14 +131,18 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
             intent.putExtra("flag","in");
             ((MainActivity) getActivity()).jumpToActivity(intent);
         });
-        btn_picture.setOnClickListener(v -> takePhoto("1"));
+        btn_picture.setOnClickListener(v -> {
+            startActivityForResult(new Intent(getActivity(), CameraActivity.class), 100);
+
+//            takePhoto("1");
+        });
         mPresenter.speech("登录成功");
 
 //        添加上传
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.addRecord(bitmapPath);
+                mPresenter.addRecord(truepath);
             }
         });
 
@@ -160,7 +164,8 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         if (!NetConstant.SCAN_RESULT.equals("")){
             et_scan.setText(NetConstant.SCAN_RESULT);
         }
-
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        tv_time.setText(dateFormat.format(new Date()));
 
         if (!isFirst) {
 //            mPresenter.getConversations();
@@ -180,20 +185,6 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 //        unRegisterBR();
     }
 
-//    private void registerBR() {
-//        BroadcastManager.getInstance(getActivity()).register(AppConst.UPDATE_CONVERSATIONS, new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                mPresenter.getConversations();
-//                isFirst = false;
-//            }
-//        });
-//    }
-
-//    private void unRegisterBR() {
-//        BroadcastManager.getInstance(getActivity()).unregister(AppConst.UPDATE_CONVERSATIONS);
-//    }
-
     @Override
     protected RecentMessageFgPresenter createPresenter() {
         return new RecentMessageFgPresenter((MainActivity) getActivity());
@@ -210,20 +201,49 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 //    }
 
 
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode ==0 && resultCode == RESULT_OK) {
+//            img_close.setVisibility(View.VISIBLE);
+//            showPic(btn_picture);
+//        }
+//    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode ==0 && resultCode == RESULT_OK) {
-            img_close.setVisibility(View.VISIBLE);
-            showPic(btn_picture);
+        if (resultCode == 101) {
+            Log.i("CJT", "picture");
+            truepath = data.getStringExtra("path");
+            btn_picture.setImageBitmap(BitmapFactory.decodeFile(truepath));
         }
-
-
+        if (resultCode == 102) {
+            Log.i("CJT", "video");
+            String path = data.getStringExtra("path");
+        }
+        if (resultCode == 103) {
+//            Toast.makeText(this, "请检查相机权限~", Toast.LENGTH_SHORT).show();
+        }
     }
+
+
+
+
+
+
+
+
+
     /**
      * 执行拍照
      */
     private void takePhoto(String s) {
+        if (showBitmap!=null&&!showBitmap.isRecycled()){
+            showBitmap.recycle();
+            showBitmap = null;
+        }
         String status = Environment.getExternalStorageState();
         if (status.equals(Environment.MEDIA_MOUNTED)) {
             File dir = new File(Environment.getExternalStorageDirectory() + "/StayWareHouseImage/");
@@ -262,14 +282,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 //            speech("请重新拍照！");
             return;
         }
-        Bitmap showBitmap = ThumbnailUtils.extractThumbnail(bitmap, 200, 200);
-
-
-
-//        Bitmap bitmap2 = ((BitmapDrawable) btnPic.getBackground()).getBitmap();
-//        if (!bitmap2.isRecycled()) {
-//            bitmap2.recycle();
-//        }
+        showBitmap = ThumbnailUtils.extractThumbnail(bitmap, 200, 200);
         btnPic.setImageBitmap(showBitmap);
 
         btnPic.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -284,11 +297,10 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
                             Log.i("TakePhoto", "图片压缩成功！");
                         }else{
                             Log.e("TakePhoto", "图片压缩失败：");
-
-//                            Bitmap bitmap2 = ((BitmapDrawable) btnPic.getBackground()).getBitmap();
-//                            if (!bitmap2.isRecycled()) {
-//                                bitmap2.recycle();
-//                            }
+                            if (showBitmap!=null&&!showBitmap.isRecycled()) {
+                                showBitmap.recycle();
+                                showBitmap=null;
+                            }
                             btnPic.setImageResource(R.mipmap.ic_photo);
 //                speech("请重新拍照！");
                         }

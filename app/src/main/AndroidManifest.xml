@@ -86,6 +86,7 @@
             android:name=".mvp.ui.activity.ScanActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".mvp.ui.activity.CameraActivity"/>
     </application>
 
 </manifest>

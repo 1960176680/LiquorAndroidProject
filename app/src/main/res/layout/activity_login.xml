@@ -41,7 +41,6 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="用户名"
-            android:inputType="phone"
             android:text=""
             android:textColorHint="@color/gray3"
             android:textSize="@dimen/dimen_14sp"

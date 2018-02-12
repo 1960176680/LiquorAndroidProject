@@ -1,11 +1,19 @@
 package com.hz.tt.mvp.ui.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hz.tt.R;
 import com.hz.tt.app.MyApp;
@@ -19,7 +27,6 @@ import com.hz.tt.util.UIUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -31,6 +38,14 @@ import static com.hz.tt.app.base.BaseApp.activities;
  */
 
 public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> implements ViewPager.OnPageChangeListener,IMainAtView{
+    private final int GET_PERMISSION_REQUEST = 100; //权限申请自定义码
+
+
+
+
+
+
+
     @Bind(R.id.vpContent)
     ViewPager mVpContent;
     @Bind(R.id.tvMessageNormal)
@@ -105,7 +120,75 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         mLlDiscovery.setOnClickListener(v -> bottomBtnClick(v));
         mLlMe.setOnClickListener(v -> bottomBtnClick(v));
         mVpContent.addOnPageChangeListener(this);
+
+        getPermissions();
+
     }
+
+
+    /**
+     * 获取权限
+     */
+    private void getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager
+                    .PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager
+                            .PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager
+                            .PERMISSION_GRANTED) {
+//                startActivityForResult(new Intent(MainActivity.this, CameraActivity.class), 100);
+            } else {
+                //不具有获取权限，需要进行权限申请
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.CAMERA}, GET_PERMISSION_REQUEST);
+            }
+        } else {
+//            startActivityForResult(new Intent(MainActivity.this, CameraActivity.class), 100);
+        }
+    }
+    @TargetApi(23)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == GET_PERMISSION_REQUEST) {
+            int size = 0;
+            if (grantResults.length >= 1) {
+                int writeResult = grantResults[0];
+                //读写内存权限
+                boolean writeGranted = writeResult == PackageManager.PERMISSION_GRANTED;//读写内存权限
+                if (!writeGranted) {
+                    size++;
+                }
+                //录音权限
+                int recordPermissionResult = grantResults[1];
+                boolean recordPermissionGranted = recordPermissionResult == PackageManager.PERMISSION_GRANTED;
+                if (!recordPermissionGranted) {
+                    size++;
+                }
+                //相机权限
+                int cameraPermissionResult = grantResults[2];
+                boolean cameraPermissionGranted = cameraPermissionResult == PackageManager.PERMISSION_GRANTED;
+                if (!cameraPermissionGranted) {
+                    size++;
+                }
+                if (size == 0) {
+                    startActivityForResult(new Intent(MainActivity.this, CameraActivity.class), 100);
+                } else {
+                    Toast.makeText(this, "请到设置-权限管理中开启", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -188,7 +271,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         switch (position) {
             case 0:
-                ((TextView) mFragmentList.get(0).getView().findViewById(R.id.tv_time)).setText(dateFormat.format(new Date()));
+//                ((TextView) mFragmentList.get(0).getView().findViewById(R.id.tv_time)).setText(dateFormat.format(new Date()));
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
                 tvMessageNormal.getBackground().setAlpha(diaphaneity_one);
                 tvMessagePress.getBackground().setAlpha(diaphaneity_two);
@@ -200,7 +283,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvContactsTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 1:
-                ((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time)).setText(dateFormat.format(new Date()));
+//                ((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time)).setText(dateFormat.format(new Date()));
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
                 tvContactsPress.getBackground().setAlpha(diaphaneity_two);

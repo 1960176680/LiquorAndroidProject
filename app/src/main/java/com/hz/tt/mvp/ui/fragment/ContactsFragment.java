@@ -17,8 +17,11 @@ import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IContactsFgView;
+import com.hz.tt.util.UIUtils;
 import com.hz.tt.widget.MyListViewInScrollView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -113,6 +116,13 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+                List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(et_scan.getText().toString())).build().list();
+                if (list==null||list.size()==0){
+                    UIUtils.showToast("无此商品");
+                    return;
+                }
+
                 mPresenter.clearYesUp();
                 mPresenter.addRecord();
             }
@@ -187,6 +197,8 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public void onResume() {
         super.onResume();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        tv_rec_time.setText(dateFormat.format(new Date()));
         if (!NetConstant.SCAN_RESULT_OUT.equals("")){
             et_scan.setText(NetConstant.SCAN_RESULT_OUT);
             InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();

@@ -5,8 +5,8 @@ package com.hz.tt.api.okHttpUtils;
  */
 
 public class NetConstant {
-    public static final String BASE_URL = "http://10.38.1.40:8080/Wine/api";
-    public static String USER_NAME ="";
+    public static final String BASE_URL = "http://121.43.167.170:8001/Wine/api";
+    public static String USER_NAME ;
     public static String SCAN_RESULT ="";
     public static String SCAN_RESULT_OUT ="";
     public static String SCAN_RESULT_QUERY ="";
