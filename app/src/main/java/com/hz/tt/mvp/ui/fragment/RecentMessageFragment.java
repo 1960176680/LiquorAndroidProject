@@ -145,6 +145,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPresenter.clearYesUp();
                 mPresenter.upRecordImg();
             }
         });
@@ -249,6 +250,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
      * 显示拍照缩略图并压缩图片
      */
     private void showPic(final ImageButton btnPic) {
+
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 //            speech("外部存储不可用，请重新拍照");
             return;
@@ -261,7 +263,15 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
             return;
         }
         Bitmap showBitmap = ThumbnailUtils.extractThumbnail(bitmap, 200, 200);
+
+
+
+//        Bitmap bitmap2 = ((BitmapDrawable) btnPic.getBackground()).getBitmap();
+//        if (!bitmap2.isRecycled()) {
+//            bitmap2.recycle();
+//        }
         btnPic.setImageBitmap(showBitmap);
+
         btnPic.setScaleType(ImageView.ScaleType.FIT_XY);
         disposable= Observable.just(showBitmap)
                 .map(bitmap1 -> BitmapUtils.compressImage(bitmap1, bitmapPath) != null)
@@ -274,6 +284,11 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
                             Log.i("TakePhoto", "图片压缩成功！");
                         }else{
                             Log.e("TakePhoto", "图片压缩失败：");
+
+//                            Bitmap bitmap2 = ((BitmapDrawable) btnPic.getBackground()).getBitmap();
+//                            if (!bitmap2.isRecycled()) {
+//                                bitmap2.recycle();
+//                            }
                             btnPic.setImageResource(R.mipmap.ic_photo);
 //                speech("请重新拍照！");
                         }
@@ -316,6 +331,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 
     @Override
     public MyListViewInScrollView getRvRecentMessage() {
+        mRvRecentMessage.setNestedScrollingEnabled(false);
         return mRvRecentMessage;
     }
 

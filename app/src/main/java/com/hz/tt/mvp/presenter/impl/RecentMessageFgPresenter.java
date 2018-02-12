@@ -25,6 +25,9 @@ import com.hz.tt.widget.CustomDialog;
 import com.lqr.adapter.LQRAdapterForRecyclerView;
 import com.lqr.adapter.LQRViewHolderForRecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -195,10 +198,14 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             }
         }
     }
+
+    public void clearYesUp(){
+        datas.removeAll(removeDatas);
+    }
     public void upRecordImg(){
         if (datas!=null&&datas.size()!=0){
-            InBean bean=datas.get(0);
             mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
+            InBean bean=datas.get(0);
             OkHttpUtils okHttpUtils=OkHttpUtils.initClient();
             okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
 //                mContext.hideWaitingDialog();
@@ -211,6 +218,7 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                 try {
                     response = gson.fromJson(newstr1,ImageUpResponse.class);
                 } catch (JsonSyntaxException e) {
+                    mContext.hideWaitingDialog();
                     mContext.speechUtil.speakXunFei("服务器异常");
 //                    mContext.loginError(new ServerException(UIUtils.getString(R.string.login_error)));
                     e.printStackTrace();
@@ -220,10 +228,19 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                 if (code.equals("1000")) {
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
                     String imgUri=response.getData();
-                    datas.get(0).setImgstr(imgUri);
-                    upRecord();
+                    try {
+                        JSONObject jsonObject = new JSONObject(imgUri);
+                        String imgtrue=jsonObject.getString("url");
+                        datas.get(0).setImgstr(imgtrue);
+                        mContext.hideWaitingDialog();
+                        upRecord();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
                     mContext.speechUtil.speakXunFei(code);
+                    mContext.hideWaitingDialog();
                     return;
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
                 }
@@ -234,14 +251,18 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
             builder.addFormDataPart("file", file.getName(), okhttp3.RequestBody.create(okhttp3.MediaType.parse("image/png"), file));
             okHttpUtils.myEnqueue("http://10.38.1.40:8080/Wine/upload",builder.build());
+//            mAdapter.notifyDataSetChanged();
+        }else{
+            datas.addAll(removeDatas);
             mAdapter.notifyDataSetChanged();
         }
     }
     public void upRecord(){
+        mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
         OkHttpUtils okHttpUtils=OkHttpUtils.initClient();
         okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
-            mContext.hideWaitingDialog();
             if (newstr1.equals("数据请求失败")) {
+                mContext.hideWaitingDialog();
                 mContext.speechUtil.speakXunFei("数据请求失败");
                 return;
             }
@@ -251,12 +272,14 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                 response = gson.fromJson(newstr1,UpInRecordResponse.class);
             } catch (JsonSyntaxException e) {
                 mContext.speechUtil.speakXunFei("服务器异常");
+                mContext.hideWaitingDialog();
 //                    mContext.loginError(new ServerException(UIUtils.getString(R.string.login_error)));
                 e.printStackTrace();
                 return;
             }
-            String code = response.getCode();
+            String code = response.getErrorCode();
             if (code.equals("1000")) {
+                mContext.hideWaitingDialog();
                 InBean inBean=datas.get(0);
                 inBean.setStatus("已上传");
                 InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
@@ -264,15 +287,16 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
                 removeDatas.add(datas.get(0));
                 datas.remove(0);
+                upRecordImg();
             } else {
-                mContext.speechUtil.speakXunFei(response.getMessage());
+                mContext.speechUtil.speakXunFei(response.getErrorMsg());
+                mContext.hideWaitingDialog();
                 return;
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
             }
         }));
 
         okHttpUtils.myEnqueue(new UpInRecordRequest(datas).getUrl(),null);
-        mAdapter.notifyDataSetChanged();
     }
 
     public void speech(String toast) {

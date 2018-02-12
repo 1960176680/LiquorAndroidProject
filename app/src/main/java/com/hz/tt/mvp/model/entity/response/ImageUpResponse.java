@@ -6,7 +6,9 @@ package com.hz.tt.mvp.model.entity.response;
 
 public class ImageUpResponse {
     /**
+     * /**
      * {"code":"1000","message":"","data":"{\"url\":\"/static/images/1518344807435.jpg\"}"}
+     *
      * code : 1000
      * message :
      * data : {"url":"/static/images/1518344807435.jpg"}
@@ -39,4 +41,6 @@ public class ImageUpResponse {
     public void setData(String data) {
         this.data = data;
     }
+
+
 }

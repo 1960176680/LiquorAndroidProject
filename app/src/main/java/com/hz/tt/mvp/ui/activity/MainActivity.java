@@ -1,5 +1,6 @@
 package com.hz.tt.mvp.ui.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-import static com.hz.tt.R.id.tv_time;
+import static com.hz.tt.app.base.BaseApp.activities;
 
 /**
  * Created by Administrator on 2018-02-06.
@@ -108,6 +109,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        for (Activity activity : activities) {
+            activity.finish();
+        }
 //        unRegisterBR();
     }
     public void bottomBtnClick(View view) {

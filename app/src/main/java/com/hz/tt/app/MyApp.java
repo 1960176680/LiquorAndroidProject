@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.hz.tt.app.base.BaseApp;
 import com.hz.tt.greendao.gen.DaoMaster;
 import com.hz.tt.greendao.gen.DaoSession;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.litepal.LitePal;
 
@@ -27,6 +28,12 @@ public class MyApp extends BaseApp  {
         LitePal.initialize(this);
         instances = this;
         setDatabase();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
 
     }
     public static MyApp getInstances(){

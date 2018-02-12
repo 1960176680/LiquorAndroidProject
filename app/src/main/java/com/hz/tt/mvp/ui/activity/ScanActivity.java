@@ -212,6 +212,9 @@ public class ScanActivity extends BaseActivity<IScanAtView, ScanAtPresenter> imp
         if (type.equals("out")){
             NetConstant.SCAN_RESULT_OUT="";
             NetConstant.SCAN_RESULT_OUT=result.trim();
+        }if (type.equals("query")){
+            NetConstant.SCAN_RESULT_OUT="";
+            NetConstant.SCAN_RESULT_QUERY=result.trim();
         }else{
             NetConstant.SCAN_RESULT="";
             NetConstant.SCAN_RESULT=result.trim();

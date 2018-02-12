@@ -2,6 +2,7 @@ package com.hz.tt.mvp.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IContactsFgView;
+import com.hz.tt.widget.MyListViewInScrollView;
 
 import java.util.List;
 
@@ -38,6 +40,10 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Bind(R.id.et_scan)
     EditText et_scan;
 
+    @Bind(R.id.btn_add)
+    Button btn_add;
+    @Bind(R.id.btn_upload)
+    Button btn_upload;
 
 
 
@@ -62,7 +68,8 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Bind(R.id.tv_position)
     TextView tv_position;
 
-
+    @Bind(R.id.rvRecentMessage)
+    MyListViewInScrollView rvRecentMessage;
 
 
 
@@ -87,6 +94,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 
     @Override
     public void initData() {
+        mPresenter.getConversations();
 //        mPresenter.loadContacts();
     }
 
@@ -100,6 +108,24 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
                 ((MainActivity) ContactsFragment.this.getActivity()).jumpToActivity(intent);
             }
         });
+
+
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.clearYesUp();
+                mPresenter.addRecord();
+            }
+        });
+        btn_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.clearYesUp();
+                mPresenter.upRecord();
+            }
+        });
+
+
     }
 
     @Override
@@ -165,6 +191,9 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
             et_scan.setText(NetConstant.SCAN_RESULT_OUT);
             InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
             List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(NetConstant.SCAN_RESULT_OUT.trim())).build().list();
+            if (list==null||list.size()==0){
+                return;
+            }
             InBean inBean=list.get(0);
             String type=inBean.getType();
             String Country=inBean.getCountry();
@@ -181,5 +210,66 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
             tv_num.setText(Number);
             tv_position.setText(Location);
         }
+    }
+
+    @Override
+    public EditText getRecPerson() {
+        return et_rec_person;
+    }
+
+    @Override
+    public TextView getRecDate() {
+        return tv_rec_time;
+    }
+
+    @Override
+    public EditText getCode() {
+        return et_scan;
+    }
+
+    @Override
+    public EditText getRemak() {
+        return et_remark;
+    }
+
+    @Override
+    public TextView getType() {
+        return tv_type;
+    }
+
+    @Override
+    public TextView getCountry() {
+        return tv_country;
+    }
+
+    @Override
+    public TextView getBirthday() {
+        return tv_birthplace;
+    }
+
+    @Override
+    public TextView getCapacity() {
+        return tv_capacity;
+    }
+
+    @Override
+    public TextView getYear() {
+        return tv_year;
+    }
+
+    @Override
+    public TextView getNum() {
+        return tv_num;
+    }
+
+    @Override
+    public TextView getPosition() {
+        return tv_position;
+    }
+
+    @Override
+    public MyListViewInScrollView getRvContacts() {
+        rvRecentMessage.setNestedScrollingEnabled(false);
+        return rvRecentMessage;
     }
 }

@@ -9,5 +9,5 @@ public class NetConstant {
     public static String USER_NAME ="";
     public static String SCAN_RESULT ="";
     public static String SCAN_RESULT_OUT ="";
-
+    public static String SCAN_RESULT_QUERY ="";
 }

@@ -8,7 +8,6 @@ import com.hz.tt.mvp.model.entity.InBean;
 import com.hz.tt.mvp.model.entity.InUpBean;
 import com.hz.tt.util.Md5Util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -43,13 +42,15 @@ public class UpInRecordRequest {
         String appsecret = "Do&9hY%l8e";
         String md5 = "";
         String enJsonObject = "";
+
         try {
             enJsonObject = URLEncoder.encode(jsonObject, "UTF-8");
             md5 = Md5Util.getMD5(jsonObject + appsecret);
             md5 = Base64.encodeToString(md5.getBytes(),Base64.DEFAULT).trim();
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         String url = NetConstant.BASE_URL+"?msg_type=" + meth + "&data_digest=" + md5 + "&logistics_interface=" +enJsonObject+"&appkey=123456";
         return url;
     }

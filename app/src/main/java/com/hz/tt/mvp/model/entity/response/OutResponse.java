@@ -1,20 +1,12 @@
 package com.hz.tt.mvp.model.entity.response;
 
 /**
- * Created by Administrator on 2018-02-11.
+ * Created by Administrator on 2018-02-12.
  */
 
-public class UpInRecordResponse {
-
-    /**
-     * errorCode : 1000
-     * errorMsg : 入库成功。
-     */
-
-    private String errorCode;
+public class OutResponse {
+//    {"errorCode":"2001","errorMsg":"outRecordDate字段必须输入，不允许为空"}
     private String errorMsg;
-
-//    {"errorCode":"1000","errorMsg":"入库成功。"}
 
     public String getErrorCode() {
         return errorCode;
@@ -31,4 +23,6 @@ public class UpInRecordResponse {
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
+
+    private String errorCode;
 }

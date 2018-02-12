@@ -298,11 +298,12 @@
                 android:text="添加"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_selector"
-                android:id="@+id/btn_stay_upload"
+                android:id="@+id/btn_add"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp" />
             <Button
+                android:id="@+id/btn_upload"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="15dp"
@@ -350,7 +351,7 @@
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView style="@style/Line"
             />
-        <com.lqr.recyclerview.LQRRecyclerView
+        <com.hz.tt.widget.MyListViewInScrollView
             android:id="@+id/rvRecentMessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
