@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,8 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
 
 
 
-
+    @Bind(R.id.ibAddMenu)
+    ImageButton mIbAddMenu;
     @Bind(R.id.vpContent)
     ViewPager mVpContent;
     @Bind(R.id.tvMessageNormal)
@@ -120,6 +122,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         mLlMe.setOnClickListener(v -> bottomBtnClick(v));
         mVpContent.addOnPageChangeListener(this);
 
+        mIbAddMenu.setOnClickListener(v -> jumpToActivity(SettingActivity.class));
         getPermissions();
 
     }
@@ -270,6 +273,8 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         switch (position) {
             case 0:
+                mIbAddMenu.setVisibility(View.GONE);
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
 //                清空列表数据
                 ((RecentMessageFragment) mFragmentList.get(0)).clearAllData();
 
@@ -278,7 +283,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                     timeIn.setText(dateFormat.format(new Date()));
                 }
 
-                setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
+
                 tvMessageNormal.getBackground().setAlpha(diaphaneity_one);
                 tvMessagePress.getBackground().setAlpha(diaphaneity_two);
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_two);
@@ -289,7 +294,8 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvContactsTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 1:
-
+                mIbAddMenu.setVisibility(View.GONE);
+                setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
                 //                清空列表数据
                 ((ContactsFragment) mFragmentList.get(1)).clearAllData();
 
@@ -299,7 +305,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 }
 
 //                ((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time)).setText(dateFormat.format(new Date()));
-                setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
+
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
                 tvContactsPress.getBackground().setAlpha(diaphaneity_two);
                 tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_two);
@@ -310,6 +316,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvDiscoveryTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 2:
+                mIbAddMenu.setVisibility(View.GONE);
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_query));
                 tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_one);
                 tvDiscoveryPress.getBackground().setAlpha(diaphaneity_two);
@@ -321,6 +328,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvMeTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 3:
+                mIbAddMenu.setVisibility(View.VISIBLE);
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_more));
                 break;
         }
@@ -330,9 +338,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     public void onPageSelected(int position) {
         if (position == 1) {
             //如果是“通讯录”页被选中，则显示快速导航条
-            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(true);
+//            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(true);
         } else {
-            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(false);
+//            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(false);
         }
     }
 
@@ -340,9 +348,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     public void onPageScrollStateChanged(int state) {
         if (state != ViewPager.SCROLL_STATE_IDLE) {
             //滚动过程中隐藏快速导航条
-            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(false);
+//            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(false);
         } else {
-            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(true);
+//            FragmentFactory.getInstance().getContactsFragment().showQuickIndexBar(true);
         }
     }
 
