@@ -5,41 +5,44 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.hz.tt.R;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
-import com.hz.tt.mvp.model.entity.RegisterBean;
-import com.hz.tt.mvp.model.entity.request.RegisterRequest;
-import com.hz.tt.mvp.model.entity.response.RegisterResponse;
+import com.hz.tt.mvp.model.entity.SettingPswBean;
+import com.hz.tt.mvp.model.entity.request.SetPswRequest;
+import com.hz.tt.mvp.model.entity.response.SetPswResponse;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
-import com.hz.tt.mvp.ui.view.IRegisterAtView;
-import com.hz.tt.util.LogUtils;
+import com.hz.tt.mvp.ui.view.ISettingPasswordAtView;
 import com.hz.tt.util.RegularUtils;
 import com.hz.tt.util.UIUtils;
 
-public class RegisterAtPresenter extends BasePresenter<IRegisterAtView> {
+/**
+ * Created by Administrator on 2018-02-13.
+ */
 
-    public RegisterAtPresenter(BaseActivity context) {
+public class SettingPasswordAtPresent extends BasePresenter<ISettingPasswordAtView> {
+    public SettingPasswordAtPresent(BaseActivity context) {
         super(context);
     }
 
-    private void sendCodeError(Throwable throwable) {
-        mContext.hideWaitingDialog();
-        LogUtils.e(throwable.getLocalizedMessage());
-        UIUtils.showToast(throwable.getLocalizedMessage());
-    }
-
-    public void register() {
-        String phone = getView().getEtPhone().getText().toString().trim();
-        String password = getView().getEtPwd().getText().toString().trim();
+    public void setPsw(){
+        String phone = getView().getEtUser().getText().toString().trim();
+        String oldPsd = getView().getEtOldPassword().getText().toString().trim();
+        String newPsd = getView().getEtNewPassword().getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
             UIUtils.showToast(UIUtils.getString(R.string.phone_not_empty));
             mContext.speechUtil.speakXunFei("手机号不能为空");
             return;
         }
-        if (TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(oldPsd)) {
             UIUtils.showToast(UIUtils.getString(R.string.password_not_empty));
-            mContext.speechUtil.speakXunFei("密码不能为空");
+            mContext.speechUtil.speakXunFei("旧密码不能为空");
             return;
         }
+        if (TextUtils.isEmpty(newPsd)) {
+            UIUtils.showToast(UIUtils.getString(R.string.password_not_empty));
+            mContext.speechUtil.speakXunFei("新密码不能为空");
+            return;
+        }
+
         if (!RegularUtils.isMobile(phone)) {
             UIUtils.showToast(UIUtils.getString(R.string.phone_format_error));
             mContext.speechUtil.speakXunFei("手机号不正确请检查");
@@ -57,12 +60,12 @@ public class RegisterAtPresenter extends BasePresenter<IRegisterAtView> {
                         return;
                     }
                     Gson gson = new Gson();
-                    RegisterResponse response = gson.fromJson(newstr1, RegisterResponse.class);
+                    SetPswResponse response = gson.fromJson(newstr1, SetPswResponse.class);
                     String code = response.getErrorCode();
                     if (code.equals("1000")) {
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
 //                        mContext.jumpToActivity(MainActivity.class);
-                        UIUtils.showToast("注册成功！");
+                        UIUtils.showToast("修改成功！");
                         mContext.hideWaitingDialog();
                         mContext.finish();
                     } else {
@@ -74,23 +77,11 @@ public class RegisterAtPresenter extends BasePresenter<IRegisterAtView> {
                 });
             }
         });
-        RegisterBean bean=new RegisterBean();
-        bean.setUserName(getView().getEtPhone().getText().toString());
-        bean.setUserPhone(getView().getEtPhone().getText().toString());
-        bean.setPassword(getView().getEtPwd().getText().toString());
-        okHttpUtils.myEnqueue(new RegisterRequest(bean).getUrl(),null);
-    }
-
-    private void registerError(Throwable throwable) {
-        LogUtils.sf(throwable.getLocalizedMessage());
-        UIUtils.showToast(throwable.getLocalizedMessage());
-    }
-
-    public void unsubscribe() {
-//        if (mSubscription != null) {
-//            mSubscription.unsubscribe();
-//            mSubscription = null;
-//        }
+        SettingPswBean bean=new SettingPswBean();
+        bean.setUserName(getView().getEtUser().getText().toString());
+        bean.setOldPassword(getView().getEtOldPassword().getText().toString());
+        bean.setNewPassword(getView().getEtNewPassword().getText().toString());
+        okHttpUtils.myEnqueue(new SetPswRequest().getUrl(bean),null);
     }
 
 }

@@ -2,7 +2,6 @@ package com.hz.tt.mvp.ui.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -16,22 +15,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hz.tt.R;
-import com.hz.tt.app.MyApp;
 import com.hz.tt.mvp.presenter.impl.MainAtPresenter;
 import com.hz.tt.mvp.ui.adapter.CommonFragmentPagerAdapter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
+import com.hz.tt.mvp.ui.fragment.ContactsFragment;
 import com.hz.tt.mvp.ui.fragment.FragmentFactory;
+import com.hz.tt.mvp.ui.fragment.RecentMessageFragment;
 import com.hz.tt.mvp.ui.view.IMainAtView;
 import com.hz.tt.util.UIUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-
-import static com.hz.tt.app.base.BaseApp.activities;
 
 /**
  * Created by Administrator on 2018-02-06.
@@ -192,9 +191,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        for (Activity activity : activities) {
-            activity.finish();
-        }
+//        for (Activity activity : activities) {
+//            activity.finish();
+//        }
 //        unRegisterBR();
     }
     public void bottomBtnClick(View view) {
@@ -271,7 +270,14 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         switch (position) {
             case 0:
-//                ((TextView) mFragmentList.get(0).getView().findViewById(R.id.tv_time)).setText(dateFormat.format(new Date()));
+//                清空列表数据
+                ((RecentMessageFragment) mFragmentList.get(0)).clearAllData();
+
+                TextView timeIn=((TextView) mFragmentList.get(0).getView().findViewById(R.id.tv_time));
+                if (timeIn!=null){
+                    timeIn.setText(dateFormat.format(new Date()));
+                }
+
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_in));
                 tvMessageNormal.getBackground().setAlpha(diaphaneity_one);
                 tvMessagePress.getBackground().setAlpha(diaphaneity_two);
@@ -283,6 +289,15 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 tvContactsTextPress.setTextColor(Color.argb(diaphaneity_one, 69, 192, 26));
                 break;
             case 1:
+
+                //                清空列表数据
+                ((ContactsFragment) mFragmentList.get(1)).clearAllData();
+
+                TextView timeOut=((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time));
+                if (timeOut!=null){
+                    timeOut.setText(dateFormat.format(new Date()));
+                }
+
 //                ((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time)).setText(dateFormat.format(new Date()));
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_out));
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
@@ -337,9 +352,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         return null;
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        MyApp.exit();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        MyApp.exit();
+//    }
 }

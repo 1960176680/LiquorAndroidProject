@@ -48,6 +48,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     private boolean isFirst = true;
     private String truepath;
     Disposable disposable;
+    boolean addRecordOk;
 //    列表ListView
     @Bind(R.id.rvRecentMessage)
     MyListViewInScrollView mRvRecentMessage;
@@ -111,11 +112,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 
     @Override
     public void initView(View rootView) {
-//        datas.add(new InBean());
-//        datas.add(new InBean());
-//        datas.add(new InBean());
-//        datas.add(new InBean());
-//        datas.add(new InBean());
+   //    setAdapter()
         mPresenter.getConversations();
 
         tv_in.setText(NetConstant.USER_NAME);
@@ -133,31 +130,43 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         });
         btn_picture.setOnClickListener(v -> {
             startActivityForResult(new Intent(getActivity(), CameraActivity.class), 100);
-
-//            takePhoto("1");
         });
-        mPresenter.speech("登录成功");
 
-//        添加上传
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.addRecord(truepath);
+
+         /**
+          *添加
+          *
+          *
+          */
+        btn_add.setOnClickListener(v -> {
+            addRecordOk=mPresenter.addRecord(truepath);
+            if (addRecordOk){
+//                    清字段
+                et_location.setText("");
+                et_scan.setText("");
+                Bitmap bitmap =btn_picture.getDrawingCache();
+                if (bitmap!=null&&!bitmap.isRecycled()){
+                    bitmap.recycle();
+                }
+                btn_picture.setImageResource(R.mipmap.ic_photo);
             }
         });
 
-        btn_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.clearYesUp();
-                mPresenter.upRecordImg();
-            }
+
+        /**
+         *上传
+         */
+        btn_upload.setOnClickListener(v -> {
+            mPresenter.clearYesUp();
+            mPresenter.upRecordImg();
         });
 
 
 
     }
-
+    public void clearAllData(){
+        mPresenter.clearAllData();
+    }
     @Override
     public void onResume() {
         super.onResume();

@@ -47,6 +47,7 @@
             android:background="#FFFFFF"
             android:orientation="vertical"
             android:gravity="center"
+            android:id="@+id/line_record"
             >
             <ImageView
                 android:layout_width="30dp"
@@ -72,6 +73,7 @@
             android:background="#FFFFFF"
             android:orientation="vertical"
             android:gravity="center"
+            android:id="@+id/line_suggest"
             >
             <ImageView
                 android:layout_width="30dp"

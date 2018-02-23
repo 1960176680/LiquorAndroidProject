@@ -1,6 +1,6 @@
 package com.hz.tt.mvp.presenter.impl;
 
-import android.view.View;
+import android.graphics.Color;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +35,15 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
     public void clearYesUp(){
         datas.removeAll(removeDatas);
     }
+
+    /**
+     * 清空界面列表
+     */
+    public void clearAllData(){
+        datas.clear();
+        removeDatas.clear();
+        mAdapter.notifyDataSetChanged();
+    }
     public void getConversations() {
 //        loadData();
 //        this.datas=datas;
@@ -52,8 +61,12 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 
                     danHao.setText(item.getRecordCode());
                     String status=item.getStatus();
+
                     if (status.equals("未上传")){
-                        delete_img.setVisibility(View.VISIBLE);
+                        states.setTextColor(Color.RED);
+//                        delete_img.setVisibility(View.VISIBLE);
+                    }else {
+                        states.setTextColor(Color.GREEN);
                     }
                     states.setText(status);
                     int size=datas.size();
@@ -65,7 +78,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 
     }
 
-    public void addRecord(){
+    public boolean addRecord(){
         if (datas!=null){
             OutBean bean=new OutBean();
             IContactsFgView view=getView();
@@ -111,10 +124,13 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 
                 OutBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getOutBeanDao();
                 inBeanDao.insert(bean);
+                return true;
             }else{
                 UIUtils.showToast("请检查数据完整性！");
+                return false;
             }
         }
+        return false;
     }
     public void upRecord(){
         if (datas!=null&&datas.size()!=0){
@@ -145,7 +161,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
                     OutBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getOutBeanDao();
                     inBeanDao.update(inBean);
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
-                    removeDatas.add(datas.get(0));
+                    removeDatas.add(0,datas.get(0));
                     datas.remove(0);
                     upRecord();
                 } else {

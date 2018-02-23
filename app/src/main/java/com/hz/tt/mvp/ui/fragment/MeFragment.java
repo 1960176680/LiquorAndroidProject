@@ -10,7 +10,11 @@ import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IMeFgView;
 import com.hz.tt.util.LogUtils;
+import com.hz.tt.util.UIUtils;
 import com.hz.tt.widget.CustomDialog;
+import com.zhy.autolayout.AutoLinearLayout;
+
+import butterknife.Bind;
 
 /**
  * @描述 我界面
@@ -19,28 +23,10 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
 
     private CustomDialog mQrCardDialog;
 
-//    @Bind(R.id.llMyInfo)
-//    LinearLayout mLlMyInfo;
-//    @Bind(R.id.ivHeader)
-//    ImageView mIvHeader;
-//    @Bind(R.id.tvName)
-//    TextView mTvName;
-//    @Bind(R.id.tvAccount)
-//    TextView mTvAccount;
-//    @Bind(R.id.ivQRCordCard)
-//    ImageView mIvQRCordCard;
-//
-//    @Bind(R.id.oivAlbum)
-//    OptionItemView mOivAlbum;
-//    @Bind(R.id.oivCollection)
-//    OptionItemView mOivCollection;
-//    @Bind(R.id.oivWallet)
-//    OptionItemView mOivWallet;
-//    @Bind(R.id.oivCardPaket)
-//    OptionItemView mOivCardPaket;
-//
-//    @Bind(R.id.oivSetting)
-//    OptionItemView mOivSetting;
+    @Bind(R.id.line_suggest)
+    AutoLinearLayout line_suggest;
+    @Bind(R.id.line_record)
+    AutoLinearLayout line_record;
 
     @Override
     public void init() {
@@ -54,18 +40,13 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
 
     @Override
     public void initView(View rootView) {
-
-//        mIvQRCordCard.setOnClickListener(v -> showQRCard());
-//        mOivAlbum.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.MY_JIAN_SHU));
-//        mOivCollection.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.MY_CSDN));
-//        mOivWallet.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.MY_OSCHINA));
-//        mOivCardPaket.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.MY_GITHUB));
     }
 
     @Override
     public void initListener() {
-//        mLlMyInfo.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivityAndClearTop(MyInfoActivity.class));
-//        mOivSetting.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivityAndClearTop(SettingActivity.class));
+
+        line_suggest.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
+        line_record.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
     }
 
     @Override
@@ -75,27 +56,6 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     }
 
     private void showQRCard() {
-//        if (mQrCardDialog == null) {
-//            View qrCardView = View.inflate(getActivity(), R.layout.include_qrcode_card, null);
-//            ImageView ivHeader = (ImageView) qrCardView.findViewById(R.id.ivHeader);
-//            TextView tvName = (TextView) qrCardView.findViewById(R.id.tvName);
-//            ImageView ivCard = (ImageView) qrCardView.findViewById(R.id.ivCard);
-//            TextView tvTip = (TextView) qrCardView.findViewById(R.id.tvTip);
-//            tvTip.setText(UIUtils.getString(R.string.qr_code_card_tip));
-//
-////            UserInfo userInfo = mPresenter.getUserInfo();
-////            if (userInfo != null) {
-////                Glide.with(getActivity()).load(userInfo.getPortraitUri()).centerCrop().into(ivHeader);
-////                tvName.setText(userInfo.getName());
-////                Observable.just(QRCodeEncoder.syncEncodeQRCode(AppConst.QrCodeCommon.ADD + userInfo.getUserId(), UIUtils.dip2Px(100)))
-////                        .subscribeOn(Schedulers.io())
-////                        .observeOn(AndroidSchedulers.mainThread())
-////                        .subscribe(bitmap -> ivCard.setImageBitmap(bitmap), this::loadQRCardError);
-////            }
-//
-//            mQrCardDialog = new CustomDialog(getActivity(), 300, 400, qrCardView, R.style.MyDialog);
-//        }
-//        mQrCardDialog.show();
     }
 
     private void loadQRCardError(Throwable throwable) {
@@ -103,12 +63,6 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     }
 
     private void registerBR() {
-//        BroadcastManager.getInstance(getActivity()).register(AppConst.CHANGE_INFO_FOR_ME, new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                mPresenter.loadUserInfo();
-//            }
-//        });
     }
 
     private void unregisterBR() {

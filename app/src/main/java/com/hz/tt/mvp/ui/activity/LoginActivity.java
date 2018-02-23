@@ -47,7 +47,7 @@ public class LoginActivity extends BaseActivity<LoginAtView, LoginAtPresenter> i
             speechUtil.speakXunFei("正在登录请稍后");
             mPresenter.login();
         });
-        tv_register.setOnClickListener(v -> mPresenter.register());
+        tv_register.setOnClickListener(v -> jumpToActivity(SettingPasswordActivity.class));
         tv_forget.setOnClickListener(v -> mPresenter.forgetKey());
 
         mEtPwd.addTextChangedListener(watcher);

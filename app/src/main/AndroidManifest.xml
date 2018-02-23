@@ -87,6 +87,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".mvp.ui.activity.CameraActivity"/>
+        <activity android:name=".mvp.ui.activity.SettingPasswordActivity"/>
     </application>
 
 </manifest>

@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
-import com.hz.tt.app.MyApp;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
 import com.hz.tt.util.UIUtils;
 import com.hz.tt.util.voice.TextToSpeechUtil;
@@ -54,7 +53,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApp.activities.add(this);
+//        MyApp.activities.add(this);
         init();
 
         //判断是否使用MVP模式
@@ -75,7 +74,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         initView();
         initData();
         initListener();
-        speechUtil = new TextToSpeechUtil(MyApp.getContext());
+        speechUtil = new TextToSpeechUtil(this);
     }
 
     /**

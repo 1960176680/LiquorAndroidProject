@@ -20,7 +20,7 @@ import butterknife.Bind;
 /**
  * Created by ZhouwenGuang
  */
-public class RegisterActivity extends BaseActivity<IRegisterAtView, RegisterAtPresenter> {
+public class RegisterActivity extends BaseActivity<IRegisterAtView, RegisterAtPresenter> implements IRegisterAtView{
 //手机号码
     @Bind(R.id.etPhone)
     EditText mEtPhone;
@@ -114,4 +114,13 @@ public class RegisterActivity extends BaseActivity<IRegisterAtView, RegisterAtPr
         return R.layout.activity_register;
     }
 
+    @Override
+    public EditText getEtPhone() {
+        return mEtPhone;
+    }
+
+    @Override
+    public EditText getEtPwd() {
+        return mEtPwd;
+    }
 }

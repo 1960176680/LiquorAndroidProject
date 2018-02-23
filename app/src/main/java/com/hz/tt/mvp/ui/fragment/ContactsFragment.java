@@ -38,6 +38,8 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 //    QuickIndexBar mQib;
 //    @Bind(R.id.tvLetter)
 //    TextView mTvLetter;
+
+    private boolean addRecordOk;
     @Bind(R.id.iv_scan)
     ImageView iv_scan;
     @Bind(R.id.et_scan)
@@ -83,16 +85,6 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public void initView(View rootView) {
 
-
-
-//        mHeaderView = View.inflate(getActivity(), R.layout.header_rv_contacts, null);
-//        mTvNewFriendUnread = (TextView) mHeaderView.findViewById(R.id.tvNewFriendUnread);
-//        mFooterView = new TextView(getContext());
-//        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIUtils.dip2Px(50));
-//        mFooterView.setLayoutParams(params);
-//        mFooterView.setGravity(Gravity.CENTER);
-//
-//        registerBR();
     }
 
     @Override
@@ -113,18 +105,28 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         });
 
 
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
-                List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(et_scan.getText().toString())).build().list();
-                if (list==null||list.size()==0){
-                    UIUtils.showToast("无此商品");
-                    return;
-                }
+        btn_add.setOnClickListener(v -> {
+            InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+            List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(et_scan.getText().toString())).build().list();
+            if (list==null||list.size()==0){
+                UIUtils.showToast("无此商品");
+                return;
+            }
 
-                mPresenter.clearYesUp();
-                mPresenter.addRecord();
+            addRecordOk=mPresenter.addRecord();
+            if (addRecordOk){
+//                    清字段
+                et_rec_person.setText("");
+                et_scan.setText("");
+                et_remark.setText("");
+                tv_type.setText("");
+                tv_country.setText("");
+                tv_birthplace.setText("");
+                tv_capacity.setText("");
+                tv_year.setText("");
+                tv_num.setText("");
+                tv_position.setText("");
+
             }
         });
         btn_upload.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +145,9 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         super.onDestroy();
 //        unregisterBR();
     }
-
+    public void clearAllData(){
+        mPresenter.clearAllData();
+    }
     private void registerBR() {
 
     }

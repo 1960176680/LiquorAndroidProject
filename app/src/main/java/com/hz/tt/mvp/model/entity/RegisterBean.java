@@ -5,8 +5,32 @@ package com.hz.tt.mvp.model.entity;
  */
 
 public class RegisterBean extends BaseBean{
-    private String phone;
+    /**
+     * //    {"userName":"123456","userPhone":"123456","password":"123456"}
+     * userName : 123456
+     * userPhone : 123456
+     * password : 123456
+     */
+
+    private String userName;
+    private String userPhone;
     private String password;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
 
     public String getPassword() {
         return password;
@@ -15,14 +39,4 @@ public class RegisterBean extends BaseBean{
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-
 }

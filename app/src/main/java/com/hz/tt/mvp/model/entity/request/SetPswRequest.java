@@ -4,19 +4,24 @@ import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.hz.tt.api.okHttpUtils.NetConstant;
-import com.hz.tt.mvp.model.entity.RegisterBean;
+import com.hz.tt.mvp.model.entity.SettingPswBean;
 import com.hz.tt.util.Md5Util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-public class RegisterRequest{
-    private RegisterBean bean;
-    public RegisterRequest(RegisterBean bean) {
-        this.bean = bean;
+
+/**
+ * Created by Administrator on 2018-02-13.
+ */
+
+public class SetPswRequest {
+
+    public SetPswRequest() {
+
     }
-    public String getUrl() {
+    public String getUrl(SettingPswBean bean) {
         Gson gson=new Gson();
-        String meth = "WINECELLAR_MANAGER_REGISTER"/*typeMeg*/;
+        String meth = "WINECELLAR_MANAGER_RESET_PASSWORD"/*typeMeg*/;
         String jsonObject =gson.toJson(bean);    /*"{\"userName\":\"123456\",\"password\":\"123456\"}"requestMeg  gson.toJson(user)*/
         String appsecret = "Do&9hY%l8e";
         String md5 = "";

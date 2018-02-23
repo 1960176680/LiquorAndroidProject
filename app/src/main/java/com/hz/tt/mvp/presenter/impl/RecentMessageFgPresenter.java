@@ -1,6 +1,7 @@
 package com.hz.tt.mvp.presenter.impl;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.hz.tt.R;
+import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
 import com.hz.tt.app.MyApp;
 import com.hz.tt.greendao.gen.InBeanDao;
@@ -20,7 +22,6 @@ import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IRecentMessageFgView;
 import com.hz.tt.util.UIUtils;
-import com.hz.tt.util.voice.TextToSpeechUtil;
 import com.hz.tt.widget.CustomDialog;
 import com.lqr.adapter.LQRAdapterForRecyclerView;
 import com.lqr.adapter.LQRViewHolderForRecyclerView;
@@ -34,29 +35,22 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 
+import static com.hz.tt.app.MyApp.getInstances;
+
 
 public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView> {
-    TextToSpeechUtil speechUtil;
-    private String bitmapPath;
+
     private Context context;
     private List<InBean> datas= new ArrayList<>();
     private List<InBean> removeDatas= new ArrayList<>();
     private int listsize;
-    //    private List<Conversation> mData = new ArrayList<>();
     private LQRAdapterForRecyclerView<InBean> mAdapter;
     private int mUnreadCountTotal = 0;
-    //    private LQRNineGridImageViewAdapter mNgivAdapter = new LQRNineGridImageViewAdapter<GroupMember>() {
-//        @Override
-//        protected void onDisplayImage(Context context, ImageView imageView, GroupMember groupMember) {
-//            Glide.with(context).load(groupMember.getPortraitUri()).centerCrop().into(imageView);
-//        }
-//    };
     private CustomDialog mConversationMenuDialog;
 
     public RecentMessageFgPresenter(BaseActivity context) {
         super(context);
         this.context = context;
-//        speechUtil = new TextToSpeechUtil(context);
     }
 
     public void getConversations() {
@@ -65,55 +59,6 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
         setAdapter(datas);
     }
 
-//    private void loadData() {
-//        RongIMClient.getInstance().getConversationList(new RongIMClient.ResultCallback<List<Conversation>>() {
-//            @Override
-//            public void onSuccess(List<Conversation> conversations) {
-//                if (conversations != null && conversations.size() > 0) {
-//                    mData.clear();
-//                    mData.addAll(conversations);
-//                    filterData(mData);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(RongIMClient.ErrorCode errorCode) {
-//                LogUtils.e("加载最近会话失败：" + errorCode);
-//            }
-//        });
-//    }
-
-//    private void filterData(List<Conversation> conversations) {
-//        for (int i = 0; i < conversations.size(); i++) {
-//            Conversation item = conversations.get(i);
-//            //其他消息会话不显示（比如：系统消息）
-//            if (!(item.getConversationType() == Conversation.ConversationType.PRIVATE || item.getConversationType() == Conversation.ConversationType.GROUP)) {
-//                conversations.remove(i);
-//                i--;
-//                continue;
-//            }
-//            if (item.getConversationType() == Conversation.ConversationType.GROUP) {
-//                List<GroupMember> groupMembers = DBManager.getInstance().getGroupMembers(item.getTargetId());
-//                if (groupMembers == null || groupMembers.size() == 0) {
-//                    DBManager.getInstance().deleteGroupsById(item.getTargetId());//删除没有群成员的群
-//                    conversations.remove(i);
-//                    i--;
-//                }
-//            } else if (item.getConversationType() == Conversation.ConversationType.PRIVATE) {
-//                if (!DBManager.getInstance().isMyFriend(item.getTargetId())) {
-//                    conversations.remove(i);
-//                    i--;
-//                }
-//            }
-//        }
-//        mUnreadCountTotal = 0;
-//        for (Conversation conversation : conversations) {
-//            mUnreadCountTotal += conversation.getUnreadMessageCount();
-//        }
-//        updateTotalUnreadView();
-//        if (mAdapter != null)
-//            mAdapter.notifyDataSetChangedWrapper();
-//    }
 
     private void updateTotalUnreadView() {
         if (mUnreadCountTotal > 0) {
@@ -139,7 +84,10 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                     danHao.setText(item.getCode());
                     String status=item.getStatus();
                     if (status.equals("未上传")){
-                        delete_img.setVisibility(View.VISIBLE);
+                        states.setTextColor(Color.RED);
+//                        delete_img.setVisibility(View.VISIBLE);
+                    }else {
+                        states.setTextColor(Color.GREEN);
                     }
                     states.setText(status);
                     int size=datas.size();
@@ -151,11 +99,17 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 
     }
 
-    public void addRecord(String bitmapPath){
-        this.bitmapPath=bitmapPath;
+    public boolean addRecord(String bitmapPath){
+
         if (datas!=null){
             InBean bean=new InBean();
             IRecentMessageFgView view=getView();
+            String Code=view.getCode().getText().toString().trim();
+            List<InBean> inBeens=MyApp.getInstances().getDaoSession().getInBeanDao().queryBuilder().where(InBeanDao.Properties.Code.eq(Code)).build().list();
+            if (inBeens!=null&&inBeens.size()!=0){
+                UIUtils.showToast("该数据已存在");
+                return true;
+            }
             String Person=view.getPerson().getText().toString().trim();
             String Time=view.getTime().getText().toString().trim();
             String Type=view.getType().getText().toString().trim();
@@ -165,8 +119,9 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             String Year=view.getYear().getText().toString().trim();
             String Num=view.getNum().getText().toString().trim();
             String Location=view.getLocation().getText().toString().trim();
-            String Code=view.getCode().getText().toString().trim();
+//            String Code=view.getCode().getText().toString().trim();
             if (!Time.equals("")
+                    &&!Person.equals("")
                     &&!Type.equals("")
                     &&!Country.equals("")
                     &&!Birthday.equals("")
@@ -193,22 +148,41 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 
                 InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
                 inBeanDao.insert(bean);
+                return true;
             }else{
                 UIUtils.showToast("请检查数据完整性！");
+                return false;
             }
         }
+        return false;
     }
 
     public void clearYesUp(){
         datas.removeAll(removeDatas);
     }
+
+    /**
+     * 清空界面列表
+     */
+    public void clearAllData(){
+        datas.clear();
+        removeDatas.clear();
+        mAdapter.notifyDataSetChanged();
+    }
+
     public void upRecordImg(){
         if (datas!=null&&datas.size()!=0){
             mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
-            InBean bean=datas.get(0);
+
             OkHttpUtils okHttpUtils=OkHttpUtils.initClient();
+            /**
+             * 下面上传图片监听
+             * ============================================================================
+             * ===========================================================================
+             * ============================================================================
+             */
             okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
-//                mContext.hideWaitingDialog();
+                mContext.hideWaitingDialog();
                 if (newstr1.equals("数据请求失败")) {
                     mContext.speechUtil.speakXunFei("数据请求失败");
                     return;
@@ -245,12 +219,21 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
                 }
             }));
+            /**
+             * 上面上传图片监听
+             * ============================================================================
+             * ===========================================================================
+             * ============================================================================
+             */
 
 //            上传图片
+            InBean bean=datas.get(0);
+            String bitmapPath=bean.getImgstr();
             File file = new File(bitmapPath);
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
             builder.addFormDataPart("file", file.getName(), okhttp3.RequestBody.create(okhttp3.MediaType.parse("image/png"), file));
-            okHttpUtils.myEnqueue("http://10.38.1.40:8080/Wine/upload",builder.build());
+//            "http://121.43.167.170:8001/Wine/upload"
+            okHttpUtils.myEnqueue(NetConstant.BASE_URL_IMG,builder.build());
 //            mAdapter.notifyDataSetChanged();
         }else{
             datas.addAll(removeDatas);
@@ -260,6 +243,11 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
     public void upRecord(){
         mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
         OkHttpUtils okHttpUtils=OkHttpUtils.initClient();
+        /**
+         * ============================================================
+         * 下面上传入库记录监听
+         * ============================================================
+         */
         okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
             if (newstr1.equals("数据请求失败")) {
                 mContext.hideWaitingDialog();
@@ -282,10 +270,10 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                 mContext.hideWaitingDialog();
                 InBean inBean=datas.get(0);
                 inBean.setStatus("已上传");
-                InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+                InBeanDao inBeanDao = getInstances().getDaoSession().getInBeanDao();
                 inBeanDao.update(inBean);
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
-                removeDatas.add(datas.get(0));
+                removeDatas.add(0,datas.get(0));
                 datas.remove(0);
                 upRecordImg();
             } else {
@@ -295,7 +283,11 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
             }
         }));
-
+/**
+ * ============================================================
+ * 上面上传入库记录监听
+ * ============================================================
+ */
         okHttpUtils.myEnqueue(new UpInRecordRequest(datas).getUrl(),null);
     }
 

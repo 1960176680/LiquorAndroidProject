@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import java.util.Map;
 
 /**
- * @创建者 CSDN_LQR
  * @描述 sharedPreferences工具类(单例模式)
  */
 public class SPUtils {
@@ -23,7 +22,6 @@ public class SPUtils {
     }
 
     public static SPUtils getInstance(Context context) {
-
         if (mSpUtils == null) {
             synchronized (SPUtils.class) {
                 if (mSpUtils == null) {
@@ -32,9 +30,7 @@ public class SPUtils {
                 }
             }
         }
-
         return mSpUtils;
-
     }
 
     public void putBoolean(String key, Boolean value) {

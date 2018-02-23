@@ -1,15 +1,13 @@
 package com.hz.tt.mvp.model.entity.response;
 
-
 /**
- * Created by AMing on 15/12/23.
- * Company RongCloud
+ * Created by Administrator on 2018-02-13.
  */
-public class RegisterResponse {
+
+public class SetPswResponse {
     /**
-     * //    {"errorCode":"2000","errorMsg":"该用户名已经被注册"}
      * errorCode : 2000
-     * errorMsg : 该用户名已经被注册
+     * errorMsg : 账号或密码不正确。
      */
 
     private String errorCode;
@@ -30,7 +28,5 @@ public class RegisterResponse {
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
-
-
-
+//    {"errorCode":"2000","errorMsg":"账号或密码不正确。"}
 }
