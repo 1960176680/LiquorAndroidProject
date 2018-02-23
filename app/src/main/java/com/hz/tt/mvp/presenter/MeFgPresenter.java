@@ -1,6 +1,7 @@
 package com.hz.tt.mvp.presenter;
 
 import com.hz.tt.mvp.presenter.base.BasePresenter;
+import com.hz.tt.mvp.ui.activity.SettingPasswordActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IMeFgView;
 import com.hz.tt.util.LogUtils;
@@ -61,8 +62,7 @@ public class MeFgPresenter extends BasePresenter<IMeFgView> {
         LogUtils.sf(throwable.getLocalizedMessage());
         UIUtils.showToast(throwable.getLocalizedMessage());
     }
-
-//    public UserInfo getUserInfo() {
-//        return mUserInfo;
-//    }
+    public void resetKey(){
+        mContext.jumpToActivity(SettingPasswordActivity.class);
+    }
 }

@@ -4,8 +4,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.hz.tt.R;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
+import com.hz.tt.mvp.model.entity.QueryBean;
 import com.hz.tt.mvp.model.entity.request.QueryRequest;
 import com.hz.tt.mvp.model.entity.response.QueryResponse;
 import com.hz.tt.mvp.model.entity.response.QueryResponseSingle;
@@ -16,6 +18,7 @@ import com.hz.tt.util.UIUtils;
 import com.lqr.adapter.LQRAdapterForRecyclerView;
 import com.lqr.adapter.LQRViewHolderForRecyclerView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,65 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
         super(context);
     }
 
+
     public void query() {
+        datas.clear();
+        mAdapter.notifyDataSetChanged();
+        mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
+        OkHttpUtils okHttpUtils = OkHttpUtils.initClient();
+        okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
+//                mContext.hideWaitingDialog();
+            if (newstr1.equals("数据请求失败")) {
+                mContext.speechUtil.speakXunFei("数据请求失败");
+                return;
+            }
+            Gson gson = new Gson();
+            QueryResponse response = null;
+            try {
+                response = gson.fromJson(newstr1, QueryResponse.class);
+            } catch (JsonSyntaxException e) {
+                mContext.hideWaitingDialog();
+                mContext.speechUtil.speakXunFei("服务器异常");
+//                    mContext.loginError(new ServerException(UIUtils.getString(R.string.login_error)));
+                e.printStackTrace();
+                return;
+            }
+            String code = response.getErrorCode();
+            if (code.equals("1000")) {
+//                QueryResponseSingle queryResponseSingle=gson.fromJson(response.getData(),QueryResponseSingle.class);
+
+                    Type type = new TypeToken<ArrayList<QueryResponseSingle>>()
+                    {}.getType();
+                    ArrayList<QueryResponseSingle> jsonObjects = new Gson().fromJson(response.getData(), type);
+                    datas.addAll(jsonObjects);
+                    mAdapter.notifyDataSetChanged();
+                mContext.hideWaitingDialog();
+//                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
+            } else {
+                mContext.speechUtil.speakXunFei(response.getErrorMsg());
+                mContext.hideWaitingDialog();
+                return;
+//                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
+            }
+        }));
+
+        String country=getView().getEtCountryV().getText().toString().trim();
+        String birthplace=getView().getEtBirthplaceV().getText().toString().trim();
+        String type=getView().getEtTypeV().getText().toString().trim();
+        String capacity=getView().getEtCapacityV().getText().toString().trim();
+        String year=getView().getEtYearV().getText().toString().trim();
+        QueryBean queryBean=new QueryBean();
+        queryBean.setCountry(country);
+        queryBean.setOrigin(birthplace);
+        queryBean.setCategory(type);
+        queryBean.setVolume(capacity);
+        queryBean.setProductiveYear(year);
+
+        okHttpUtils.myEnqueue(new QueryRequest(queryBean).getUrl(), null);
+//            mAdapter.notifyDataSetChanged();
+    }
+//    下面的废弃
+    public void query1() {
         datas.clear();
         mAdapter.notifyDataSetChanged();
         mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
@@ -62,7 +123,7 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
             }
         }));
-        okHttpUtils.myEnqueue(new QueryRequest(getView().getEtScanV().getText().toString().trim()).getUrl(), null);
+//        okHttpUtils.myEnqueue(new QueryRequest(getView().getEtScanV().getText().toString().trim()).getUrl(), null);
 //            mAdapter.notifyDataSetChanged();
     }
 
@@ -72,19 +133,20 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
                 @Override
                 public void convert(LQRViewHolderForRecyclerView helper, QueryResponseSingle item, int position) {
                     TextView danHao = helper.getView(R.id.danHao);
+                    TextView country = helper.getView(R.id.tv_country);
                     TextView birthday = helper.getView(R.id.tv_birthday);
-                    TextView year= helper.getView(R.id.tv_year);
+                    TextView type= helper.getView(R.id.tv_type);
                     TextView count = helper.getView(R.id.tv_count);
                     TextView location = helper.getView(R.id.tv_location);
                     TextView num = helper.getView(R.id.tv_num);
 
                     danHao.setText(item.getRecordCode());
+                    country.setText(item.getCountry());
                     birthday.setText(item.getOrigin());
-                    year.setText(item.getProductiveYear());
+                    type.setText(item.getCategory());
                     count.setText(item.getCountNum());
                     location.setText(item.getPosition());
-                    num.setText("1");
-
+                    num.setText(String.valueOf(datas.size()-position));
                 }
             };
             getView().getRvRecyclerView().setAdapter(mAdapter);

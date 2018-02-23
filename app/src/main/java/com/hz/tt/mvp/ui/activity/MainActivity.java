@@ -352,9 +352,9 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
         return null;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        MyApp.exit();
-//    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+    }
 }

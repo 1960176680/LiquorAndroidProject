@@ -15,15 +15,13 @@ import java.net.URLEncoder;
  */
 
 public class QueryRequest {
-    private String code;
-    public QueryRequest(String code) {
-     this.code=code;
+    private QueryBean bean;
+    public QueryRequest(QueryBean bean) {
+     this.bean=bean;
     }
     public String getUrl() {
         Gson gson=new Gson();
-        QueryBean bean=new QueryBean();
-        bean.setRecordCode(code);
-        String meth = "WINECELLAR_MANAGER_QUERY_RECORD"/*typeMeg*/;
+        String meth = "WINECELLAR_MANAGER_QUERY_STOCKRECORD"/*typeMeg*/;
         String jsonObject =gson.toJson(bean);    /*"{\"userName\":\"123456\",\"password\":\"123456\"}"requestMeg  gson.toJson(user)*/
         String appsecret = "Do&9hY%l8e";
         String md5 = "";

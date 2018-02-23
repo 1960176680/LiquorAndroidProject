@@ -27,7 +27,8 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     AutoLinearLayout line_suggest;
     @Bind(R.id.line_record)
     AutoLinearLayout line_record;
-
+    @Bind(R.id.line_forgetkey)
+    AutoLinearLayout line_forgetkey;
     @Override
     public void init() {
         registerBR();
@@ -47,6 +48,8 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
 
         line_suggest.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
         line_record.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
+        line_forgetkey.setOnClickListener(v -> mPresenter.resetKey());
+
     }
 
     @Override

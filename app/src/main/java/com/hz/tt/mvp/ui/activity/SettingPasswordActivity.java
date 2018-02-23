@@ -1,7 +1,10 @@
 package com.hz.tt.mvp.ui.activity;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
@@ -24,7 +27,12 @@ public class SettingPasswordActivity extends BaseActivity<ISettingPasswordAtView
     EditText etNew;
     @Bind(R.id.btnRegister)
     TextView btnRegister;
-
+    @Bind(R.id.ivSeePwd)
+    ImageView ivSeePwd;
+    @Override
+    public void initView() {
+        setToolbarTitle("重置密码");
+    }
 
     @Override
     public void initListener() {
@@ -33,6 +41,17 @@ public class SettingPasswordActivity extends BaseActivity<ISettingPasswordAtView
             public void onClick(View v) {
                 mPresenter.setPsw();
             }
+        });
+
+
+        ivSeePwd.setOnClickListener(v -> {
+            if (etNew.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()) {
+                etNew.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            } else {
+                etNew.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+
+            etNew.setSelection(etNew.getText().toString().trim().length());
         });
     }
 
