@@ -27,8 +27,7 @@ import java.util.List;
 import butterknife.Bind;
 
 /**
- * @创建者 CSDN_LQR
- * @描述 通讯录界面
+ * @描述
  */
 public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPresenter> implements IContactsFgView {
 

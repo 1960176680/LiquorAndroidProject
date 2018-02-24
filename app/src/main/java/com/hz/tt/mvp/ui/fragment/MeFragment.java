@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.MeFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.activity.WorkRecordActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IMeFgView;
 import com.hz.tt.util.LogUtils;
@@ -47,7 +48,7 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     public void initListener() {
 
         line_suggest.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
-        line_record.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
+        line_record.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(WorkRecordActivity.class));
         line_forgetkey.setOnClickListener(v -> mPresenter.resetKey());
 
     }

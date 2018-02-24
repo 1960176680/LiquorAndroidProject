@@ -1,5 +1,8 @@
 package com.hz.tt.mvp.ui.fragment;
 
+import com.hz.tt.mvp.ui.fragment.workrecord.UnUpLoadDataFragment;
+import com.hz.tt.mvp.ui.fragment.workrecord.UpLoadDataFragment;
+
 /**
  * @描述 主界面4个Fragment工厂
  */
@@ -25,6 +28,10 @@ public class FragmentFactory {
     private ContactsFragment mContactsFragment;
     private DiscoveryFragment mDiscoveryFragment;
     private MeFragment mMeFragment;
+
+    private UnUpLoadDataFragment unUpLoadFg;
+    private UpLoadDataFragment upLoadFg;
+
 
     public RecentMessageFragment getRecentMessageFragment() {
         if (mRecentMessageFragment == null) {
@@ -69,4 +76,32 @@ public class FragmentFactory {
         }
         return mMeFragment;
     }
+
+
+
+    public UnUpLoadDataFragment getUnUpLoadFragment() {
+        if (unUpLoadFg == null) {
+            synchronized (FragmentFactory.class) {
+                if (unUpLoadFg == null) {
+                    unUpLoadFg = new UnUpLoadDataFragment();
+                }
+            }
+        }
+        return unUpLoadFg;
+    }
+
+    public UpLoadDataFragment getUpLoadFragment() {
+        if (upLoadFg == null) {
+            synchronized (FragmentFactory.class) {
+                if (upLoadFg == null) {
+                    upLoadFg = new UpLoadDataFragment();
+                }
+            }
+        }
+        return upLoadFg;
+    }
+
+
+
+
 }

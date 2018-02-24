@@ -73,7 +73,7 @@
 
                 <EditText
                     android:paddingLeft="15dp"
-                    android:id="@+id/etPwd"
+                    android:id="@+id/etKey"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="56px"
@@ -115,11 +115,12 @@
                 android:text="确定"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_selector"
-                android:id="@+id/btn_stay_upload"
+                android:id="@+id/btnSubmit"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="15dp" />
             <Button
+                android:id="@+id/btnCancel"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="15dp"
