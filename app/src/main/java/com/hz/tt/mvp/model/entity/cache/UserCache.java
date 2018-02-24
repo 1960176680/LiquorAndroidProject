@@ -1,34 +1,36 @@
 package com.hz.tt.mvp.model.entity.cache;
 
+import com.hz.tt.app.AppConst;
+import com.hz.tt.app.MyApp;
+import com.hz.tt.util.SPUtils;
+
 /**
- * @创建者 CSDN_LQR
  * @描述 用户缓存
  */
 public class UserCache {
 
-//    public static String getId() {
-//        return SPUtils.getInstance(UIUtils.getContext()).getString(AppConst.User.ID, "");
-//    }
-//
-//    public static String getPhone() {
-//        return SPUtils.getInstance(UIUtils.getContext()).getString(AppConst.User.PHONE, "");
-//    }
-//
-//    public static String getToken() {
-//        return SPUtils.getInstance(UIUtils.getContext()).getString(AppConst.User.TOKEN, "");
-//    }
-//
-//    public static void save(String id, String account, String token) {
-//        SPUtils.getInstance(UIUtils.getContext()).putString(AppConst.User.ID, id);
-//        SPUtils.getInstance(UIUtils.getContext()).putString(AppConst.User.PHONE, account);
-//        SPUtils.getInstance(UIUtils.getContext()).putString(AppConst.User.TOKEN, token);
-//    }
-//
-//    public static void clear() {
-//        SPUtils.getInstance(UIUtils.getContext()).remove(AppConst.User.ID);
-//        SPUtils.getInstance(UIUtils.getContext()).remove(AppConst.User.PHONE);
-//        SPUtils.getInstance(UIUtils.getContext()).remove(AppConst.User.TOKEN);
-////        DBManager.getInstance().deleteAllUserInfo();
-//    }
+    public static String getId() {
+        return SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).getString(AppConst.User.ID, "");
+    }
+
+    public static String getPhone() {
+        return SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).getString(AppConst.User.PHONE, "");
+    }
+
+    public static String getToken() {
+        return SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).getString(AppConst.User.TOKEN, "");
+    }
+
+    public static void save(String phone, String key) {
+        SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).putString(AppConst.User.PHONE, phone);
+        SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).putString(AppConst.User.PASSWORD, key);
+    }
+
+    public static void clear() {
+//        SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).remove(AppConst.User.ID);
+        SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).remove(AppConst.User.PHONE);
+//        SPUtils.getInstance(MyApp.getInstances().getApplicationContext()).remove(AppConst.User.TOKEN);
+//        DBManager.getInstance().deleteAllUserInfo();
+    }
 
 }

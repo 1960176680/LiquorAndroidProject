@@ -1,5 +1,6 @@
 package com.hz.tt.app;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -8,12 +9,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.hz.tt.greendao.gen.DaoMaster;
 import com.hz.tt.greendao.gen.DaoSession;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
- * @创建者 CSDN_LQR
  * @描述 BaseApp的拓展，用于设置其他第三方的初始化
  */
 public class MyApp extends Application {
+    public static List<Activity> activities = new LinkedList<>();
     private DaoMaster.DevOpenHelper mHelper;
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
@@ -22,7 +26,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        LitePal.initialize(this);
+
         instances = this;
         setDatabase();
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
@@ -73,5 +77,13 @@ public class MyApp extends Application {
         }
         return null;
     }
-
+    /**
+     * 完全退出
+     * 一般用于“退出程序”功能
+     */
+    public static void exit() {
+        for (Activity activity : activities) {
+            activity.finish();
+        }
+    }
 }

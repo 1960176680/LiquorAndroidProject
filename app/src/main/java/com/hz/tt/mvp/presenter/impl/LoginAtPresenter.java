@@ -5,8 +5,8 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.hz.tt.R;
-import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
+import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.model.entity.exception.ServerException;
 import com.hz.tt.mvp.model.entity.request.LoginRequest;
 import com.hz.tt.mvp.model.entity.response.LoginResponse;
@@ -20,12 +20,14 @@ import com.hz.tt.util.LogUtils;
 import com.hz.tt.util.UIUtils;
 
 public class LoginAtPresenter extends BasePresenter<LoginAtView> {
+
+
     public LoginAtPresenter(BaseActivity context) {
         super(context);}
 
     public void login() {
         String phone = getView().getEtPhone().getText().toString().trim();
-        NetConstant.USER_NAME=phone;
+//        NetConstant.USER_NAME=phone;
         String pwd = getView().getEtPwd().getText().toString().trim();
 
         if (TextUtils.isEmpty(phone)) {
@@ -59,7 +61,7 @@ public class LoginAtPresenter extends BasePresenter<LoginAtView> {
             }
             String code = response.getErrorCode();
             if (code.equals("1000")) {
-//                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
+                UserCache.save(phone, pwd);
                 mContext.jumpToActivityAndClearTop(MainActivity.class);
                 mContext.finish();
             } else {

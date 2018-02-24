@@ -1,18 +1,23 @@
 package com.hz.tt.mvp.ui.activity;
 
 
+import android.Manifest;
+import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hz.tt.R;
+import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.impl.LoginAtPresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.LoginAtView;
 
 import butterknife.Bind;
+import kr.co.namee.permissiongen.PermissionGen;
 
 /**
  * @描述 登录界面
@@ -39,6 +44,36 @@ public class LoginActivity extends BaseActivity<LoginAtView, LoginAtPresenter> i
     @Override
     public void initView() {
 //        mIbAddMenu.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void init() {
+        PermissionGen.with(this)
+                .addRequestCode(100)
+                .permissions(
+                        //电话通讯录
+                        Manifest.permission.GET_ACCOUNTS,
+                        Manifest.permission.READ_PHONE_STATE,
+                        //位置
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        //相机、麦克风
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.WAKE_LOCK,
+                        Manifest.permission.CAMERA,
+                        //存储空间
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_SETTINGS
+                )
+                .request();
+
+        if (!TextUtils.isEmpty(UserCache.getPhone())) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            jumpToActivity(intent);
+            finish();
+        }
     }
 
     @Override

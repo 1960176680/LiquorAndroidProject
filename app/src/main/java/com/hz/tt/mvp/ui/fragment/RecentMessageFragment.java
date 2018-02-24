@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.hz.tt.R;
 import com.hz.tt.api.okHttpUtils.NetConstant;
+import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.impl.RecentMessageFgPresenter;
 import com.hz.tt.mvp.ui.activity.CameraActivity;
 import com.hz.tt.mvp.ui.activity.MainActivity;
@@ -115,7 +116,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
    //    setAdapter()
         mPresenter.getConversations();
 
-        tv_in.setText(NetConstant.USER_NAME);
+        tv_in.setText(UserCache.getPhone());
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         tv_time.setText(dateFormat.format(new Date()));
 

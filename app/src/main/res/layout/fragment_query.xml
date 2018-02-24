@@ -191,9 +191,10 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1.2"
                 android:text="编码"
                 android:gravity="center"
+                android:textSize="12sp"
                 />
 
             <TextView
@@ -201,20 +202,23 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="国家"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="产地"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textSize="12sp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="品类"
                 android:gravity="center"
+                android:textSize="12sp"
                 />
             <TextView
                 android:layout_width="0dp"
@@ -222,13 +226,15 @@
                 android:layout_weight="1"
                 android:text="数量"
                 android:gravity="center"
+                android:textSize="12sp"
                 />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.3"
+                android:layout_weight="1.5"
                 android:text="当前位置"
                 android:gravity="center"
+                android:textSize="12sp"
                 />
             <TextView
                 android:layout_width="0dp"
@@ -236,6 +242,7 @@
                 android:layout_weight="1"
                 android:text="序号"
                 android:gravity="center"
+                android:textSize="12sp"
                 />
         </com.zhy.autolayout.AutoLinearLayout>
         <com.hz.tt.widget.MyListViewInScrollView
