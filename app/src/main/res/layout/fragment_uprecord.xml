@@ -2,5 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@color/white"
+        android:id="@+id/relaStartdate"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请选择查询日期"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/text_gray"
+            android:textSize="16sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/ic_enter"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:id="@+id/iv_enter"
+            />
+        <TextView
+            android:id="@+id/start_date"
+            android:textColor="#888888"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_enter"
+            android:layout_toLeftOf="@+id/iv_enter"
+            android:layout_toStartOf="@+id/iv_enter"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            />
+
+        <TextView
+            android:text="2018-02-25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_date"
+            android:textSize="16sp"
+            android:textColor="#888888"
+            android:layout_alignTop="@+id/start_date"
+            android:layout_toLeftOf="@+id/iv_enter"
+            android:layout_toStartOf="@+id/iv_enter"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp" />
+    </RelativeLayout>
+    <com.lqr.recyclerview.LQRRecyclerView
+        android:id="@+id/recyclerView"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+    </com.lqr.recyclerview.LQRRecyclerView>
 </LinearLayout>
