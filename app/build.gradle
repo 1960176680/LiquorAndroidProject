@@ -72,8 +72,6 @@ dependencies {
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile project(':camera')
     compile 'com.google.code.gson:gson:2.2.4'
-
     compile 'com.lovedise:permissiongen:0.0.6'
-
-    compile 'com.zhouwenguang.timeselector:timeselector:0.0.1'
+    compile project(':datepicker')
 }

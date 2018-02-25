@@ -36,8 +36,9 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
         mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
         OkHttpUtils okHttpUtils = OkHttpUtils.initClient();
         okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
-//                mContext.hideWaitingDialog();
+            mContext.hideWaitingDialog();
             if (newstr1.equals("数据请求失败")) {
+
                 mContext.speechUtil.speakXunFei("数据请求失败");
                 return;
             }

@@ -69,4 +69,5 @@
 
     <color name="tab_blue">#2A65E4</color>
     <color name="text_gray">#333333</color>
+    <color name="item_pressed_color">#552A65E4</color>
 </resources>

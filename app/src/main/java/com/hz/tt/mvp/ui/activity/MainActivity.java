@@ -381,10 +381,4 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
     public TextView getTvMessageCount() {
         return null;
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        moveTaskToBack(true);
-    }
 }
