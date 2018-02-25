@@ -33,6 +33,7 @@ import com.hz.tt.widget.SelectDialog;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.Bind;
 import io.reactivex.Observable;
@@ -106,9 +107,18 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Bind(R.id.btn_upload)
     Button btn_upload;
 
+    List<String> CategoryList;
+    List<String> CountryList;
+    List<String> OriginList;
+    List<String> VolumeList;
+
     @Override
     public void init() {
 //        registerBR();
+
+
+
+
     }
 
     @Override
@@ -180,13 +190,15 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         if (!isFirst) {
 //            mPresenter.getConversations();
         }
+
     }
 
     @Override
     public void initData() {
-//        UIUtils.postTaskDelay(() -> {
-//        mPresenter.getConversations();
-//        }, 1000);
+        CategoryList=mPresenter.loadCategoryData();
+        CountryList=mPresenter.loadCountryData();
+        OriginList=mPresenter.loadOriginData();
+        VolumeList=mPresenter.loadVolumeData();
     }
 
     @Override
@@ -329,22 +341,22 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         switch (type){
             case "type":
                 SelectDialog.setOnResultListener(result -> et_type.setText(result));
-                SelectDialog.initDialog(getActivity(),"品类选择","",R.array.CXH_list,0)
+                SelectDialog.initDialog(getActivity(),"品类选择","", CategoryList.toArray(new String[0]),0)
                 .show();
                 break;
             case "country":
                 SelectDialog.setOnResultListener(result -> et_country.setText(result));
-                SelectDialog.initDialog(getActivity(),"国家选择","",R.array.CXH_list0,0)
+                SelectDialog.initDialog(getActivity(),"国家选择","",CountryList.toArray(new String[0]),0)
                         .show();
                 break;
             case "birthplace":
                 SelectDialog.setOnResultListener(result -> et_birthplace.setText(result));
-                SelectDialog.initDialog(getActivity(),"产地选择","",R.array.CXH_list1,0)
+                SelectDialog.initDialog(getActivity(),"产地选择","",OriginList.toArray(new String[0]),0)
                         .show();
                 break;
             case "capacity":
                 SelectDialog.setOnResultListener(result -> et_capacity.setText(result));
-                SelectDialog.initDialog(getActivity(),"容量选择","",R.array.CXH_list2,0)
+                SelectDialog.initDialog(getActivity(),"容量选择","",VolumeList.toArray(new String[0]),0)
                         .show();
                 break;
         }
@@ -406,4 +418,5 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     public EditText getCode() {
         return et_scan;
     }
+
 }

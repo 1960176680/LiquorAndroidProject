@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -281,6 +282,27 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                 TextView timeIn=((TextView) mFragmentList.get(0).getView().findViewById(R.id.tv_time));
                 if (timeIn!=null){
                     timeIn.setText(dateFormat.format(new Date()));
+                }
+//              清空界面
+                EditText etType=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_type));
+                EditText etCountry=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_country));
+                EditText etBirthplace=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_birthplace));
+                EditText etCapacity=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_capacity));
+                EditText etYear=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_year));
+                EditText etNum=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_num));
+                if (etType!=null
+                        &&etCountry!=null
+                        &&etBirthplace!=null
+                        &&etCapacity!=null
+                        &&etYear!=null
+                        &&etNum!=null
+                        ){
+                    etType.setText("");
+                    etCountry.setText("");
+                    etBirthplace.setText("");
+                    etCapacity.setText("");
+                    etYear.setText("");
+                    etNum.setText("");
                 }
 
 

@@ -17,6 +17,7 @@
         />
 
     <TextView
+        android:visibility="gone"
         android:text="郎丽"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,10 +27,9 @@
         android:textSize="16sp"/>
 
     <TextView
-        android:text="18348088072"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
+        android:id="@+id/tv_user"
         android:textSize="16sp"
         android:gravity="center"
         android:layout_marginTop="5dp"/>

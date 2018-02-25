@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
+import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.MeFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.WorkRecordActivity;
@@ -30,6 +31,8 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     AutoLinearLayout line_record;
     @Bind(R.id.line_forgetkey)
     AutoLinearLayout line_forgetkey;
+    @Bind(R.id.tv_user)
+    TextView tv_user;
     @Override
     public void init() {
         registerBR();
@@ -42,6 +45,7 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
 
     @Override
     public void initView(View rootView) {
+        tv_user.setText(UserCache.getPhone());
     }
 
     @Override

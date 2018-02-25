@@ -13,7 +13,11 @@ import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
 import com.hz.tt.app.MyApp;
 import com.hz.tt.greendao.gen.InBeanDao;
+import com.hz.tt.mvp.model.entity.CategoryBean;
+import com.hz.tt.mvp.model.entity.CountryBean;
 import com.hz.tt.mvp.model.entity.InBean;
+import com.hz.tt.mvp.model.entity.OriginBean;
+import com.hz.tt.mvp.model.entity.VolumeBean;
 import com.hz.tt.mvp.model.entity.request.UpInRecordRequest;
 import com.hz.tt.mvp.model.entity.response.ImageUpResponse;
 import com.hz.tt.mvp.model.entity.response.UpInRecordResponse;
@@ -59,7 +63,38 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
         setAdapter(datas);
     }
 
-
+    public List<String> loadCategoryData(){
+        List<CategoryBean> beanList=MyApp.getInstances().getDaoSession().getCategoryBeanDao().queryBuilder().build().list();
+        List<String> list=new ArrayList<>();
+        for (CategoryBean bean:beanList){
+            list.add(bean.getTypeName());
+        }
+        return list;
+    }
+    public List<String> loadCountryData(){
+        List<CountryBean> beanList=MyApp.getInstances().getDaoSession().getCountryBeanDao().queryBuilder().build().list();
+        List<String> list=new ArrayList<>();
+        for (CountryBean bean:beanList){
+            list.add(bean.getTypeName());
+        }
+        return list;
+    }
+    public List<String> loadOriginData(){
+        List<OriginBean> beanList=MyApp.getInstances().getDaoSession().getOriginBeanDao().queryBuilder().build().list();
+        List<String> list=new ArrayList<>();
+        for (OriginBean bean:beanList){
+            list.add(bean.getTypeName());
+        }
+        return list;
+    }
+    public List<String> loadVolumeData(){
+        List<VolumeBean> beanList=MyApp.getInstances().getDaoSession().getVolumeBeanDao().queryBuilder().build().list();
+        List<String> list=new ArrayList<>();
+        for (VolumeBean bean:beanList){
+            list.add(bean.getTypeName());
+        }
+        return list;
+    }
     private void updateTotalUnreadView() {
         if (mUnreadCountTotal > 0) {
             ((MainActivity) mContext).getTvMessageCount().setText(mUnreadCountTotal + "");
