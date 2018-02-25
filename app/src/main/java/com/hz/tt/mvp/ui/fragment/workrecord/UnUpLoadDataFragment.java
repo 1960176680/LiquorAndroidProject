@@ -1,6 +1,7 @@
 package com.hz.tt.mvp.ui.fragment.workrecord;
 
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,6 +28,16 @@ public class UnUpLoadDataFragment extends BaseFragment<IUnUpLoadFgView, UnUpLoad
     @Bind(R.id.btnUpload)
     Button btnUpload;
 
+    @Override
+    public void initListener() {
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadInAndOutList();
+                mPresenter.upRecordImg();
+            }
+        });
+    }
 
     @Override
     public void initData() {
