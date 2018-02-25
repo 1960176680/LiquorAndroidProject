@@ -31,13 +31,6 @@ import butterknife.Bind;
  */
 public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPresenter> implements IContactsFgView {
 
-//    @Bind(R.id.rvContacts)
-//    LQRRecyclerView mRvContacts;
-//    @Bind(R.id.qib)
-//    QuickIndexBar mQib;
-//    @Bind(R.id.tvLetter)
-//    TextView mTvLetter;
-
     private boolean addRecordOk;
     @Bind(R.id.iv_scan)
     ImageView iv_scan;
@@ -75,12 +68,6 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Bind(R.id.rvRecentMessage)
     MyListViewInScrollView rvRecentMessage;
 
-
-
-
-    private View mHeaderView;
-    private TextView mFooterView;
-    private TextView mTvNewFriendUnread;
     @Override
     public void initView(View rootView) {
 
@@ -89,7 +76,6 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public void initData() {
         mPresenter.getConversations();
-//        mPresenter.loadContacts();
     }
 
     @Override
@@ -142,35 +128,12 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        unregisterBR();
+
     }
     public void clearAllData(){
         mPresenter.clearAllData();
     }
-    private void registerBR() {
 
-    }
-
-    private void unregisterBR() {
-
-    }
-
-    private void showLetter(String letter) {
-
-    }
-
-    private void hideLetter() {
-
-    }
-
-    /**
-     * 是否显示快速导航条
-     *
-     * @param show
-     */
-    public void showQuickIndexBar(boolean show) {
-
-    }
 
     @Override
     protected ContactsFgPresenter createPresenter() {
@@ -181,21 +144,6 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     protected int provideContentViewId() {
         return R.layout.fragment_out;
     }
-
-//    @Override
-//    public View getHeaderView() {
-//        return mHeaderView;
-//    }
-//
-//    @Override
-//    public LQRRecyclerView getRvContacts() {
-//        return null;
-//    }
-//
-//    @Override
-//    public TextView getFooterView() {
-//        return mFooterView;
-//    }
 
     @Override
     public void onResume() {

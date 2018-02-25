@@ -45,8 +45,6 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
         mAdapter.notifyDataSetChanged();
     }
     public void getConversations() {
-//        loadData();
-//        this.datas=datas;
         setAdapter(datas);
     }
     public void setAdapter(List<OutBean> datas) {
@@ -92,13 +90,6 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
             String outDate="2018-02-12 16:00:00";
             String outCustomer= "123456";
 
-//            String Country=view.getCountry().getText().toString().trim();
-//            String Birthday=view.getBirthday().getText().toString().trim();
-//            String Capacity=view.getCapacity().getText().toString().trim();
-//            String Year=view.getYear().getText().toString().trim();
-//            String Num=view.getNum().getText().toString().trim();
-//            String Location=view.getLocation().getText().toString().trim();
-//            String Code=view.getCode().getText().toString().trim();
             if (!Time.equals("")
                     &&!Person.equals("")
                     &&!Code.equals("")
