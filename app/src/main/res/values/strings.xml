@@ -21,8 +21,8 @@
     <string name="disconnect_server">与服务器失联</string>
 
     <!--主界面-->
-    <string name="tv_in">入库</string>
-    <string name="tv_out">出库</string>
+    <string name="tv_in">新增</string>
+    <string name="tv_out">出/入库</string>
     <string name="tv_query">查询</string>
     <string name="tv_more">更多</string>
 

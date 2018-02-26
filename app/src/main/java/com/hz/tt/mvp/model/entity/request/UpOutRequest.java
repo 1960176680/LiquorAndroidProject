@@ -36,7 +36,7 @@ public class UpOutRequest {
 //        inUpBean.setRemark("");
 //        inUpBean.setPosition(inBean.getLocation());
 
-        String meth = "WINECELLAR_MANAGER_OUT_LIBRARY"/*typeMeg*/;
+        String meth = "WINECELLAR_MANAGER_INTO_OUT_RECORD"/*typeMeg*/;
         String jsonObject =gson.toJson(inBean);    /*"{\"userName\":\"123456\",\"password\":\"123456\"}"requestMeg  gson.toJson(user)*/
         String appsecret = "Do&9hY%l8e";
         String md5 = "";

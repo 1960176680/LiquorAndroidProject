@@ -11,23 +11,6 @@ public class QueryBean {
     private String origin;
     private String volume;
     private String productiveYear;
-    private String countNum;
-    private String intoDate;
-    private String intoCustomer;
-    private String position;
-    private String outRecordSource;
-    private String outRecordDate;
-    private String outDate;
-    private String outCustomer;
-    private String receiveCustomer;
-
-    public String getReceiveDate() {
-        return receiveDate;
-    }
-
-    public void setReceiveDate(String receiveDate) {
-        this.receiveDate = receiveDate;
-    }
 
     public String getRemark() {
         return remark;
@@ -37,44 +20,12 @@ public class QueryBean {
         this.remark = remark;
     }
 
-    public String getReceiveCustomer() {
-        return receiveCustomer;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setReceiveCustomer(String receiveCustomer) {
-        this.receiveCustomer = receiveCustomer;
-    }
-
-    public String getOutCustomer() {
-        return outCustomer;
-    }
-
-    public void setOutCustomer(String outCustomer) {
-        this.outCustomer = outCustomer;
-    }
-
-    public String getOutDate() {
-        return outDate;
-    }
-
-    public void setOutDate(String outDate) {
-        this.outDate = outDate;
-    }
-
-    public String getOutRecordDate() {
-        return outRecordDate;
-    }
-
-    public void setOutRecordDate(String outRecordDate) {
-        this.outRecordDate = outRecordDate;
-    }
-
-    public String getOutRecordSource() {
-        return outRecordSource;
-    }
-
-    public void setOutRecordSource(String outRecordSource) {
-        this.outRecordSource = outRecordSource;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getPosition() {
@@ -149,10 +100,6 @@ public class QueryBean {
         this.category = category;
     }
 
-    private String receiveDate;
-    private String remark;
-
-
     public String getRecordCode() {
         return recordCode;
     }
@@ -161,5 +108,10 @@ public class QueryBean {
         this.recordCode = recordCode;
     }
 
-
+    private String countNum;
+    private String intoDate;
+    private String intoCustomer;
+    private String position;
+    private String photo;
+    private String remark;
 }

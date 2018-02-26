@@ -34,7 +34,8 @@ public class UnUpLoadDataFragment extends BaseFragment<IUnUpLoadFgView, UnUpLoad
             @Override
             public void onClick(View view) {
                 mPresenter.loadInAndOutList();
-                mPresenter.upRecordImg();
+//                mPresenter.upRecordImg();
+                mPresenter.upOutRecord();
             }
         });
     }

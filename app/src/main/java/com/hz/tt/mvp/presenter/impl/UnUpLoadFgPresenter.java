@@ -15,7 +15,9 @@ import com.hz.tt.mvp.model.entity.InBean;
 import com.hz.tt.mvp.model.entity.OutBean;
 import com.hz.tt.mvp.model.entity.RecordDataBean;
 import com.hz.tt.mvp.model.entity.request.UpInRecordRequest;
+import com.hz.tt.mvp.model.entity.request.UpOutRequest;
 import com.hz.tt.mvp.model.entity.response.ImageUpResponse;
+import com.hz.tt.mvp.model.entity.response.OutResponse;
 import com.hz.tt.mvp.model.entity.response.UpInRecordResponse;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
@@ -42,8 +44,11 @@ import static com.hz.tt.app.MyApp.getInstances;
 public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
     private List<RecordDataBean> dataBeenList=new ArrayList<>();
     private LQRAdapterForRecyclerView mAdapter;
-    List<InBean> inBeanList;
-    List<OutBean> outBeanList;
+    private List<InBean> inBeanList;
+    private List<OutBean> outBeanList;
+    private boolean inUpFinish=false;
+    private boolean outUpFinish=false;
+
     public UnUpLoadFgPresenter(BaseActivity context) {
         super(context);
     }
@@ -113,6 +118,7 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
     }
 
     public void upRecordImg(){
+        inUpFinish=false;
         if (inBeanList!=null&&inBeanList.size()!=0){
             mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
 
@@ -124,8 +130,12 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
              * ============================================================================
              */
             okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
-                mContext.hideWaitingDialog();
+//                mContext.hideWaitingDialog();
                 if (newstr1.equals("数据请求失败")) {
+                    inUpFinish=true;
+                    if (inUpFinish&&outUpFinish){
+                        mContext.hideWaitingDialog();
+                    }
                     mContext.speechUtil.speakXunFei("数据请求失败");
                     return;
                 }
@@ -134,7 +144,11 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
                 try {
                     response = gson.fromJson(newstr1,ImageUpResponse.class);
                 } catch (JsonSyntaxException e) {
-                    mContext.hideWaitingDialog();
+//                    mContext.hideWaitingDialog();
+                    inUpFinish=true;
+                    if (inUpFinish&&outUpFinish){
+                        mContext.hideWaitingDialog();
+                    }
                     mContext.speechUtil.speakXunFei("服务器异常");
 //                    mContext.loginError(new ServerException(UIUtils.getString(R.string.login_error)));
                     e.printStackTrace();
@@ -148,15 +162,21 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
                         JSONObject jsonObject = new JSONObject(imgUri);
                         String imgtrue=jsonObject.getString("url");
                         inBeanList.get(0).setImgstr(imgtrue);
-                        mContext.hideWaitingDialog();
+//                        mContext.hideWaitingDialog();
                         upRecord();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                 } else {
+
+//                    异常情况
+                    inUpFinish=true;
+                    if (inUpFinish&&outUpFinish){
+                        mContext.hideWaitingDialog();
+                    }
                     mContext.speechUtil.speakXunFei(code);
-                    mContext.hideWaitingDialog();
+//                    mContext.hideWaitingDialog();
                     return;
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
                 }
@@ -177,7 +197,14 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
 //            "http://121.43.167.170:8001/Wine/upload"
             okHttpUtils.myEnqueue(NetConstant.BASE_URL_IMG,builder.build());
 //            mAdapter.notifyDataSetChanged();
+
+
         }else{
+//            上传完成或无数据上传
+            inUpFinish=true;
+            if (inUpFinish&&outUpFinish){
+                mContext.hideWaitingDialog();
+            }
             for (RecordDataBean bean:dataBeenList){
                 if (bean.getType().equals("入：")){
                     dataBeenList.remove(bean);
@@ -197,6 +224,9 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
         okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
             if (newstr1.equals("数据请求失败")) {
                 mContext.hideWaitingDialog();
+                if (inUpFinish&&outUpFinish){
+                    mContext.hideWaitingDialog();
+                }
                 mContext.speechUtil.speakXunFei("数据请求失败");
                 return;
             }
@@ -206,14 +236,18 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
                 response = gson.fromJson(newstr1,UpInRecordResponse.class);
             } catch (JsonSyntaxException e) {
                 mContext.speechUtil.speakXunFei("服务器异常");
-                mContext.hideWaitingDialog();
+//                mContext.hideWaitingDialog();
+                inUpFinish=true;
+                if (inUpFinish&&outUpFinish){
+                    mContext.hideWaitingDialog();
+                }
 //                    mContext.loginError(new ServerException(UIUtils.getString(R.string.login_error)));
                 e.printStackTrace();
                 return;
             }
             String code = response.getErrorCode();
             if (code.equals("1000")) {
-                mContext.hideWaitingDialog();
+//                mContext.hideWaitingDialog();
                 InBean inBean=inBeanList.get(0);
                 inBean.setStatus("已上传");
                 InBeanDao inBeanDao = getInstances().getDaoSession().getInBeanDao();
@@ -224,7 +258,11 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
                 upRecordImg();
             } else {
                 mContext.speechUtil.speakXunFei(response.getErrorMsg());
-                mContext.hideWaitingDialog();
+                inUpFinish=true;
+                if (inUpFinish&&outUpFinish){
+                    mContext.hideWaitingDialog();
+                }
+//                mContext.hideWaitingDialog();
                 return;
 //                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
             }
@@ -236,4 +274,80 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
  */
         okHttpUtils.myEnqueue(new UpInRecordRequest(inBeanList).getUrl(),null);
     }
+
+
+    public void upOutRecord(){
+        outUpFinish=false;
+        if (outBeanList!=null&&outBeanList.size()!=0){
+            mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
+            OkHttpUtils okHttpUtils=OkHttpUtils.initClient();
+            okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
+                if (newstr1.equals("数据请求失败")) {
+                    outUpFinish=true;
+                    if (inUpFinish&&outUpFinish){
+                        mContext.hideWaitingDialog();
+                    }
+//                    mContext.hideWaitingDialog();
+                    mContext.speechUtil.speakXunFei("数据请求失败");
+                    return;
+                }
+                Gson gson = new Gson();
+                OutResponse response = null;
+                try {
+                    response = gson.fromJson(newstr1,OutResponse.class);
+                } catch (JsonSyntaxException e) {
+                    mContext.speechUtil.speakXunFei("服务器异常");
+                    outUpFinish=true;
+                    if (inUpFinish&&outUpFinish){
+                        mContext.hideWaitingDialog();
+                    }
+//                    mContext.hideWaitingDialog();
+//                    mContext.loginError(new ServerException(UIUtils.getString(R.string.login_error)));
+                    e.printStackTrace();
+                    return;
+                }
+                String code = response.getErrorCode();
+                if (code.equals("1000")) {
+//                    mContext.hideWaitingDialog();
+                    OutBean inBean=outBeanList.get(0);
+                    inBean.setStatus("已上传");
+                    OutBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getOutBeanDao();
+                    inBeanDao.update(inBean);
+//                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
+//                    removeDatas.add(0,datas.get(0));
+                    outBeanList.remove(0);
+                    upOutRecord();
+                } else {
+                    mContext.speechUtil.speakXunFei(response.getErrorMsg());
+
+                    outUpFinish=true;
+                    if (inUpFinish&&outUpFinish){
+                        mContext.hideWaitingDialog();
+                    }
+//                    mContext.hideWaitingDialog();
+                    return;
+//                    loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
+                }
+            }));
+
+            okHttpUtils.myEnqueue(new UpOutRequest(outBeanList).getUrl(),null);
+        }else{
+//            datas.addAll(removeDatas);
+            outUpFinish=true;
+            if (inUpFinish&&outUpFinish){
+                mContext.hideWaitingDialog();
+            }
+
+            for (RecordDataBean bean:dataBeenList){
+                if (bean.getType().equals("出：")){
+                    dataBeenList.remove(bean);
+                }
+            }
+            mAdapter.notifyDataSetChanged();
+
+            upRecordImg();
+        }
+    }
+
+
 }

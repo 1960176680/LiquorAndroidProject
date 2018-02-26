@@ -36,7 +36,6 @@ public class UpInRecordRequest {
         inUpBean.setPhoto(inBean.getImgstr());
         inUpBean.setRemark("");
         inUpBean.setPosition(inBean.getLocation());
-
         String meth = "WINECELLAR_MANAGER_INTO_LIBRARY"/*typeMeg*/;
         String jsonObject =gson.toJson(inUpBean);    /*"{\"userName\":\"123456\",\"password\":\"123456\"}"requestMeg  gson.toJson(user)*/
         String appsecret = "Do&9hY%l8e";

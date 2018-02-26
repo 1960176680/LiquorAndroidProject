@@ -1,6 +1,8 @@
 package com.hz.tt.mvp.presenter.impl;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
@@ -120,11 +122,39 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                     String status=item.getStatus();
                     if (status.equals("未上传")){
                         states.setTextColor(Color.RED);
-//                        delete_img.setVisibility(View.VISIBLE);
+                        delete_img.setVisibility(View.VISIBLE);
                     }else {
                         states.setTextColor(Color.GREEN);
+                        delete_img.setVisibility(View.INVISIBLE);
                     }
                     states.setText(status);
+                    delete_img.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setTitle("注意:删除操作");
+                            builder.setMessage("确定要删除吗？");
+                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    InBean inBean=datas.get(position);
+                                    InBeanDao inBeanDao=MyApp.getInstances().getDaoSession().getInBeanDao();
+                                    inBeanDao.delete(inBean);
+                                    datas.remove(position);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            });
+                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+
+
                     int size=datas.size();
                     num.setText(size-position+"");
                 }

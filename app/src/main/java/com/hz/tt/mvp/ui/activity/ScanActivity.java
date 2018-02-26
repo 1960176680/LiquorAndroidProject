@@ -1,5 +1,6 @@
 package com.hz.tt.mvp.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
@@ -14,7 +15,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.hz.tt.R;
-import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.mvp.presenter.impl.ScanAtPresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IScanAtView;
@@ -70,9 +70,9 @@ public class ScanActivity extends BaseActivity<IScanAtView, ScanAtPresenter> imp
     public void initView() {
         selectBottomOne(0);
         mIbToolbarMore.setVisibility(View.VISIBLE);
-        NetConstant.SCAN_RESULT_OUT="";
-        NetConstant.SCAN_RESULT_QUERY="";
-        NetConstant.SCAN_RESULT="";
+//        NetConstant.SCAN_RESULT_OUT="";
+//        NetConstant.SCAN_RESULT_QUERY="";
+//        NetConstant.SCAN_RESULT="";
     }
 
     @Override
@@ -208,18 +208,23 @@ public class ScanActivity extends BaseActivity<IScanAtView, ScanAtPresenter> imp
     private void handleResult(String result) {
         LogUtils.sf("扫描结果:" + result);
         vibrate();
-//        周文广
-        String type=getIntent().getStringExtra("flag");
-        if (type.equals("out")){
-            NetConstant.SCAN_RESULT_OUT="";
-            NetConstant.SCAN_RESULT_OUT=result.trim();
-        }else if (type.equals("query")){
-            NetConstant.SCAN_RESULT_QUERY="";
-            NetConstant.SCAN_RESULT_QUERY=result.trim();
-        }else if(type.equals("in")){
-            NetConstant.SCAN_RESULT="";
-            NetConstant.SCAN_RESULT=result.trim();
-        }
+
+        Intent intent=new Intent();
+        intent.putExtra("result",result.trim());
+        setResult(Activity.RESULT_OK,intent);
+
+////        周文广
+//        String type=getIntent().getStringExtra("flag");
+//        if (type.equals("out")){
+//            NetConstant.SCAN_RESULT_OUT="";
+//            NetConstant.SCAN_RESULT_OUT=result.trim();
+//        }else if (type.equals("query")){
+//            NetConstant.SCAN_RESULT_QUERY="";
+//            NetConstant.SCAN_RESULT_QUERY=result.trim();
+//        }else if(type.equals("in")){
+//            NetConstant.SCAN_RESULT="";
+//            NetConstant.SCAN_RESULT=result.trim();
+//        }
         finish();
 
         mZxingview.startSpot();

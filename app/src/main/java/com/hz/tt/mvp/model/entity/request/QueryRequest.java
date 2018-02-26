@@ -21,7 +21,7 @@ public class QueryRequest {
     }
     public String getUrl() {
         Gson gson=new Gson();
-        String meth = "WINECELLAR_MANAGER_QUERY_STOCKRECORD"/*typeMeg*/;
+        String meth = "WINECELLAR_MANAGER_QUERY_LIBRARY"/*typeMeg*/;
         String jsonObject =gson.toJson(bean);    /*"{\"userName\":\"123456\",\"password\":\"123456\"}"requestMeg  gson.toJson(user)*/
         String appsecret = "Do&9hY%l8e";
         String md5 = "";

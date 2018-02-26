@@ -48,6 +48,10 @@ public class LoginActivity extends BaseActivity<LoginAtView, LoginAtPresenter> i
 
     @Override
     public void init() {
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+            return;
+        }
         PermissionGen.with(this)
                 .addRequestCode(100)
                 .permissions(

@@ -61,7 +61,7 @@
             android:scaleType="fitXY"
             android:visibility="invisible"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/de_le"
+            android:src="@mipmap/ic_delete"
             />
     </LinearLayout>
 </LinearLayout>

@@ -1,28 +1,24 @@
 package com.hz.tt.mvp.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
-import com.hz.tt.api.okHttpUtils.NetConstant;
-import com.hz.tt.app.MyApp;
-import com.hz.tt.greendao.gen.InBeanDao;
-import com.hz.tt.mvp.model.entity.InBean;
 import com.hz.tt.mvp.presenter.impl.ContactsFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IContactsFgView;
-import com.hz.tt.util.UIUtils;
 import com.hz.tt.widget.MyListViewInScrollView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.Bind;
 
@@ -68,6 +64,23 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Bind(R.id.rvRecentMessage)
     MyListViewInScrollView rvRecentMessage;
 
+
+    @Bind(R.id.tvRecPerson)
+    TextView tvRecPerson;
+    @Bind(R.id.tvRecTime)
+    TextView tvRecTime;
+    @Bind(R.id.tvExtra)
+    TextView tvExtra;
+    @Bind(R.id.etNum)
+    EditText etNum;
+    @Bind(R.id.btnSwitch)
+    Button btnSwitch;
+    @Bind(R.id.ivImg)
+    ImageView ivImg;
+
+    private final int REQUEST_OUT=1;
+
+
     @Override
     public void initView(View rootView) {
 
@@ -80,23 +93,57 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 
     @Override
     public void initListener() {
+        et_scan.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                mPresenter.query();
+                return true;
+            }
+            return false;
+        });
+
+
+
         iv_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),ScanActivity.class);
-                intent.putExtra("flag","out");
-                ((MainActivity) ContactsFragment.this.getActivity()).jumpToActivity(intent);
+                startActivityForResult(intent,REQUEST_OUT);
+//                intent.putExtra("flag","out");
+//                ((MainActivity) ContactsFragment.this.getActivity()).jumpToActivity(intent);
+            }
+        });
+        btnSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text=btnSwitch.getText().toString();
+                if (text.equals("出库")){
+                    btnSwitch.setText("入库");
+                    tvRecPerson.setText("入库员：");
+                    tvRecTime.setText("入库时间：");
+                    tvExtra.setText("当前位置：");
+                }else {
+                    btnSwitch.setText("出库");
+                    tvRecPerson.setText("接收人：");
+                    tvRecTime.setText("接收时间：");
+                    tvExtra.setText("备注：");
+                }
             }
         });
 
 
+
+
+
+
+
         btn_add.setOnClickListener(v -> {
-            InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
-            List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(et_scan.getText().toString())).build().list();
-            if (list==null||list.size()==0){
-                UIUtils.showToast("无此商品");
-                return;
-            }
+//            InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+//            List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(et_scan.getText().toString())).build().list();
+//            if (list==null||list.size()==0){
+//                UIUtils.showToast("无此商品");
+//                return;
+//            }
+
 
             addRecordOk=mPresenter.addRecord();
             if (addRecordOk){
@@ -111,6 +158,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
                 tv_year.setText("");
                 tv_num.setText("");
                 tv_position.setText("");
+                etNum.setText("");
 
             }
         });
@@ -121,8 +169,6 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
                 mPresenter.upRecord();
             }
         });
-
-
     }
 
     @Override
@@ -140,9 +186,22 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         return new ContactsFgPresenter((MainActivity) getActivity());
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==Activity.RESULT_OK){
+            String result=data.getStringExtra("result");
+            et_scan.setText(result);
+            et_scan.setSelection(et_scan.getText().toString().trim().length());
+//            查询该条数据网络值
+            mPresenter.query();
+        }
+    }
+
     @Override
     protected int provideContentViewId() {
-        return R.layout.fragment_out;
+        return R.layout.fragment_out1;
     }
 
     @Override
@@ -150,29 +209,31 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         super.onResume();
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         tv_rec_time.setText(dateFormat.format(new Date()));
-        if (!NetConstant.SCAN_RESULT_OUT.equals("")){
-            et_scan.setText(NetConstant.SCAN_RESULT_OUT);
-            InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
-            List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(NetConstant.SCAN_RESULT_OUT.trim())).build().list();
-            if (list==null||list.size()==0){
-                return;
-            }
-            InBean inBean=list.get(0);
-            String type=inBean.getType();
-            String Country=inBean.getCountry();
-            String Birthday=inBean.getBirthday();
-            String Capacity=inBean.getCapacity();
-            String Year=inBean.getYear();
-            String Number=inBean.getNumber();
-            String Location=inBean.getLocation();
-            tv_type.setText(type);
-            tv_country.setText(Country);
-            tv_birthplace.setText(Birthday);
-            tv_capacity.setText(Capacity);
-            tv_year.setText(Year);
-            tv_num.setText(Number);
-            tv_position.setText(Location);
-        }
+
+
+//        if (!NetConstant.SCAN_RESULT_OUT.equals("")){
+//            et_scan.setText(NetConstant.SCAN_RESULT_OUT);
+//            InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
+//            List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(NetConstant.SCAN_RESULT_OUT.trim())).build().list();
+//            if (list==null||list.size()==0){
+//                return;
+//            }
+//            InBean inBean=list.get(0);
+//            String type=inBean.getType();
+//            String Country=inBean.getCountry();
+//            String Birthday=inBean.getBirthday();
+//            String Capacity=inBean.getCapacity();
+//            String Year=inBean.getYear();
+//            String Number=inBean.getNumber();
+//            String Location=inBean.getLocation();
+//            tv_type.setText(type);
+//            tv_country.setText(Country);
+//            tv_birthplace.setText(Birthday);
+//            tv_capacity.setText(Capacity);
+//            tv_year.setText(Year);
+//            tv_num.setText(Number);
+//            tv_position.setText(Location);
+//        }
     }
 
     @Override
@@ -193,6 +254,11 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public EditText getRemak() {
         return et_remark;
+    }
+
+    @Override
+    public Button getDoType() {
+        return btnSwitch;
     }
 
     @Override
@@ -228,6 +294,16 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public TextView getPosition() {
         return tv_position;
+    }
+
+    @Override
+    public EditText getOutNum() {
+        return etNum;
+    }
+
+    @Override
+    public ImageView getImgV() {
+        return ivImg;
     }
 
     @Override

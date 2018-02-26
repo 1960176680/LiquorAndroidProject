@@ -1,5 +1,6 @@
 package com.hz.tt.mvp.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
-import com.hz.tt.api.okHttpUtils.NetConstant;
 import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.impl.RecentMessageFgPresenter;
 import com.hz.tt.mvp.ui.activity.CameraActivity;
@@ -46,6 +46,7 @@ import io.reactivex.schedulers.Schedulers;
  * @描述 最近会话列表界面
  */
 public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, RecentMessageFgPresenter> implements IRecentMessageFgView {
+    private final int REQUEST_IN = 0;
     private  Bitmap showBitmap;
     private boolean isFirst = true;
     private String truepath;
@@ -114,11 +115,6 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 
     @Override
     public void init() {
-//        registerBR();
-
-
-
-
     }
 
     @Override
@@ -136,8 +132,11 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         iv_capacity.setOnClickListener(v -> selectDialog("capacity"));
         iv_scan.setOnClickListener(v -> {
             Intent intent=new Intent(this.getActivity(),ScanActivity.class);
-            intent.putExtra("flag","in");
-            ((MainActivity) getActivity()).jumpToActivity(intent);
+//            intent.putExtra("flag","in");
+//            ((MainActivity) getActivity()).jumpToActivity(intent);
+
+            startActivityForResult(intent,REQUEST_IN);
+
         });
         btn_picture.setOnClickListener(v -> {
             startActivityForResult(new Intent(getActivity(), CameraActivity.class), 100);
@@ -181,9 +180,9 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Override
     public void onResume() {
         super.onResume();
-        if (!NetConstant.SCAN_RESULT.equals("")){
-            et_scan.setText(NetConstant.SCAN_RESULT);
-        }
+//        if (!NetConstant.SCAN_RESULT.equals("")){
+//            et_scan.setText(NetConstant.SCAN_RESULT);
+//        }
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         tv_time.setText(dateFormat.format(new Date()));
 
@@ -248,6 +247,13 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         if (resultCode == 103) {
 //            Toast.makeText(this, "请检查相机权限~", Toast.LENGTH_SHORT).show();
         }
+
+//        扫描条码
+        if (requestCode==0&&resultCode== Activity.RESULT_OK){
+            String result=data.getStringExtra("result");
+            et_scan.setText(result);
+        }
+
     }
 
 
