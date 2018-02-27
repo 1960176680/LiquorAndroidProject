@@ -9,6 +9,7 @@ import com.hz.tt.mvp.model.entity.response.QueryResponseSingle;
 import com.hz.tt.mvp.presenter.impl.RecordDetailAtPresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IRecordDetailAtView;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import butterknife.Bind;
 
@@ -49,14 +50,19 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
     TextView tvUpTime;
     @Bind(R.id.ivImg)
     ImageView ivImg;
+    @Bind(R.id.lineOut)
+    AutoLinearLayout lineOut;
+
     private QueryResponseSingle outBean;
 
     @Override
     public void initView() {
+        setToolbarTitle("记录详情");
         outBean=getIntent().getParcelableExtra("bean");
         if (outBean.getOperation().equals("入库")){
-            tvOutpersonLable.setVisibility(View.GONE);
-            tvOutperson.setVisibility(View.GONE);
+            lineOut.setVisibility(View.GONE);
+//            tvOutpersonLable.setVisibility(View.GONE);
+//            tvOutperson.setVisibility(View.GONE);
             tvRecPersonLable.setText("入库员：");
             tvRecTimeLable.setText("入库时间：");
             ivImg.setVisibility(View.VISIBLE);
