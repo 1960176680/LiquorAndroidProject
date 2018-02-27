@@ -1,11 +1,58 @@
 package com.hz.tt.mvp.model.entity.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2018-02-12.
  */
 
-public class QueryResponseSingle {
+public class QueryResponseSingle implements Parcelable{
     private String recordCode;
+
+    protected QueryResponseSingle(Parcel in) {
+        recordCode = in.readString();
+        operation = in.readString();
+        category = in.readString();
+        country = in.readString();
+        origin = in.readString();
+        volume = in.readString();
+        productiveYear = in.readString();
+        countNum = in.readString();
+        intoDate = in.readString();
+        intoCustomer = in.readString();
+        position = in.readString();
+        outRecordSource = in.readString();
+        outRecordDate = in.readString();
+        outDate = in.readString();
+        outCustomer = in.readString();
+        receiveCustomer = in.readString();
+        photo = in.readString();
+        receiveDate = in.readString();
+        remark = in.readString();
+    }
+
+    public static final Creator<QueryResponseSingle> CREATOR = new Creator<QueryResponseSingle>() {
+        @Override
+        public QueryResponseSingle createFromParcel(Parcel in) {
+            return new QueryResponseSingle(in);
+        }
+
+        @Override
+        public QueryResponseSingle[] newArray(int size) {
+            return new QueryResponseSingle[size];
+        }
+    };
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    private String operation;
     private String category;
     private String country;
     private String origin;
@@ -132,4 +179,31 @@ public class QueryResponseSingle {
         this.remark = remark;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(recordCode);
+        dest.writeString(operation);
+        dest.writeString(category);
+        dest.writeString(country);
+        dest.writeString(origin);
+        dest.writeString(volume);
+        dest.writeString(productiveYear);
+        dest.writeString(countNum);
+        dest.writeString(intoDate);
+        dest.writeString(intoCustomer);
+        dest.writeString(position);
+        dest.writeString(outRecordSource);
+        dest.writeString(outRecordDate);
+        dest.writeString(outDate);
+        dest.writeString(outCustomer);
+        dest.writeString(receiveCustomer);
+        dest.writeString(photo);
+        dest.writeString(receiveDate);
+        dest.writeString(remark);
+    }
 }

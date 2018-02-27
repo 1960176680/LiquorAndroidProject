@@ -1,14 +1,14 @@
 package com.hz.tt.mvp.model.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * Created by Administrator on 2018-02-12.
  */
 @Entity
-public class OutBean {
+public class OutBean{
     @Id
     private Long id;
 
@@ -36,7 +36,6 @@ public class OutBean {
     private String remark;
 
     private String status;
-
     public String getStatus() {
         return this.status;
     }

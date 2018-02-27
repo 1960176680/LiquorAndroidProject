@@ -1,5 +1,6 @@
 package com.hz.tt.mvp.presenter.impl;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -9,10 +10,11 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.hz.tt.R;
 import com.hz.tt.api.okHttpUtils.OkHttpUtils;
-import com.hz.tt.mvp.model.entity.OutBean;
 import com.hz.tt.mvp.model.entity.request.QueryUpRequest;
 import com.hz.tt.mvp.model.entity.response.QueryResponse;
+import com.hz.tt.mvp.model.entity.response.QueryResponseSingle;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
+import com.hz.tt.mvp.ui.activity.RecordDetailActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IUpLoadFgView;
 import com.hz.tt.util.UIUtils;
@@ -28,8 +30,8 @@ import java.util.List;
  */
 
 public class UpLoadFgPresenter extends BasePresenter<IUpLoadFgView> {
-    private LQRAdapterForRecyclerView<OutBean> mAdapter;
-    private List<OutBean> datas= new ArrayList<>();
+    private LQRAdapterForRecyclerView<QueryResponseSingle> mAdapter;
+    private List<QueryResponseSingle> datas= new ArrayList<>();
 
     public UpLoadFgPresenter(BaseActivity context) {
         super(context);
@@ -39,9 +41,9 @@ public class UpLoadFgPresenter extends BasePresenter<IUpLoadFgView> {
 
     public void setAdapter() {
         if (mAdapter == null) {
-            mAdapter = new LQRAdapterForRecyclerView<OutBean>(mContext, datas, R.layout.list_item_upload) {
+            mAdapter = new LQRAdapterForRecyclerView<QueryResponseSingle>(mContext, datas, R.layout.list_item_upload) {
                 @Override
-                public void convert(LQRViewHolderForRecyclerView helper, OutBean item, int position) {
+                public void convert(LQRViewHolderForRecyclerView helper, QueryResponseSingle item, int position) {
                     RelativeLayout listitem=helper.getView(R.id.item);
                     TextView tvType = helper.getView(R.id.tvType);
                     TextView tvCode = helper.getView(R.id.tvCode);
@@ -58,7 +60,13 @@ public class UpLoadFgPresenter extends BasePresenter<IUpLoadFgView> {
                     listitem.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            tiao
+//                            跳转详情
+                            Intent intent=new Intent(mContext, RecordDetailActivity.class);
+                            intent.putExtra("bean",item);
+                            mContext.jumpToActivity(intent);
+
+
+
                         }
                     });
 
@@ -99,9 +107,9 @@ public class UpLoadFgPresenter extends BasePresenter<IUpLoadFgView> {
             if (code.equals("1000")) {
 //                QueryResponseSingle queryResponseSingle=gson.fromJson(response.getData(),QueryResponseSingle.class);
 
-                Type type = new TypeToken<ArrayList<OutBean>>()
+                Type type = new TypeToken<ArrayList<QueryResponseSingle>>()
                 {}.getType();
-                ArrayList<OutBean> jsonObjects = new Gson().fromJson(response.getData(), type);
+                ArrayList<QueryResponseSingle> jsonObjects = new Gson().fromJson(response.getData(), type);
                 datas.addAll(jsonObjects);
                 mAdapter.notifyDataSetChanged();
                 mContext.hideWaitingDialog();
