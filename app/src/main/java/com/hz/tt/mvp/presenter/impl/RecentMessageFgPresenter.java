@@ -170,10 +170,11 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             InBean bean=new InBean();
             IRecentMessageFgView view=getView();
             String Code=view.getCode().getText().toString().trim();
-            List<InBean> inBeens=MyApp.getInstances().getDaoSession().getInBeanDao().queryBuilder().where(InBeanDao.Properties.Code.eq(Code)).build().list();
+            List<InBean> inBeens=MyApp.getInstances().getDaoSession().getInBeanDao().queryBuilder().where(InBeanDao.Properties.Code.eq(Code),InBeanDao.Properties.Status.eq("未上传")).build().list();
             if (inBeens!=null&&inBeens.size()!=0){
-                UIUtils.showToast("该数据已存在");
-                return true;
+                inBeens.removeAll(inBeens);
+//                UIUtils.showToast("该数据已存在");
+//                return true;
             }
             String Person=view.getPerson().getText().toString().trim();
             String Time=view.getTime().getText().toString().trim();

@@ -159,6 +159,8 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
                 tv_num.setText("");
                 tv_position.setText("");
                 etNum.setText("");
+                ivImg.setImageResource(R.mipmap.ic_launcher);
+
 
             }
         });

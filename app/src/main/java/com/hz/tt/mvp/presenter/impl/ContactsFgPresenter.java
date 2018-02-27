@@ -251,17 +251,29 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
                 Type type = new TypeToken<ArrayList<QueryResponseSingle>>()
                 {}.getType();
                 ArrayList<QueryResponseSingle> jsonObjects = new Gson().fromJson(response.getData(), type);
+                if (jsonObjects.size()!=0){
+                    QueryResponseSingle queryResponseSingle=jsonObjects.get(0);
+                    getView().getType().setText(queryResponseSingle.getCategory());
+                    getView().getCountry().setText(queryResponseSingle.getCountry());
+                    getView().getBirthday().setText(queryResponseSingle.getOrigin());
+                    getView().getCapacity().setText(queryResponseSingle.getVolume());
+                    getView().getYear().setText(queryResponseSingle.getProductiveYear());
+                    getView().getNum().setText(queryResponseSingle.getCountNum());
+                    getView().getPosition().setText(queryResponseSingle.getPosition());
+
+//                    Bitmap bitmap = ((BitmapDrawable) getView().getImgV().getDrawable()).getBitmap();
+//                    getView().getImgV().setImageResource(R.mipmap.ic_launcher);
+//                    if (bitmap != null && !bitmap.isRecycled()){
+//                        bitmap.recycle();
+//                        bitmap = null;
+//                    }
+                    Glide.with(mContext).load("http://121.43.167.170:8001/Wine/"+queryResponseSingle.getPhoto()).centerCrop().into(getView().getImgV());
+                }else {
+                    UIUtils.showToast("无此商品信息，请新增！");
+                    mContext.speechUtil.speakXunFei("无此商品信息");
+                }
 //                datas.addAll(jsonObjects);
 //                mAdapter.notifyDataSetChanged();
-                QueryResponseSingle queryResponseSingle=jsonObjects.get(0);
-                getView().getType().setText(queryResponseSingle.getCategory());
-                getView().getCountry().setText(queryResponseSingle.getCountry());
-                getView().getBirthday().setText(queryResponseSingle.getOrigin());
-                getView().getCapacity().setText(queryResponseSingle.getVolume());
-                getView().getYear().setText(queryResponseSingle.getProductiveYear());
-                getView().getNum().setText(queryResponseSingle.getCountNum());
-                getView().getPosition().setText(queryResponseSingle.getPosition());
-                Glide.with(mContext).load("http://121.43.167.170:8001/Wine/"+queryResponseSingle.getPhoto()).centerCrop().into(getView().getImgV());
 
                 mContext.hideWaitingDialog();
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());

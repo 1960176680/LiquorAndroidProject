@@ -1,5 +1,8 @@
 package com.hz.tt.mvp.presenter.impl;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,6 +96,44 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
                     ImageView ivDel = helper.getView(R.id.iv_delete);
                     type.setText(item.getType());
                     danHao.setText(item.getcode());
+
+                    ivDel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setTitle("注意:删除操作");
+                            builder.setMessage("确定要删除吗？");
+                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    RecordDataBean recordDataBean=datas.get(position);
+                                    if (recordDataBean.getType().equals("入：")){
+                                        InBeanDao inBeanDao=MyApp.getInstances().getDaoSession().getInBeanDao();
+                                        InBean bean=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(recordDataBean.getcode()),InBeanDao.Properties.Status.eq("未上传")).build().unique();
+                                        inBeanDao.delete(bean);
+                                    }else{
+                                        OutBeanDao outBeanDao=MyApp.getInstances().getDaoSession().getOutBeanDao();
+                                        OutBean bean=outBeanDao.queryBuilder().where(OutBeanDao.Properties.RecordCode.eq(recordDataBean.getcode()),OutBeanDao.Properties.Status.eq("未上传")).build().unique();
+                                        outBeanDao.delete(bean);
+                                    }
+                                    datas.remove(position);
+                                    getView().getVCount().setText(String.valueOf(datas.size()));
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            });
+                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.show();
+
+                        }
+                    });
+
+
+
 
 
 //                    if (status.equals("未上传")){
@@ -205,12 +246,18 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
             if (inUpFinish&&outUpFinish){
                 mContext.hideWaitingDialog();
             }
-            for (RecordDataBean bean:dataBeenList){
-                if (bean.getType().equals("入：")){
-                    dataBeenList.remove(bean);
+
+            if (inBeanList.size()==0){
+                List<RecordDataBean> tempList=new ArrayList<>();
+                for (RecordDataBean bean:dataBeenList){
+                    if (bean.getType().equals("入：")){
+                        tempList.add(bean);
+                    }
                 }
+                dataBeenList.removeAll(tempList);
+                getView().getVCount().setText(String.valueOf(dataBeenList.size()));
+                mAdapter.notifyDataSetChanged();
             }
-            mAdapter.notifyDataSetChanged();
         }
     }
     public void upRecord(){
@@ -316,6 +363,7 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
 //                    UserCache.save(loginResponse.getResult().getId(), phone, loginResponse.getResult().getToken());
 //                    removeDatas.add(0,datas.get(0));
                     outBeanList.remove(0);
+
                     upOutRecord();
                 } else {
                     mContext.speechUtil.speakXunFei(response.getErrorMsg());
@@ -337,14 +385,17 @@ public class UnUpLoadFgPresenter extends BasePresenter<IUnUpLoadFgView> {
             if (inUpFinish&&outUpFinish){
                 mContext.hideWaitingDialog();
             }
-
-            for (RecordDataBean bean:dataBeenList){
-                if (bean.getType().equals("出：")){
-                    dataBeenList.remove(bean);
+            if (outBeanList.size()==0){
+                List<RecordDataBean> tempList=new ArrayList<>();
+                for (RecordDataBean bean:dataBeenList){
+                    if (bean.getType().equals("出：")){
+                        tempList.add(bean);
+                    }
                 }
+                dataBeenList.removeAll(tempList);
+                getView().getVCount().setText(String.valueOf(dataBeenList.size()));
+                mAdapter.notifyDataSetChanged();
             }
-            mAdapter.notifyDataSetChanged();
-
             upRecordImg();
         }
     }

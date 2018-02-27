@@ -11,6 +11,7 @@ import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IUpLoadFgView;
 import com.hz.tt.util.UIUtils;
 import com.hz.tt.util.Util;
+import com.lqr.recyclerview.LQRRecyclerView;
 import com.zhouwenguang.timeselector.widget.TimeSelector;
 
 import java.text.ParseException;
@@ -29,12 +30,13 @@ public class UpLoadDataFragment extends BaseFragment<IUpLoadFgView, UpLoadFgPres
     RelativeLayout relaStartdate;
     @Bind(R.id.tv_date)
     TextView tv_date;
-
+    @Bind(R.id.recyclerView)
+    LQRRecyclerView recyclerView;
     private String currentDate="";
 
     @Override
     public void initView(View rootView) {
-
+        mPresenter.setAdapter();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class UpLoadDataFragment extends BaseFragment<IUpLoadFgView, UpLoadFgPres
                                 return;
                             }
                             tv_date.setText(time);
-//                            queryUploadData(time);
+                            mPresenter.queryData();
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -69,13 +71,18 @@ public class UpLoadDataFragment extends BaseFragment<IUpLoadFgView, UpLoadFgPres
 
     @Override
     public void initData() {
-
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String time=dateFormat.format(new Date());
+        tv_date.setText(time);
+        mPresenter.queryData();
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
          if (isVisibleToUser){
-
+             if (mPresenter!=null){
+                 mPresenter.queryData();
+             }
          }
     }
 
@@ -97,5 +104,15 @@ public class UpLoadDataFragment extends BaseFragment<IUpLoadFgView, UpLoadFgPres
     @Override
     protected int provideContentViewId() {
         return R.layout.fragment_uprecord;
+    }
+
+    @Override
+    public TextView getTimeV() {
+        return tv_date;
+    }
+
+    @Override
+    public LQRRecyclerView getRvRecyclerView() {
+        return recyclerView;
     }
 }
