@@ -22,6 +22,7 @@ import com.hz.tt.mvp.ui.adapter.CommonFragmentPagerAdapter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.fragment.ContactsFragment;
+import com.hz.tt.mvp.ui.fragment.DiscoveryFragment;
 import com.hz.tt.mvp.ui.fragment.FragmentFactory;
 import com.hz.tt.mvp.ui.fragment.RecentMessageFragment;
 import com.hz.tt.mvp.ui.view.IMainAtView;
@@ -340,6 +341,11 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
             case 2:
                 mIbAddMenu.setVisibility(View.GONE);
                 setToolbarTitle(UIUtils.getString(R.string.tv_title_query));
+//清空列表数据
+                ((DiscoveryFragment) mFragmentList.get(2)).clearAllData();
+
+
+
                 tvDiscoveryNormal.getBackground().setAlpha(diaphaneity_one);
                 tvDiscoveryPress.getBackground().setAlpha(diaphaneity_two);
                 tvMeNormal.getBackground().setAlpha(diaphaneity_two);

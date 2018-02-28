@@ -124,6 +124,19 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 
             String recordCode=view.getCode().getText().toString().trim();
             String operation=view.getDoType().getText().toString().trim();
+            if (operation.equals("出库")){
+                int totalNum=Integer.valueOf(view.getNum().getText().toString());
+                int outNum=Integer.valueOf(view.getOutNum().getText().toString());
+                if (outNum>totalNum){
+                    UIUtils.showToast("出库数量大于当前库存！");
+                    return false;
+                }else if (outNum<=0){
+                    UIUtils.showToast("出库数量必须大于0！");
+                    return false;
+                }
+
+            }
+
             String position=view.getPosition().getText().toString().trim();
             String outRecordSource="出库指令来自";
             String outRecordDate="2000-00-00 00:00:00";
@@ -139,7 +152,6 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
                     &&!receiveDate.equals("")
                     &&!recordCode.equals("")
                     &&!countNum.equals("")
-                    &&!remark.equals("")
                     )
             {
                 bean.setRecordCode(recordCode);

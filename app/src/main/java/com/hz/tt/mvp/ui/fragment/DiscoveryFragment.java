@@ -95,6 +95,15 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
 //        mOivGame.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.GAME));
     }
 
+
+    public void clearAllData(){
+        et_country.setText("");
+        et_birthplace.setText("");
+        et_type.setText("");
+        et_capacity.setText("");
+        et_year.setText("");
+        mPresenter.clearAllData();
+    }
     @Override
     protected DiscoveryFgPresenter createPresenter() {
         return new DiscoveryFgPresenter((MainActivity) getActivity());

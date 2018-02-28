@@ -252,6 +252,9 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
         if (requestCode==0&&resultCode== Activity.RESULT_OK){
             String result=data.getStringExtra("result");
             et_scan.setText(result);
+
+            //            查询该条数据网络值
+            mPresenter.query();
         }
 
     }

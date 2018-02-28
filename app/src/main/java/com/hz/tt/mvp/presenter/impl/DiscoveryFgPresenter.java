@@ -29,7 +29,13 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
         super(context);
     }
 
-
+    /**
+     * 清空界面列表
+     */
+    public void clearAllData(){
+        datas.clear();
+        mAdapter.notifyDataSetChanged();
+    }
     public void query() {
         datas.clear();
         mAdapter.notifyDataSetChanged();
