@@ -74,9 +74,17 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
         if (outBean!=null){
             if (outBean.getOperation().equals("出库")){
                 tvOutperson.setText(outBean.getOutCustomer());
-            }
+
                 tvRecPerson.setText(outBean.getReceiveCustomer());
+                tvRecTime.setText(outBean.getOutDate());
+                tvUpTime.setText(outBean.getOutDate());
+            }else{
+                tvRecPerson.setText(outBean.getIntoCustomer());
                 tvRecTime.setText(outBean.getIntoDate());
+                tvUpTime.setText(outBean.getIntoDate());
+            }
+
+
                 tv_type.setText(outBean.getCategory());
                 tv_country.setText(outBean.getCountry());
                 tv_birthplace.setText(outBean.getOrigin());
@@ -84,7 +92,7 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
                 tv_year.setText(outBean.getProductiveYear());
                 tv_num.setText(outBean.getCountNum());
                 tv_position.setText(outBean.getPosition());
-                tvUpTime.setText(outBean.getIntoDate());
+
         }
 
 

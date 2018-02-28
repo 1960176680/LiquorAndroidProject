@@ -124,16 +124,32 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 
             String recordCode=view.getCode().getText().toString().trim();
             String operation=view.getDoType().getText().toString().trim();
+
+
+            int totalNum=0;
+            if (!view.getNum().getText().toString().trim().equals("")){
+                totalNum=Integer.valueOf(view.getNum().getText().toString());
+            }else{
+                UIUtils.showToast("请检查是否获取该商品的网络信息，手动输入的单号请按回车键！");
+                return false;
+            }
+
+
             if (operation.equals("出库")){
-                int totalNum=Integer.valueOf(view.getNum().getText().toString());
-                int outNum=Integer.valueOf(view.getOutNum().getText().toString());
-                if (outNum>totalNum){
-                    UIUtils.showToast("出库数量大于当前库存！");
-                    return false;
-                }else if (outNum<=0){
-                    UIUtils.showToast("出库数量必须大于0！");
+                if (!view.getOutNum().getText().toString().trim().equals("")){
+                    int outNum=Integer.valueOf(view.getOutNum().getText().toString());
+                    if (outNum>totalNum){
+                        UIUtils.showToast("出库数量大于当前库存！");
+                        return false;
+                    }else if (outNum<=0){
+                        UIUtils.showToast("出库数量必须大于0！");
+                        return false;
+                    }
+                }else {
+                    UIUtils.showToast("请检查必填数据不能为空！");
                     return false;
                 }
+
 
             }
 
@@ -162,12 +178,11 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
                 if (operation.equals("出库")){
                     bean.setOutDate(outDate);
                     bean.setOutCustomer(outCustomer);
+                    bean.setReceiveCustomer(receiveCustomer);
                     bean.setRemark(remark);
                 }
 
                 if (operation.equals("入库")){
-                    bean.setReceiveCustomer(receiveCustomer);
-                    bean.setReceiveDate(receiveDate);
                     bean.setIntoDate(intoDate);
                     bean.setIntoCustomer(intoCustomer);
                 }

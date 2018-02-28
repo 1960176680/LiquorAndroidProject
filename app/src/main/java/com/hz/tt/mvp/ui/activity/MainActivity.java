@@ -285,25 +285,32 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                     timeIn.setText(dateFormat.format(new Date()));
                 }
 //              清空界面
+                EditText etCode=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_scan));
                 EditText etType=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_type));
                 EditText etCountry=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_country));
                 EditText etBirthplace=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_birthplace));
                 EditText etCapacity=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_capacity));
                 EditText etYear=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_year));
                 EditText etNum=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_num));
+                EditText location=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_location));
+
                 if (etType!=null
                         &&etCountry!=null
                         &&etBirthplace!=null
                         &&etCapacity!=null
                         &&etYear!=null
                         &&etNum!=null
+                        &&location!=null
+                        &&etCode!=null
                         ){
+                    etCode.setText("");
                     etType.setText("");
                     etCountry.setText("");
                     etBirthplace.setText("");
                     etCapacity.setText("");
                     etYear.setText("");
                     etNum.setText("");
+                    location.setText("");
                 }
 
 
@@ -327,7 +334,37 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                     timeOut.setText(dateFormat.format(new Date()));
                 }
 
-//                ((TextView) mFragmentList.get(1).getView().findViewById(R.id.tv_rec_time)).setText(dateFormat.format(new Date()));
+                //                清空字段
+                //              清空界面
+//                EditText etCode=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_scan));
+//                EditText etType=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_type));
+//                EditText etCountry=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_country));
+//                EditText etBirthplace=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_birthplace));
+//                EditText etCapacity=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_capacity));
+//                EditText etYear=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_year));
+//                EditText etNum=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_num));
+//                EditText location=((EditText) mFragmentList.get(1).getView().findViewById(R.id.et_location));
+//
+//                if (etType!=null
+//                        &&etCountry!=null
+//                        &&etBirthplace!=null
+//                        &&etCapacity!=null
+//                        &&etYear!=null
+//                        &&etNum!=null
+//                        &&location!=null
+//                        &&etCode!=null
+//                        ){
+//                    etCode.setText("");
+//                    etType.setText("");
+//                    etCountry.setText("");
+//                    etBirthplace.setText("");
+//                    etCapacity.setText("");
+//                    etYear.setText("");
+//                    etNum.setText("");
+//                    location.setText("");
+//                }
+
+
 
                 tvContactsNormal.getBackground().setAlpha(diaphaneity_one);
                 tvContactsPress.getBackground().setAlpha(diaphaneity_two);

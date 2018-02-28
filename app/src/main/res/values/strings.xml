@@ -26,8 +26,8 @@
     <string name="tv_query">查询</string>
     <string name="tv_more">更多</string>
 
-    <string name="tv_title_in">商品入库</string>
-    <string name="tv_title_out">商品出库</string>
+    <string name="tv_title_in">商品新增</string>
+    <string name="tv_title_out">商品登记</string>
     <string name="tv_title_query">商品查询</string>
     <string name="tv_title_more">更多</string>
 

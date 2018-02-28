@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hz.tt.R;
+import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.impl.ContactsFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.ScanActivity;
@@ -119,11 +120,15 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
                 if (text.equals("出库")){
                     btnSwitch.setText("入库");
                     tvRecPerson.setText("入库员：");
+                    et_rec_person.setText(UserCache.getPhone());
+                    et_rec_person.setEnabled(false);
                     tvRecTime.setText("入库时间：");
                     tvExtra.setText("当前位置：");
                 }else {
                     btnSwitch.setText("出库");
                     tvRecPerson.setText("接收人：");
+                    et_rec_person.setEnabled(true);
+                    et_rec_person.setText("");
                     tvRecTime.setText("接收时间：");
                     tvExtra.setText("备注：");
                 }
@@ -179,6 +184,19 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 
     }
     public void clearAllData(){
+        et_rec_person.setText("");
+        et_scan.setText("");
+        et_remark.setText("");
+        tv_type.setText("");
+        tv_country.setText("");
+        tv_birthplace.setText("");
+        tv_capacity.setText("");
+        tv_year.setText("");
+        tv_num.setText("");
+        tv_position.setText("");
+        etNum.setText("");
+        ivImg.setImageResource(R.mipmap.ic_launcher);
+
         mPresenter.clearAllData();
     }
 

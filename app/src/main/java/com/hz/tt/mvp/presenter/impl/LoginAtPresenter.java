@@ -85,6 +85,7 @@ public class LoginAtPresenter extends BasePresenter<LoginAtView> {
 //                mContext.jumpToActivityAndClearTop(MainActivity.class);
 //                mContext.finish();
             } else {
+                mContext.speechUtil.speakXunFei("登录失败");
                 loginError(new ServerException(UIUtils.getString(R.string.login_error) + code));
             }
         }));
