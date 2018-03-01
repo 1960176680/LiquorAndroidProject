@@ -87,8 +87,15 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aBoolean -> {
-                        ((MainActivity) getActivity()).hideWaitingDialog();
-                         disposable.dispose();
+                        mPresenter.showTipDialog();
+                        if (aBoolean){
+                            UIUtils.showToast("导出数据成功！");
+                            ((MainActivity) getActivity()).hideWaitingDialog();
+                            disposable.dispose();
+                        }else{
+                            UIUtils.showToast("无数据导出！");
+                        }
+
                     });
         });
 

@@ -1,5 +1,7 @@
 package com.hz.tt.mvp.presenter.impl;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -101,9 +103,34 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
             String[] arr=datas.get(i).toString().split("#");
             excelArr[i]=arr;
         }
-        boolean isOk= WriteExcelUtils.writeExecleToFile(mContext,excelArr);
-        return isOk;
+        if (datas.size()!=0){
+            boolean isOk= WriteExcelUtils.writeExecleToFile(mContext,excelArr);
+            return isOk;
+        }
+
+        return false;
     }
+
+    public void showTipDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("注意:重要提示");
+        builder.setMessage("如果您已安装WPS等软件，点击界面打开按钮查看Excel数据；如果没有安装WPS等第三方软件，您可以切换到手机文件管理的文件目录，找到EXCEL_DIR文件夹查看！");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
+    }
+
 //    下面的废弃
     public void query1() {
         datas.clear();
