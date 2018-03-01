@@ -1,8 +1,6 @@
 package com.hz.tt;
 
 import android.util.Base64;
-
-import com.hz.tt.api.MyApi;
 import com.hz.tt.util.Md5Util;
 
 import org.junit.Test;
@@ -55,7 +53,7 @@ public class RegisterRequest {
             e.printStackTrace();
         }
 
-        url = MyApi.BASE_URL+"?msg_type=" + meth + "&data_digest=" + md5 + "&logistics_interface=" + ckey+"&appkey=123456";
+//        url = MyApi.BASE_URL+"?msg_type=" + meth + "&data_digest=" + md5 + "&logistics_interface=" + ckey+"&appkey=123456";
 //        return url;
     }
 

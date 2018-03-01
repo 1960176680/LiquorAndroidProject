@@ -15,6 +15,7 @@ import com.hz.tt.mvp.presenter.base.BasePresenter;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IDiscoveryFgView;
 import com.hz.tt.util.UIUtils;
+import com.hz.tt.util.excel.WriteExcelUtils;
 import com.lqr.adapter.LQRAdapterForRecyclerView;
 import com.lqr.adapter.LQRViewHolderForRecyclerView;
 
@@ -92,6 +93,16 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
 
         okHttpUtils.myEnqueue(new QueryRequest(queryBean).getUrl(), null);
 //            mAdapter.notifyDataSetChanged();
+    }
+
+    public boolean exportToExcel(){
+        String[][] excelArr=new String[datas.size()][];
+        for (int i=0;i<datas.size();i++){
+            String[] arr=datas.get(i).toString().split("#");
+            excelArr[i]=arr;
+        }
+        boolean isOk= WriteExcelUtils.writeExecleToFile(mContext,excelArr);
+        return isOk;
     }
 //    下面的废弃
     public void query1() {

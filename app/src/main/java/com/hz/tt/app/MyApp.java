@@ -37,6 +37,7 @@ public class MyApp extends Application {
 //        LeakCanary.install(this);
 
     }
+
     public static MyApp getInstances(){
         return instances;
     }

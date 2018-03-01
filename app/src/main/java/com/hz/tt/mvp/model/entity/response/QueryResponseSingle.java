@@ -206,4 +206,11 @@ public class QueryResponseSingle implements Parcelable{
         dest.writeString(receiveDate);
         dest.writeString(remark);
     }
+
+    @Override
+    public String toString() {
+        return recordCode+"#"+country+"#"
+                +origin+"#"+category+"#"
+                +countNum+"#"+position;
+    }
 }

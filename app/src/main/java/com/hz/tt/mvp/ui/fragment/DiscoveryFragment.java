@@ -4,16 +4,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.hz.tt.R;
 import com.hz.tt.mvp.presenter.impl.DiscoveryFgPresenter;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IDiscoveryFgView;
+import com.hz.tt.util.UIUtils;
+import com.hz.tt.util.excel.MyUtils;
 import com.hz.tt.widget.MyListViewInScrollView;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import butterknife.Bind;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @描述 发现界面
@@ -46,11 +53,13 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
     EditText et_year;
     @Bind(R.id.btn_query)
     Button btn_query;
-
-
+    @Bind(R.id.btnExport)
+    Button btnExport;
+    @Bind(R.id.btnOpen)
+    Button btnOpen;
 
     private boolean isVisiable=true;
-
+    private Disposable disposable;
 
     @Override
     public void initView(View rootView) {
@@ -60,39 +69,43 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
 
     @Override
     public void initListener() {
-        iv_pull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isVisiable){
-                    isVisiable=false;
-                    line_more.setVisibility(View.VISIBLE);
-                }else{
-                    isVisiable=true;
-                    line_more.setVisibility(View.GONE);
+        iv_pull.setOnClickListener(v -> {
+            if (isVisiable){
+                isVisiable=false;
+                line_more.setVisibility(View.VISIBLE);
+            }else{
+                isVisiable=true;
+                line_more.setVisibility(View.GONE);
+            }
+        });
+
+        btn_query.setOnClickListener(v -> mPresenter.query());
+
+        btnExport.setOnClickListener(v -> {
+            ((MainActivity) getActivity()).showWaitingDialog(UIUtils.getString(R.string.please_wait));
+            disposable = Observable.just(mPresenter.exportToExcel())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aBoolean -> {
+                        ((MainActivity) getActivity()).hideWaitingDialog();
+                         disposable.dispose();
+                    });
+        });
+
+
+        btnOpen.setOnClickListener(v -> {
+            if (MyUtils.FILE_PATH!=null){
+                try {
+                    MyUtils.openAssignFolder(getActivity(),MyUtils.FILE_PATH);
+                } catch (Exception e) {
+                    Toast toast = Toast.makeText(getActivity(), "没有找到打开该文件的应用程序", Toast.LENGTH_SHORT);
+                    toast.show();
+                    e.printStackTrace();
                 }
             }
         });
 
-        btn_query.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.query();
-            }
-        });
 
-//        Intent intent=new Intent(this.getActivity(),ScanActivity.class);
-//        intent.putExtra("flag","query");
-//        iv_scan.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(intent));
-//        iv_query.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mPresenter.query();
-//            }
-//        });
-
-
-//        mOivShop.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.JD));
-//        mOivGame.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToWebViewActivity(AppConst.WeChatUrl.GAME));
     }
 
 
