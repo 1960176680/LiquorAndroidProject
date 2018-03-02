@@ -106,7 +106,7 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
                 try {
                     MyUtils.openAssignFolder(getActivity(),MyUtils.FILE_PATH);
                 } catch (Exception e) {
-                    Toast toast = Toast.makeText(getActivity(), "没有找到打开该文件的应用程序", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getActivity(), "没有找到打开该文件的应用程序，请下载安装WPS等软件！", Toast.LENGTH_SHORT);
                     toast.show();
                     e.printStackTrace();
                 }
