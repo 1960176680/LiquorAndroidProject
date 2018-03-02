@@ -16,6 +16,8 @@ import com.hz.tt.util.excel.MyUtils;
 import com.hz.tt.widget.MyListViewInScrollView;
 import com.zhy.autolayout.AutoLinearLayout;
 
+import java.io.File;
+
 import butterknife.Bind;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -104,7 +106,9 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
         btnOpen.setOnClickListener(v -> {
             if (MyUtils.FILE_PATH!=null){
                 try {
-                    MyUtils.openAssignFolder(getActivity(),MyUtils.FILE_PATH);
+//                    MyUtils.openAssignFolder(getActivity(),MyUtils.FILE_PATH);
+                    File file=new File(MyUtils.FILE_PATH);
+                    MyUtils.startActionFile(getActivity(),file,"application/vnd.ms-excel");
                 } catch (Exception e) {
                     Toast toast = Toast.makeText(getActivity(), "没有找到打开该文件的应用程序，请下载安装WPS等软件！", Toast.LENGTH_SHORT);
                     toast.show();
