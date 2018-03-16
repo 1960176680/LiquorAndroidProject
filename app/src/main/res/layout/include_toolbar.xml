@@ -19,8 +19,9 @@
 
             <ImageView
                 android:id="@+id/ivToolbarNavigation"
-                android:layout_width="40px"
-                android:layout_height="40px"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="center"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
                 android:src="@mipmap/ic_back"/>
