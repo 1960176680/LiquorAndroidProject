@@ -12,16 +12,29 @@ android {
 
     defaultConfig {
         applicationId "com.hz.tt"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 26
-
-//      重要没有这个不能导出数据到Excel
+//      多包加载
         multiDexEnabled true
-
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+//    buildTypes {
+//        debug {
+//            minifyEnabled true
+//            useProguard true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+//                    'proguard-rules.pro'
+//        }
+//        release {
+//            shrinkResources true
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+//                    'proguard-rules.pro'
+//        }
+//    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -47,8 +60,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     testCompile 'junit:junit:4.12'
-    //    //多包加载避免ANR
-//        compile 'com.android.support:multidex:1.0.1'
+        //多包加载避免ANR
+//    compile 'com.android.support:multidex:1.0.1'
     //    //数据库组件
     //    compile 'org.litepal.android:core:1.5.0'
     //zhy组件
@@ -83,8 +96,7 @@ dependencies {
     compile project(':camera')
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.lovedise:permissiongen:0.0.6'
-    compile project(':datepicker')
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    compile 'com.zhou_wen_guang.datepicker:timeselector:1.0.1'
 
 }

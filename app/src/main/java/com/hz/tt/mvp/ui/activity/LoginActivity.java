@@ -43,6 +43,10 @@ public class LoginActivity extends BaseActivity<LoginAtView, LoginAtPresenter> i
 
     @Override
     public void initView() {
+//        MultiDexApplication
+
+
+
 //        mIbAddMenu.setVisibility(View.GONE);
     }
 

@@ -30,7 +30,7 @@ public class DateUtil {
     }
 
     /**
-     * 返回 yyyy-MM-dd HH:mm:ss格式日期时间
+     *  yyyy-MM-dd HH:mm:ss
      *
      * @param date
      * @return
@@ -40,9 +40,9 @@ public class DateUtil {
     }
 
     /**
-     * 返回 yyyy-MM-dd HH:mm:ss格式日期时间
+     *  yyyy-MM-dd HH:mm:ss
      *
-     * @param time 毫秒数
+     * @param time
      * @return
      */
     public static String formatDateTime(long time) {
@@ -73,11 +73,11 @@ public class DateUtil {
         }
         return DateUtil.format(date,"yyyy-MM-dd HH:mm:ss");
     }
-    /**
-     * 获取毫秒数
-     * @param dateTime (格式：yyyy-MM-dd HH:mm:ss)
-     * @return
-     */
+//    /**
+//     * 获取毫秒数
+//     * @param dateTime (格式：yyyy-MM-dd HH:mm:ss)
+//     * @return
+//     */
     public static String getLongTimeByYearMonthDay(String dateTime){
         String time = "";
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
@@ -89,9 +89,9 @@ public class DateUtil {
         return time;
     }
 
-    /**
-     * 获取时间差
-     */
+//    /**
+//     * 获取时间差
+//     */
     public static boolean isNeedFixTime(String serverTime, long resultTime){
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
         String now = DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss");
