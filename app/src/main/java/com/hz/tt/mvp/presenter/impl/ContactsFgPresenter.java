@@ -2,6 +2,7 @@ package com.hz.tt.mvp.presenter.impl;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
     private LQRAdapterForRecyclerView mAdapter;
     private List<OutBean> datas= new ArrayList<>();
     private List<OutBean> removeDatas= new ArrayList<>();
+    private String responseImgUrl;
     public ContactsFgPresenter(BaseActivity context) {
         super(context);
     }
@@ -54,6 +56,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
         datas.clear();
         removeDatas.clear();
         mAdapter.notifyDataSetChanged();
+        responseImgUrl=null;
     }
     public void getConversations() {
         setAdapter(datas);
@@ -250,8 +253,12 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
         }
 
     }
-
-    public void query() {
+    public void jumpActivity(Class activity){
+        Intent intent=new Intent(mContext,activity);
+        intent.putExtra("url",responseImgUrl);
+        mContext.jumpToActivity(intent);
+    }
+    public String query() {
         mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));
         OkHttpUtils okHttpUtils = OkHttpUtils.initClient();
         okHttpUtils.setOnResultListener(newstr1 -> mContext.runOnUiThread(() -> {
@@ -294,6 +301,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 //                        bitmap.recycle();
 //                        bitmap = null;
 //                    }
+                    responseImgUrl=queryResponseSingle.getPhoto();
                     Glide.with(mContext).load("http://121.43.167.170:8001/Wine/"+queryResponseSingle.getPhoto()).centerCrop().into(getView().getImgV());
                 }else {
                     UIUtils.showToast("无此商品信息，请新增！");
@@ -335,6 +343,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
 
 
 //            mAdapter.notifyDataSetChanged();
+        return responseImgUrl;
     }
 
 

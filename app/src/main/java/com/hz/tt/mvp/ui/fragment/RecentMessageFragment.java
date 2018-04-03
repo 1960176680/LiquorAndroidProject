@@ -113,6 +113,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     List<String> OriginList;
     List<String> VolumeList;
 
+
     @Override
     public void init() {
     }

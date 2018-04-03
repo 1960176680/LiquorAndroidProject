@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.hz.tt.R;
 import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.impl.ContactsFgPresenter;
+import com.hz.tt.mvp.ui.activity.ImgPreviewActivity;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.ScanActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
@@ -94,6 +95,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 
     @Override
     public void initListener() {
+        ivImg.setOnClickListener(v -> mPresenter.jumpActivity(ImgPreviewActivity.class));
         et_scan.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 mPresenter.query();
@@ -217,6 +219,10 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
 //            查询该条数据网络值
             mPresenter.query();
         }
+
+
+
+
     }
 
     @Override
