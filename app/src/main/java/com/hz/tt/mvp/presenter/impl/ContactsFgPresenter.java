@@ -257,6 +257,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
         Intent intent=new Intent(mContext,activity);
         intent.putExtra("url",responseImgUrl);
         mContext.jumpToActivity(intent);
+
     }
     public String query() {
         mContext.showWaitingDialog(UIUtils.getString(R.string.please_wait));

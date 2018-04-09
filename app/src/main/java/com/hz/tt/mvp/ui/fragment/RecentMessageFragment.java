@@ -41,10 +41,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
-/**
- * @描述 最近会话列表界面
- */
 public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, RecentMessageFgPresenter> implements IRecentMessageFgView {
     private final int REQUEST_IN = 0;
     private  Bitmap showBitmap;

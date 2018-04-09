@@ -59,7 +59,6 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
     private LQRAdapterForRecyclerView<InBean> mAdapter;
     private int mUnreadCountTotal = 0;
     private CustomDialog mConversationMenuDialog;
-
     public RecentMessageFgPresenter(BaseActivity context) {
         super(context);
         this.context = context;
