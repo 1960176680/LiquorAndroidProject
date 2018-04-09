@@ -79,7 +79,8 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     Button btnSwitch;
     @Bind(R.id.ivImg)
     ImageView ivImg;
-
+    @Bind(R.id.tvName)
+    TextView tvName;
     private final int REQUEST_OUT=1;
 
 
@@ -189,6 +190,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         et_rec_person.setText("");
         et_scan.setText("");
         et_remark.setText("");
+        tvName.setText("品名：");
         tv_type.setText("");
         tv_country.setText("");
         tv_birthplace.setText("");
@@ -235,31 +237,6 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         super.onResume();
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         tv_rec_time.setText(dateFormat.format(new Date()));
-
-
-//        if (!NetConstant.SCAN_RESULT_OUT.equals("")){
-//            et_scan.setText(NetConstant.SCAN_RESULT_OUT);
-//            InBeanDao inBeanDao = MyApp.getInstances().getDaoSession().getInBeanDao();
-//            List<InBean> list=inBeanDao.queryBuilder().where(InBeanDao.Properties.Code.eq(NetConstant.SCAN_RESULT_OUT.trim())).build().list();
-//            if (list==null||list.size()==0){
-//                return;
-//            }
-//            InBean inBean=list.get(0);
-//            String type=inBean.getType();
-//            String Country=inBean.getCountry();
-//            String Birthday=inBean.getBirthday();
-//            String Capacity=inBean.getCapacity();
-//            String Year=inBean.getYear();
-//            String Number=inBean.getNumber();
-//            String Location=inBean.getLocation();
-//            tv_type.setText(type);
-//            tv_country.setText(Country);
-//            tv_birthplace.setText(Birthday);
-//            tv_capacity.setText(Capacity);
-//            tv_year.setText(Year);
-//            tv_num.setText(Number);
-//            tv_position.setText(Location);
-//        }
     }
 
     @Override
@@ -330,6 +307,11 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public ImageView getImgV() {
         return ivImg;
+    }
+
+    @Override
+    public TextView getName() {
+        return tvName;
     }
 
     @Override

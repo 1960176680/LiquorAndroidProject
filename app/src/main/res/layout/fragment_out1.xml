@@ -52,7 +52,10 @@
                 android:layout_weight="1"
                 >
                 <TextView
-                    android:text="商品信息"
+                    android:id="@+id/tvName"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="品名："
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageView
@@ -63,7 +66,17 @@
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
                     android:src="@mipmap/ic_launcher"/>
-
+                <!--android:layout_centerHorizontal="true"-->
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar"
+                    style="@style/myRatingBar"
+                    android:stepSize="1"
+                    android:isIndicator="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    />
 
             </com.zhy.autolayout.AutoLinearLayout>
 

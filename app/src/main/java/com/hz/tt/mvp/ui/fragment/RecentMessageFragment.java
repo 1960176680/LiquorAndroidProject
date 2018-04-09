@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -71,6 +72,8 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Bind(R.id.iv_capacity)
     ImageView iv_capacity;
 //输入文本框
+    @Bind(R.id.et_name)
+    EditText et_name;
     @Bind(R.id.et_type)
     EditText et_type;
     @Bind(R.id.et_country)
@@ -149,6 +152,7 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
             addRecordOk=mPresenter.addRecord(truepath);
             if (addRecordOk){
 //                    清字段
+                et_name.setText("");
                 et_location.setText("");
                 et_scan.setText("");
                 Bitmap bitmap =btn_picture.getDrawingCache();
@@ -171,6 +175,18 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
 
 
     }
+
+    @Override
+    public void initListener() {
+        et_scan.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                mPresenter.query();
+                return true;
+            }
+            return false;
+        });
+    }
+
     public void clearAllData(){
         mPresenter.clearAllData();
     }
@@ -383,6 +399,11 @@ public class RecentMessageFragment extends BaseFragment<IRecentMessageFgView, Re
     @Override
     public TextView getTime() {
         return tv_time;
+    }
+
+    @Override
+    public EditText getName() {
+        return et_name;
     }
 
     @Override

@@ -9,10 +9,30 @@ import android.os.Parcelable;
 
 public class QueryResponseSingle implements Parcelable{
     private String recordCode;
+    private String operation;
+    private String recordName;
+    private String category;
+    private String country;
+    private String origin;
+    private String volume;
+    private String productiveYear;
+    private String countNum;
+    private String intoDate;
+    private String intoCustomer;
+    private String position;
+    private String outRecordSource;
+    private String outRecordDate;
+    private String outDate;
+    private String outCustomer;
+    private String receiveCustomer;
+    private String photo;
+    private String receiveDate;
+    private String remark;
 
     protected QueryResponseSingle(Parcel in) {
         recordCode = in.readString();
         operation = in.readString();
+        recordName = in.readString();
         category = in.readString();
         country = in.readString();
         origin = in.readString();
@@ -43,7 +63,13 @@ public class QueryResponseSingle implements Parcelable{
             return new QueryResponseSingle[size];
         }
     };
+    public String getRecordName() {
+        return recordName;
+    }
 
+    public void setRecordName(String recordName) {
+        this.recordName = recordName;
+    }
     public String getOperation() {
         return operation;
     }
@@ -52,24 +78,6 @@ public class QueryResponseSingle implements Parcelable{
         this.operation = operation;
     }
 
-    private String operation;
-    private String category;
-    private String country;
-    private String origin;
-    private String volume;
-    private String productiveYear;
-    private String countNum;
-    private String intoDate;
-    private String intoCustomer;
-    private String position;
-    private String outRecordSource;
-    private String outRecordDate;
-    private String outDate;
-    private String outCustomer;
-    private String receiveCustomer;
-    private String photo;
-    private String receiveDate;
-    private String remark;
     public String getRecordCode() {
         return recordCode;
     }
@@ -179,6 +187,14 @@ public class QueryResponseSingle implements Parcelable{
         this.remark = remark;
     }
 
+
+    @Override
+    public String toString() {
+        return recordCode+"#"+country+"#"
+                +origin+"#"+category+"#"
+                +countNum+"#"+position;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -188,6 +204,7 @@ public class QueryResponseSingle implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(recordCode);
         dest.writeString(operation);
+        dest.writeString(recordName);
         dest.writeString(category);
         dest.writeString(country);
         dest.writeString(origin);
@@ -205,12 +222,5 @@ public class QueryResponseSingle implements Parcelable{
         dest.writeString(photo);
         dest.writeString(receiveDate);
         dest.writeString(remark);
-    }
-
-    @Override
-    public String toString() {
-        return recordCode+"#"+country+"#"
-                +origin+"#"+category+"#"
-                +countNum+"#"+position;
     }
 }

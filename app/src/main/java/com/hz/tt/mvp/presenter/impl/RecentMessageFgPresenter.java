@@ -175,14 +175,15 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
             InBean bean=new InBean();
             IRecentMessageFgView view=getView();
             String Code=view.getCode().getText().toString().trim();
-            List<InBean> inBeens=MyApp.getInstances().getDaoSession().getInBeanDao().queryBuilder().where(InBeanDao.Properties.Code.eq(Code),InBeanDao.Properties.Status.eq("未上传")).build().list();
-            if (inBeens!=null&&inBeens.size()!=0){
-                inBeens.removeAll(inBeens);
-//                UIUtils.showToast("该数据已存在");
-//                return true;
-            }
+//            List<InBean> inBeens=MyApp.getInstances().getDaoSession().getInBeanDao().queryBuilder().where(InBeanDao.Properties.Code.eq(Code),InBeanDao.Properties.Status.eq("未上传")).build().list();
+//            if (inBeens!=null&&inBeens.size()!=0){
+//                inBeens.removeAll(inBeens);
+////                UIUtils.showToast("该数据已存在");
+////                return true;
+//            }
             String Person=view.getPerson().getText().toString().trim();
             String Time=view.getTime().getText().toString().trim();
+            String Name=view.getName().getText().toString().trim();
             String Type=view.getType().getText().toString().trim();
             String Country=view.getCountry().getText().toString().trim();
             String Birthday=view.getBirthday().getText().toString().trim();
@@ -193,6 +194,7 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 //            String Code=view.getCode().getText().toString().trim();
             if (!Time.equals("")
                     &&!Person.equals("")
+                    &&!Name.equals("")
                     &&!Type.equals("")
                     &&!Country.equals("")
                     &&!Birthday.equals("")
@@ -204,6 +206,7 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
                     &&bitmapPath!=null&&!bitmapPath.equals("")){
                 bean.setPerson(Person);
                 bean.setTime(Time);
+                bean.setName(Name);
                 bean.setType(Type);
                 bean.setCountry(Country);
                 bean.setBirthday(Birthday);
@@ -419,6 +422,7 @@ public class RecentMessageFgPresenter extends BasePresenter<IRecentMessageFgView
 
 
                     QueryResponseSingle queryResponseSingle=jsonObjects.get(0);
+                    getView().getName().setText("品名："+queryResponseSingle.getRecordName());
                     getView().getType().setText(queryResponseSingle.getCategory());
                     getView().getCountry().setText(queryResponseSingle.getCountry());
                     getView().getBirthday().setText(queryResponseSingle.getOrigin());

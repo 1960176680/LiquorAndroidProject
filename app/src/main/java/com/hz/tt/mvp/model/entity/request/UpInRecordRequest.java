@@ -25,6 +25,7 @@ public class UpInRecordRequest {
         Gson gson=new Gson();
         InUpBean inUpBean=new InUpBean();
         inUpBean.setRecordCode(inBean.getCode());
+        inUpBean.setRecordName(inBean.getName());
         inUpBean.setCategory(inBean.getType());
         inUpBean.setCountry(inBean.getCountry());
         inUpBean.setOrigin(inBean.getBirthday());

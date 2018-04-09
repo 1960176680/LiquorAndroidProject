@@ -70,4 +70,12 @@
         <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
     </style>
+
+    <style name="myRatingBar">
+        <item name="android:progressDrawable">@drawable/starlayer</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxHeight">30dp</item>
+        <item name="android:thumb">@null</item>
+        <!--<item name="android:isIndicator">false</item>-->
+    </style>
 </resources>

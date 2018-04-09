@@ -59,7 +59,8 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
     Button btnExport;
     @Bind(R.id.btnOpen)
     Button btnOpen;
-
+    @Bind(R.id.et_name)
+    EditText et_name;
     private boolean isVisiable=true;
     private Disposable disposable;
 
@@ -125,6 +126,7 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
         et_country.setText("");
         et_birthplace.setText("");
         et_type.setText("");
+        et_name.setText("");
         et_capacity.setText("");
         et_year.setText("");
         mPresenter.clearAllData();
@@ -173,6 +175,11 @@ public class DiscoveryFragment extends BaseFragment<IDiscoveryFgView, DiscoveryF
     @Override
     public EditText getEtYearV() {
         return et_year;
+    }
+
+    @Override
+    public EditText getName() {
+        return et_name;
     }
 
     @Override

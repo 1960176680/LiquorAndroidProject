@@ -12,6 +12,15 @@ public class QueryBean {
     private String volume;
     private String productiveYear;
 
+    public String getRecordName() {
+        return recordName;
+    }
+
+    public void setRecordName(String recordName) {
+        this.recordName = recordName;
+    }
+
+    private String recordName;
     public String getRemark() {
         return remark;
     }

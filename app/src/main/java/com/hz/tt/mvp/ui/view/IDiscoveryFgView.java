@@ -12,6 +12,7 @@ public interface IDiscoveryFgView {
     EditText getEtTypeV();
     EditText getEtCapacityV();
     EditText getEtYearV();
+    EditText getName();
     MyListViewInScrollView getRvRecyclerView();
 
 }

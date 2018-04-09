@@ -84,10 +84,34 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入或扫描条形码"
                 android:layout_marginLeft="10dp"
-                android:theme="@style/MyEditText"/>
+                android:theme="@style/MyEditText"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"/>
 
         </com.zhy.autolayout.AutoLinearLayout>
         <TextView style="@style/Line" />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="品        名："
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textSize="16sp"
+                android:theme="@style/MyEditText"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            style="@style/Line"
+            />
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"

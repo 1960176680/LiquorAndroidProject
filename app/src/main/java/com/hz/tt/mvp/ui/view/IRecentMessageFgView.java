@@ -9,6 +9,7 @@ public interface IRecentMessageFgView {
     MyListViewInScrollView getRvRecentMessage();
     TextView getPerson();
     TextView getTime();
+    EditText getName();
     EditText getType();
     EditText getCountry();
     EditText getBirthday();

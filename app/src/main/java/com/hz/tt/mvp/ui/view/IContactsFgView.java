@@ -24,6 +24,7 @@ public interface IContactsFgView {
     TextView getPosition();
     EditText getOutNum();
     ImageView getImgV();
+    TextView getName();
 //    View getHeaderView();
 //
     MyListViewInScrollView getRvContacts();

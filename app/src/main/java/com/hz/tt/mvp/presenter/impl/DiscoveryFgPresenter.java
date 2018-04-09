@@ -84,9 +84,11 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
         String country=getView().getEtCountryV().getText().toString().trim();
         String birthplace=getView().getEtBirthplaceV().getText().toString().trim();
         String type=getView().getEtTypeV().getText().toString().trim();
+        String name=getView().getName().getText().toString().trim();
         String capacity=getView().getEtCapacityV().getText().toString().trim();
         String year=getView().getEtYearV().getText().toString().trim();
         QueryBean queryBean=new QueryBean();
+        queryBean.setRecordName(name);
         queryBean.setCountry(country);
         queryBean.setOrigin(birthplace);
         queryBean.setCategory(type);
