@@ -22,10 +22,7 @@
 #-libraryjars /android-sdk-windows/platforms/android-26/android.jar
 
 #-android
--dontpreverify
 -repackageclasses ''
--allowaccessmodification
--optimizations !code/simplification/arithmetic
 -keepattributes *Annotation*
 
 -keep public class * extends android.app.Activity
