@@ -28,6 +28,8 @@ public class QueryResponseSingle implements Parcelable{
     private String photo;
     private String receiveDate;
     private String remark;
+    private int starLevelAvg;
+
 
     protected QueryResponseSingle(Parcel in) {
         recordCode = in.readString();
@@ -50,6 +52,7 @@ public class QueryResponseSingle implements Parcelable{
         photo = in.readString();
         receiveDate = in.readString();
         remark = in.readString();
+        starLevelAvg = in.readInt();
     }
 
     public static final Creator<QueryResponseSingle> CREATOR = new Creator<QueryResponseSingle>() {
@@ -63,6 +66,14 @@ public class QueryResponseSingle implements Parcelable{
             return new QueryResponseSingle[size];
         }
     };
+
+    public int getStarLevelAvg() {
+        return starLevelAvg;
+    }
+
+    public void setStarLevelAvg(int starLevelAvg) {
+        this.starLevelAvg = starLevelAvg;
+    }
     public String getRecordName() {
         return recordName;
     }
@@ -187,7 +198,6 @@ public class QueryResponseSingle implements Parcelable{
         this.remark = remark;
     }
 
-
     @Override
     public String toString() {
         return recordCode+"#"+country+"#"
@@ -222,5 +232,6 @@ public class QueryResponseSingle implements Parcelable{
         dest.writeString(photo);
         dest.writeString(receiveDate);
         dest.writeString(remark);
+        dest.writeInt(starLevelAvg);
     }
 }

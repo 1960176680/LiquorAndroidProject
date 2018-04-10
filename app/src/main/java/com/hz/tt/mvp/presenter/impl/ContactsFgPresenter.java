@@ -296,7 +296,7 @@ public class ContactsFgPresenter extends BasePresenter<IContactsFgView> {
                     getView().getYear().setText(queryResponseSingle.getProductiveYear());
                     getView().getNum().setText(queryResponseSingle.getCountNum());
                     getView().getPosition().setText(queryResponseSingle.getPosition());
-
+                    getView().getRatingBar().setProgress(queryResponseSingle.getStarLevelAvg());
 //                    Bitmap bitmap = ((BitmapDrawable) getView().getImgV().getDrawable()).getBitmap();
 //                    getView().getImgV().setImageResource(R.mipmap.ic_launcher);
 //                    if (bitmap != null && !bitmap.isRecycled()){

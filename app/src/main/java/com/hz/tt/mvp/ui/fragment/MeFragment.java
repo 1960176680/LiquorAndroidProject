@@ -7,12 +7,12 @@ import android.widget.TextView;
 import com.hz.tt.R;
 import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.MeFgPresenter;
+import com.hz.tt.mvp.ui.activity.EvaluateActivity;
 import com.hz.tt.mvp.ui.activity.MainActivity;
 import com.hz.tt.mvp.ui.activity.WorkRecordActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IMeFgView;
 import com.hz.tt.util.LogUtils;
-import com.hz.tt.util.UIUtils;
 import com.hz.tt.widget.CustomDialog;
 import com.zhy.autolayout.AutoLinearLayout;
 
@@ -51,7 +51,7 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     @Override
     public void initListener() {
 
-        line_suggest.setOnClickListener(v -> UIUtils.showToast("正在研发中，敬请期待！"));
+        line_suggest.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(EvaluateActivity.class));
         line_record.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(WorkRecordActivity.class));
         line_forgetkey.setOnClickListener(v -> mPresenter.resetKey());
 

@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.hz.tt.R;
@@ -81,6 +82,9 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     ImageView ivImg;
     @Bind(R.id.tvName)
     TextView tvName;
+    @Bind(R.id.ratingBar)
+    RatingBar ratingBar;
+
     private final int REQUEST_OUT=1;
 
 
@@ -200,7 +204,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         tv_position.setText("");
         etNum.setText("");
         ivImg.setImageResource(R.mipmap.ic_launcher);
-
+        ratingBar.setProgress(0);
         mPresenter.clearAllData();
     }
 
@@ -312,6 +316,11 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
     @Override
     public TextView getName() {
         return tvName;
+    }
+
+    @Override
+    public RatingBar getRatingBar() {
+        return ratingBar;
     }
 
     @Override

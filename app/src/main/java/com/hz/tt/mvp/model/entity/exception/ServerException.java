@@ -4,8 +4,6 @@ import com.hz.tt.R;
 import com.hz.tt.util.UIUtils;
 
 /**
- * @创建者 CSDN_LQR
- * @描述 服务器异常
  */
 public class ServerException extends Exception {
 

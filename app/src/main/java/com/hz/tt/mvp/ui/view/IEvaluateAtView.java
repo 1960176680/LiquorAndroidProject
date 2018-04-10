@@ -1,21 +1,16 @@
 package com.hz.tt.mvp.ui.view;
 
-
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.hz.tt.widget.MyListViewInScrollView;
+/**
+ * Created by Administrator on 2018-04-10.
+ */
 
-public interface IContactsFgView {
-    EditText getRecPerson();
-    TextView getRecDate();
+public interface IEvaluateAtView {
     EditText getCode();
-    TextView getRemak();
-    Button getDoType();
-
     TextView getType();
     TextView getCountry();
     TextView getBirthday();
@@ -23,12 +18,10 @@ public interface IContactsFgView {
     TextView getYear();
     TextView getNum();
     TextView getPosition();
-    EditText getOutNum();
     ImageView getImgV();
     TextView getName();
     RatingBar getRatingBar();
-//
-    MyListViewInScrollView getRvContacts();
-//
-//    TextView getFooterView();
+    RatingBar getRatingBarLike();
+    EditText getSuggestPerson();
+    EditText getSuggestArea();
 }
