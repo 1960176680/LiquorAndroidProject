@@ -8,7 +8,9 @@ import com.hz.tt.R;
 import com.hz.tt.mvp.model.entity.cache.UserCache;
 import com.hz.tt.mvp.presenter.MeFgPresenter;
 import com.hz.tt.mvp.ui.activity.EvaluateActivity;
+import com.hz.tt.mvp.ui.activity.GoodsEvaluateActivity;
 import com.hz.tt.mvp.ui.activity.MainActivity;
+import com.hz.tt.mvp.ui.activity.UserEvaluateActivity;
 import com.hz.tt.mvp.ui.activity.WorkRecordActivity;
 import com.hz.tt.mvp.ui.common.BaseFragment;
 import com.hz.tt.mvp.ui.view.IMeFgView;
@@ -33,6 +35,11 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
     AutoLinearLayout line_forgetkey;
     @Bind(R.id.tv_user)
     TextView tv_user;
+    @Bind(R.id.line_goodssuggest)
+    AutoLinearLayout line_goodssuggest;
+    @Bind(R.id.line_usersuggest)
+    AutoLinearLayout line_usersuggest;
+
     @Override
     public void init() {
         registerBR();
@@ -54,7 +61,8 @@ public class MeFragment extends BaseFragment<IMeFgView, MeFgPresenter> implement
         line_suggest.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(EvaluateActivity.class));
         line_record.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(WorkRecordActivity.class));
         line_forgetkey.setOnClickListener(v -> mPresenter.resetKey());
-
+        line_goodssuggest.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(GoodsEvaluateActivity.class));
+        line_usersuggest.setOnClickListener(v -> ((MainActivity) getActivity()).jumpToActivity(UserEvaluateActivity.class));
     }
 
     @Override

@@ -93,6 +93,8 @@
         <activity android:name=".mvp.ui.activity.RecordDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mvp.ui.activity.ImgPreviewActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mvp.ui.activity.EvaluateActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mvp.ui.activity.GoodsEvaluateActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mvp.ui.activity.UserEvaluateActivity" android:screenOrientation="portrait"/>
 
         <provider
             android:authorities="com.hz.tt.fileprovider"
