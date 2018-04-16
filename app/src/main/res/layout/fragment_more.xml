@@ -73,6 +73,33 @@
             android:background="#FFFFFF"
             android:orientation="vertical"
             android:gravity="center"
+            android:id="@+id/line_forgetkey"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@mipmap/ic_forgetkey"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重置密码"
+                android:textSize="16sp"
+                />
+</com.zhy.autolayout.AutoLinearLayout>
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#D2D2D2"/>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:gravity="center"
             android:id="@+id/line_suggest"
             >
             <ImageView
@@ -88,31 +115,7 @@
                 />
 
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#D2D2D2"/>
-        <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:id="@+id/line_forgetkey"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@mipmap/ic_forgetkey"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="重置密码"
-                android:textSize="16sp"
-                />
-</com.zhy.autolayout.AutoLinearLayout>
         <TextView
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -129,7 +132,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@mipmap/img_search"/>
+                app:srcCompat="@mipmap/img_goodssearch"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -164,7 +167,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@mipmap/img_search"/>
+                app:srcCompat="@mipmap/img_usersearch"/>
 
             <TextView
                 android:layout_width="wrap_content"

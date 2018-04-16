@@ -285,6 +285,8 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                     timeIn.setText(dateFormat.format(new Date()));
                 }
 //              清空界面
+
+                EditText etName=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_name));
                 EditText etCode=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_scan));
                 EditText etType=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_type));
                 EditText etCountry=((EditText) mFragmentList.get(0).getView().findViewById(R.id.et_country));
@@ -303,6 +305,7 @@ public class MainActivity extends BaseActivity<IMainAtView,MainAtPresenter> impl
                         &&location!=null
                         &&etCode!=null
                         ){
+                    etName.setText("");
                     etCode.setText("");
                     etType.setText("");
                     etCountry.setText("");

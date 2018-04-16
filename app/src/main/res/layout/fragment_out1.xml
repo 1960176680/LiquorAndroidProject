@@ -37,33 +37,27 @@
                 android:singleLine="true" />
 
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView
-            style="@style/Line"
-            />
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1"
+
                 >
-                <TextView
-                    android:id="@+id/tvName"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:text="品名："
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+
                 <ImageView
+
                     android:id="@+id/ivImg"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
                     android:scaleType="fitXY"
                     android:src="@mipmap/ic_launcher"/>
                 <!--android:layout_centerHorizontal="true"-->
@@ -75,8 +69,17 @@
                     android:stepSize="1"
                     android:isIndicator="true"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="25dp"
                     />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/tvName"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="茅台"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </com.zhy.autolayout.AutoLinearLayout>
 
@@ -88,7 +91,8 @@
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -108,13 +112,11 @@
                         android:textSize="16sp"/>
                 </com.zhy.autolayout.AutoLinearLayout>
 
-                <TextView
-                    style="@style/Line"
-                    />
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -135,13 +137,12 @@
                         />
 
                 </com.zhy.autolayout.AutoLinearLayout>
-                <TextView
-                    style="@style/Line"
-                    />
+
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -159,13 +160,12 @@
                         android:textSize="16sp"/>
 
                 </com.zhy.autolayout.AutoLinearLayout>
-                <TextView
-                    style="@style/Line"
-                    />
+
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -180,14 +180,12 @@
                         android:paddingLeft="10dp"
                         android:textSize="16sp"/>
                 </com.zhy.autolayout.AutoLinearLayout>
-                <TextView
-                    style="@style/Line"
-                    />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -204,13 +202,12 @@
                         android:textSize="16sp"
                         />
                 </com.zhy.autolayout.AutoLinearLayout>
-                <TextView
-                    style="@style/Line"
-                    />
+
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -226,13 +223,12 @@
                         android:paddingLeft="10dp"
                         android:textSize="16sp"/>
                 </com.zhy.autolayout.AutoLinearLayout>
-                <TextView
-                    style="@style/Line"
-                    />
+
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -248,14 +244,14 @@
                         android:paddingLeft="10dp"
                         android:textSize="16sp"/>
                 </com.zhy.autolayout.AutoLinearLayout>
-                <TextView style="@style/Line" />
             </com.zhy.autolayout.AutoLinearLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -280,26 +276,6 @@
 
 
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView
-            style="@style/Line"
-            />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <com.zhy.autolayout.AutoLinearLayout
@@ -326,10 +302,7 @@
                 android:theme="@style/MyEditText"/>
 
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView
-            android:id="@+id/vLinePhone"
-            style="@style/Line"
-            />
+
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -354,9 +327,7 @@
                 />
 
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView
-            style="@style/Line"
-            />
+
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -376,9 +347,7 @@
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
         </com.zhy.autolayout.AutoLinearLayout>
-        <TextView
-            style="@style/Line"
-            />
+
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -402,17 +371,6 @@
                 android:textSize="16sp"
                 android:theme="@style/MyEditText"/>
         </com.zhy.autolayout.AutoLinearLayout>
-
-        <TextView
-            style="@style/Line"
-            />
-
-
-
-
-
-
-
 
 
         <com.zhy.autolayout.AutoRelativeLayout
@@ -448,9 +406,7 @@
                 android:layout_marginLeft="15dp" />
 
         </com.zhy.autolayout.AutoRelativeLayout>
-        <TextView style="@style/Line"
-            android:layout_marginTop="15dp"
-            />
+
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"

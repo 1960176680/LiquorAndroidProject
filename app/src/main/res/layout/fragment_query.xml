@@ -73,7 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical"
-            android:layout_marginLeft="40dp">
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,7 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical"
-            android:layout_marginLeft="40dp">
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,6 +125,7 @@
             android:orientation="vertical"
             android:visibility="gone"
             android:id="@+id/line_more"
+            android:layout_marginRight="25dp"
             >
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"

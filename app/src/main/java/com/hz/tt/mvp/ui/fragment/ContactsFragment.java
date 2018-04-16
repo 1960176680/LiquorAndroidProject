@@ -194,7 +194,7 @@ public class ContactsFragment extends BaseFragment<IContactsFgView, ContactsFgPr
         et_rec_person.setText("");
         et_scan.setText("");
         et_remark.setText("");
-        tvName.setText("品名：");
+        tvName.setText("");
         tv_type.setText("");
         tv_country.setText("");
         tv_birthplace.setText("");

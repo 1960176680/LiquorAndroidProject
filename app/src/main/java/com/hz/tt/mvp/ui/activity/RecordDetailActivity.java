@@ -65,7 +65,7 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
 //            tvOutperson.setVisibility(View.GONE);
             tvRecPersonLable.setText("入库员：");
             tvRecTimeLable.setText("入库时间：");
-            ivImg.setVisibility(View.VISIBLE);
+//            ivImg.setVisibility(View.VISIBLE);
         }
     }
 

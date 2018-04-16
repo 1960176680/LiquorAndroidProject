@@ -70,7 +70,7 @@ public class GoodsEvaluateAtPresenter extends BasePresenter<IGoodsEvaluateAtView
                 ArrayList<QueryResponseSingle> jsonObjects = new Gson().fromJson(response.getData(), type);
                 if (jsonObjects.size()!=0){
                     QueryResponseSingle queryResponseSingle=jsonObjects.get(0);
-                    getView().getName().setText("品名："+queryResponseSingle.getRecordName());
+                    getView().getName().setText(queryResponseSingle.getRecordName());
                     getView().getType().setText(queryResponseSingle.getCategory());
                     getView().getCountry().setText(queryResponseSingle.getCountry());
                     getView().getBirthday().setText(queryResponseSingle.getOrigin());
