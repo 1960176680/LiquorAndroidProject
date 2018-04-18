@@ -80,8 +80,8 @@ public class MyUtils {
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
-        context.startActivity(intent);
-//        context.startActivity(Intent.createChooser(intent,"选择浏览工具"));
+//        context.startActivity(intent);
+        context.startActivity(Intent.createChooser(intent,"选择浏览工具"));
     }
 
     /**

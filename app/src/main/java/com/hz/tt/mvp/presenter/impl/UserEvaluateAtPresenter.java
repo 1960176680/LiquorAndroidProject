@@ -1,5 +1,8 @@
 package com.hz.tt.mvp.presenter.impl;
 
+import android.content.Intent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -12,11 +15,14 @@ import com.hz.tt.mvp.model.entity.request.GoodsAndUserComRequest;
 import com.hz.tt.mvp.model.entity.response.GoodsAndUserCommentBean;
 import com.hz.tt.mvp.model.entity.response.QueryResponse;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
+import com.hz.tt.mvp.ui.activity.UserEvaluateDetailActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IUserEvaluateAtView;
 import com.hz.tt.util.UIUtils;
 import com.lqr.adapter.LQRAdapterForRecyclerView;
+import com.lqr.adapter.LQRViewHolder;
 import com.lqr.adapter.LQRViewHolderForRecyclerView;
+import com.lqr.adapter.OnItemClickListener;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -111,6 +117,14 @@ public class UserEvaluateAtPresenter extends BasePresenter<IUserEvaluateAtView> 
                 }
             };
             getView().getRecycleView().setAdapter(mAdapter);
+            mAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(LQRViewHolder helper, ViewGroup parent, View itemView, int position) {
+                    Intent intent=new Intent(mContext,UserEvaluateDetailActivity.class);
+                    intent.putExtra("code",datas.get(position).getRecordCode().trim());
+                    mContext.jumpToActivity(intent);
+                }
+            });
         }
 
     }
