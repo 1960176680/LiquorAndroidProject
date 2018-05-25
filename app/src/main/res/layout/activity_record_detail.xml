@@ -320,11 +320,37 @@
             </com.zhy.autolayout.AutoLinearLayout>
 
             <TextView style="@style/Line" />
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注："
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tvRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="无"
+                    android:paddingLeft="10dp"
+                    android:textSize="16sp"/>
+
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+            <TextView style="@style/Line" />
             <ImageView
                 android:id="@+id/ivImg"
-                android:visibility="invisible"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"
                 android:layout_gravity="center_horizontal"

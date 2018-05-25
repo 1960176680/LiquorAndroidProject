@@ -2,6 +2,7 @@ package com.hz.tt.mvp.presenter.impl;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -179,6 +180,7 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
             mAdapter = new LQRAdapterForRecyclerView<QueryResponseSingle>(mContext, datas, R.layout.iten_query) {
                 @Override
                 public void convert(LQRViewHolderForRecyclerView helper, QueryResponseSingle item, int position) {
+                    LinearLayout listitem=helper.getView(R.id.item);
                     TextView danHao = helper.getView(R.id.danHao);
                     TextView country = helper.getView(R.id.tv_country);
                     TextView birthday = helper.getView(R.id.tv_birthday);
@@ -194,6 +196,16 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
                     count.setText(item.getCountNum());
                     location.setText(item.getPosition());
                     num.setText(String.valueOf(datas.size()-position));
+//                    listitem.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            //                    跳转详情
+//                            Intent intent=new Intent(mContext, RecordDetailActivity.class);
+//                            intent.putExtra("bean",item);
+//                            mContext.jumpToActivity(intent);
+//
+//                        }
+//                    });
                 }
             };
             getView().getRvRecyclerView().setAdapter(mAdapter);

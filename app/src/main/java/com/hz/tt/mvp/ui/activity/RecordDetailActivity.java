@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hz.tt.R;
 import com.hz.tt.mvp.model.entity.response.QueryResponseSingle;
 import com.hz.tt.mvp.presenter.impl.RecordDetailAtPresenter;
@@ -52,7 +53,8 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
     ImageView ivImg;
     @Bind(R.id.lineOut)
     AutoLinearLayout lineOut;
-
+    @Bind(R.id.tvRemark)
+    TextView tvRemark;
     private QueryResponseSingle outBean;
 
     @Override
@@ -78,6 +80,7 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
                 tvRecPerson.setText(outBean.getReceiveCustomer());
                 tvRecTime.setText(outBean.getOutDate());
                 tvUpTime.setText(outBean.getOutDate());
+                tvRemark.setText(outBean.getRemark());
             }else{
                 tvRecPerson.setText(outBean.getIntoCustomer());
                 tvRecTime.setText(outBean.getIntoDate());
@@ -92,12 +95,11 @@ public class RecordDetailActivity extends BaseActivity<IRecordDetailAtView,Recor
                 tv_year.setText(outBean.getProductiveYear());
                 tv_num.setText(outBean.getCountNum());
                 tv_position.setText(outBean.getPosition());
-
+            Glide.with(this)
+                    .load("http://121.43.167.170:8001/Wine/"+outBean.getPhoto()).centerCrop()
+                    .into(ivImg);
         }
-
-
     }
-
     @Override
     protected RecordDetailAtPresenter createPresenter() {
         return new RecordDetailAtPresenter(this);
