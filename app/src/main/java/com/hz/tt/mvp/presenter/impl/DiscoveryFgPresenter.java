@@ -2,6 +2,7 @@ package com.hz.tt.mvp.presenter.impl;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.hz.tt.mvp.model.entity.request.QueryRequest;
 import com.hz.tt.mvp.model.entity.response.QueryResponse;
 import com.hz.tt.mvp.model.entity.response.QueryResponseSingle;
 import com.hz.tt.mvp.presenter.base.BasePresenter;
+import com.hz.tt.mvp.ui.activity.QueryDetailActivity;
 import com.hz.tt.mvp.ui.common.BaseActivity;
 import com.hz.tt.mvp.ui.view.IDiscoveryFgView;
 import com.hz.tt.util.UIUtils;
@@ -196,16 +198,13 @@ public class DiscoveryFgPresenter extends BasePresenter<IDiscoveryFgView> {
                     count.setText(item.getCountNum());
                     location.setText(item.getPosition());
                     num.setText(String.valueOf(datas.size()-position));
-//                    listitem.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            //                    跳转详情
-//                            Intent intent=new Intent(mContext, RecordDetailActivity.class);
-//                            intent.putExtra("bean",item);
-//                            mContext.jumpToActivity(intent);
-//
-//                        }
-//                    });
+                    listitem.setOnClickListener(v -> {
+                        //                    跳转详情
+                        Intent intent=new Intent(mContext, QueryDetailActivity.class);
+                        intent.putExtra("bean",item);
+                        mContext.jumpToActivity(intent);
+
+                    });
                 }
             };
             getView().getRvRecyclerView().setAdapter(mAdapter);
